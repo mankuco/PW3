@@ -1,0 +1,55 @@
+
+ *{ margin:0; padding:0;}
+ 
+ header{
+ width:100%;
+ overflow:hidden;
+ background:#d7e0da;
+
+ }
+ 
+ header nav{
+ float:right;
+ line-height:200px;
+ }
+ 
+ header nav a{
+ display:inline-block;
+ color:white;
+ text-decoration:none;
+ padding: 10px,20px;
+ line-height:normal;
+ font-size:20px;
+ font-weight: bold;
+ -webkit-transition:all 500ms ease;
+ -o-transition:all 500ms ease;
+ transition:all 500ms ease;
+ }
+ 
+ header nav a:hover{
+ 
+ background:gray;
+ border-radius:50px;
+ 
+ }
+ 
+ .DivHeader {
+ width:100%;
+ max-width:1000px;
+ margin:auto;
+ overflow:hidden;
+ }
+ 
+ header .titulo{
+ 	color:white;
+ 	font-size:20px;
+ 	line-height:200px;
+ 	float:left;
+ }
+
+
+ .Back-Reservas {
+background-image: url("../images/Backgrounds/BackReservas.jpg");
+ background-repeat: no-repeat;
+ background-size: 1900px;
+ }
