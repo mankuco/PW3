@@ -76,13 +76,5 @@ public class KartDTO {
 	public void setnombrePista(String nombrePista){
 		this.nombrePista=nombrePista;
 	}
-	
-	/* 
-	 * @Resumen Devuelve una cadena con la informacion del kart
-	 * @return string
-	 */
-	@Override
-	public String toString() {
-		return "KART [IDKart=" + idKart + ", TipoKart=" + tipoKart + ", Estado=" + estado + "]";
-	}	
+		
 }

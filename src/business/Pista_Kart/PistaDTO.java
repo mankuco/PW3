@@ -23,8 +23,6 @@ public class PistaDTO {
 		this.dificultad = dificultad;
 		this.maxKarts = maxKarts;
 		this.nkartsasociados=0;
-		KartDAO listar = new KartDAO();
-		this.listaKarts=listar.listarkart(nombrePista);
 	}
 	//CONSTRUCTOR
 	public PistaDTO() {
@@ -102,62 +100,5 @@ public class PistaDTO {
 	public void setnkartsasociados(int nkartsasociados) {
 		this.nkartsasociados = nkartsasociados;
 	}
-	/* 
-	 * @Resumen Devuelve un vector con todas las pistas
-	 * @return listaKarts = ArrayList<Kart> 
-	 */
-	public ArrayList<KartDTO> getListaKarts() {
-		return listaKarts;
-	}
-	/* 
-	 * @Resumen Cambia un vector con todas las pistas
-	 * @param listaKarts = ArrayList<Kart> 
-	 */
-	public void setListaKarts(ArrayList<KartDTO> listaKarts) {
-		this.listaKarts = listaKarts;
-	}
 	
-	/* 
-	 * @Resumen Devuelve un vector con todas las pistas disponibles
-	 * @return listaKartsDisponibles = ArrayList<Kart> 
-	 */
-	public ArrayList<KartDTO> consultarKartsDisponibles() {
-		
-		ArrayList<KartDTO> listaKartsDisponibles = new ArrayList<KartDTO>();
-		ArrayList<KartDTO> listaAUX = getListaKarts();
-		
-		for(int i=0; i < listaAUX.size(); i++ ) {
-		   if(listaAUX.get(i).getEstado() == Estados.DISPONIBLE) {
-			   listaKartsDisponibles.add(listaAUX.get(i));
-		   }
-		}
-		
-		return listaKartsDisponibles;
-	}
-	
-	/* 
-	 * @Resumen Asocia un kart a una pista
-	 * @param kart = Kart
-	 * @param pista = Pista 
-	 */
-	public void asociarKartPista(KartDTO kart, PistaDTO pista) {
-		pista.getListaKarts().add(kart);
-		kart.setnombrePista(pista.getNombrePista());
-		KartDAO modificar = new KartDAO();
-		modificar.cambiarnombrePista(kart,pista);
-		pista.setnkartsasociados(pista.getnkartsasociados() + 1);
-		PistaDAO cambiar = new PistaDAO();
-		cambiar.cambiarnkartsasociados(pista);
-	}
-	
-	/* 
-	 * @Resumen Devuelve una cadena con la informacion del pista
-	 * @return string
-	 */
-	@Override
-	public String toString() {
-		return "Pista [nombrePista=" + nombrePista + ", tipoEstado=" + tipoEstado + ", dificultad=" + dificultad
-				+ ", maxKarts=" + maxKarts + ", listaKarts=" + listaKarts + "]";
-
-	}
 }

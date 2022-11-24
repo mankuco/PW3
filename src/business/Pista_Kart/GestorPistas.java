@@ -62,14 +62,7 @@ public class GestorPistas {
 	 * @param kart = Kart, el kart que hay que eliminar
 	 * @param pista = Pista
 	 */
-	public void eliminarkart(KartDTO kart, PistaDTO pista) {
-		ArrayList<KartDTO> array = new ArrayList<KartDTO>();
-		for(int i = 0; i < pista.getListaKarts().size(); i++) {
-			if(pista.getListaKarts().get(i).getIdKart() != kart.getIdKart()) {
-				array.add(pista.getListaKarts().get(i));
-			}
-		}
-		pista.setListaKarts(array);
+	public void eliminarkart(PistaDTO pista) {
 		pista.setnkartsasociados(pista.getnkartsasociados() - 1);
 		PistaDAO cambiar = new PistaDAO();
 		cambiar.cambiarnkartsasociados(pista);
@@ -95,5 +88,64 @@ public class GestorPistas {
 		ArrayList<PistaDTO> pistas = listar.listardisponibles(numKart, dificultad);
 		return pistas;
 	}
+	
+	/* 
+	 * @Resumen Asocia un kart a una pista
+	 * @param kart = Kart
+	 * @param pista = Pista 
+	 */
+	public void asociarKartPista(KartDTO kart, PistaDTO pista) {
+		kart.setnombrePista(pista.getNombrePista());
+		KartDAO modificar = new KartDAO();
+		modificar.cambiarnombrePista(kart,pista);
+		pista.setnkartsasociados(pista.getnkartsasociados() + 1);
+		PistaDAO cambiar = new PistaDAO();
+		cambiar.cambiarnkartsasociados(pista);
+	}
+	
+	/*
+	 * @Resumen Devuelve una lista con todos los karts asociados a una pista
+	 * @param pista = String
+	 * @return lista = ArrayLista<KartDTO>
+	 */
+	public ArrayList<KartDTO> getListaKarts(String pista){
+		KartDAO listar= new KartDAO();
+		ArrayList<KartDTO> lista = listar.listarkart(pista);
+		return lista;
+	}
+	
+	/* 
+	 * @Resumen Devuelve una cadena con la informacion del kart
+	 * @return string
+	 
+	public String toStringKart(KartDTO kart) {
+		return "El identificador del kart es " + kart.getIdKart() + ", el tipo es " + kart.getTipoKart() + " y su estado es " + kart.getEstado() + ".";
+	}
+	/* 
+	 * @Resumen Devuelve una cadena con la informacion del pista
+	 * @return string
+	 
+	public String toStringPista(PistaDTO pista) {
+		return "El nombre de la pista es " + pista.getNombrePista() + ", el estado de la pista es " + pista.getTipoEstado() + ", la dificultad es " + pista.getDificultad()
+				+ ", el numero maximo de karts que puede tener asociados es " + pista.getMaxKarts() + " y el numero de karts asociados es " + pista.getnkartsasociados() + ".";
+
+	}*/
+	/* 
+	 * @Resumen Devuelve un vector con todas las pistas disponibles
+	 * @return listaKartsDisponibles = ArrayList<Kart> 
+	
+	public ArrayList<KartDTO> consultarKartsDisponibles() {
+		
+		ArrayList<KartDTO> listaKartsDisponibles = new ArrayList<KartDTO>();
+		ArrayList<KartDTO> listaAUX = getListaKarts();
+		
+		for(int i=0; i < listaAUX.size(); i++ ) {
+		   if(listaAUX.get(i).getEstado() == Estados.DISPONIBLE) {
+			   listaKartsDisponibles.add(listaAUX.get(i));
+		   }
+		}
+		
+		return listaKartsDisponibles;
+	} */
 }
 	

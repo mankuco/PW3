@@ -8,6 +8,7 @@ import business.Pista_Kart.Estados;
 import business.Pista_Kart.GestorPistas;
 import business.Pista_Kart.KartDTO;
 import business.Pista_Kart.PistaDTO;
+import data.Pista_Kart.PistaDAO;
 
 public class ProgramaPistas {
 
@@ -17,7 +18,7 @@ public class ProgramaPistas {
 		Scanner scanpistas = new Scanner(System.in);
 		
 		int num = 0;
-		while(num != 6) {
+		while(num != 7) {
 			
 			System.out.println("BIENVENIDO AL PROGRAMA DE PISTAS");
 			System.out.println("1. Crear Pista");
@@ -25,7 +26,8 @@ public class ProgramaPistas {
 			System.out.println("3. Asociar kart a pista disponible");
 			System.out.println("4. Mostrar pistas que estan en manteniento");
 			System.out.println("5. Mostrar pistas libres para un numero de karts");
-			System.out.println("6. Salir");
+			System.out.println("6. Mostrar karts para una pista");
+			System.out.println("7. Salir");
 			String aux = scanpistas.nextLine();
 			try{
 				num = Integer.parseInt(aux);
@@ -161,29 +163,29 @@ public class ProgramaPistas {
 							}
 							KartDTO kart;
 							if ((kart = factoryGestor.existeKart(id)) != null) {
-								if (pista.getListaKarts().size() < pista.getMaxKarts()) {
+								if (pista.getnkartsasociados() < pista.getMaxKarts()) {
 									if(pista.getDificultad()== Dificultades.ADULTOS && kart.getTipoKart() == true){
 										if (factoryGestor.tienepista(kart)) {
 											PistaDTO pista1 = factoryGestor.existePista(kart.getnombrePista());
-											factoryGestor.eliminarkart(kart,pista1);
+											factoryGestor.eliminarkart(pista1);
 										}
-										pista.asociarKartPista(kart, pista);
+										factoryGestor.asociarKartPista(kart, pista);
 										System.out.println("Kart asociado");
 									}
 									else if(pista.getDificultad()== Dificultades.INFANTIL && kart.getTipoKart() == false){
 										if (factoryGestor.tienepista(kart)) {
 											PistaDTO pista1 = factoryGestor.existePista(kart.getnombrePista());
-											factoryGestor.eliminarkart(kart,pista1);
+											factoryGestor.eliminarkart(pista1);
 										}
-										pista.asociarKartPista(kart, pista);
+										factoryGestor.asociarKartPista(kart, pista);
 										System.out.println("Kart asociado");
 									}
 									else if(pista.getDificultad()== Dificultades.FAMILIAR){
 										if (factoryGestor.tienepista(kart)) {
 											PistaDTO pista1 = factoryGestor.existePista(kart.getnombrePista());
-											factoryGestor.eliminarkart(kart,pista1);
+											factoryGestor.eliminarkart(pista1);
 										}
-										pista.asociarKartPista(kart, pista);
+										factoryGestor.asociarKartPista(kart, pista);
 										System.out.println("Kart asociado");
 									}
 									else {
@@ -257,7 +259,24 @@ public class ProgramaPistas {
 							System.out.println("No existe ninguna pista que cumpla los requisitos");
 						}
 						break;
+					//Listar karts de una pista
 					case 6:
+						System.out.println("Introduce el nombre de la pista");
+						String npista = scanpistas.nextLine();
+						PistaDTO pista_  = factoryGestor.existePista(npista);
+						if (pista_ == null) {
+							System.out.println("La pista no existe");
+						}
+						else {
+							ArrayList<KartDTO> lista = factoryGestor.getListaKarts(npista);
+							for(KartDTO k : lista) {
+								System.out.println(k.toString());
+							}
+						}
+						break;
+					//Salir
+					case 7:
+						System.out.println(" ");
 						break;
 					default:
 						System.out.println("Opcion no valida");
