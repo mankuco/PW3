@@ -1,4 +1,4 @@
-package business;
+package business.Reserva;
 
 import java.io.Serializable;
 import java.time.LocalDate;

@@ -1,4 +1,4 @@
-package business;
+package business.Reserva;
 
 /**
  * Enum de los diferentes tipos de reservas

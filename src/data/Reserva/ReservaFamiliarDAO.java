@@ -1,4 +1,4 @@
-package data;
+package data.Reserva;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -8,19 +8,19 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import business.ReservaAdultosDTO;
-import business.TipoReserva;
+import business.Reserva.ReservaFamiliarDTO;
+import business.Reserva.TipoReserva;
 
 import java.sql.Types;
 
-public class ReservaAdultosDAO extends ReservaDAO {
+public class ReservaFamiliarDAO extends ReservaDAO {
 	
 	/* 
-	 * @Resumen Introduce en la base de datos la reserva de tipo Adultos
-	 * @Param Reserva de tipo Adultos
+	 * @Resumen Introduce en la base de datos la reserva de tipo familiar
+	 * @Param Reserva de tipo familiar
 	 */
 	
-	public void insertaReservaAdultos(ReservaAdultosDTO r) {
+	public void insertaReservaFamiliar(ReservaFamiliarDTO r) {
 	
 		try{
 			Connection con = getConnection();
@@ -32,7 +32,7 @@ public class ReservaAdultosDAO extends ReservaDAO {
 			ps.setInt(5, r.getDescuento());
 			ps.setString(6, r.getModalidad());
 			ps.setInt(7, r.getIdPista());
-			ps.setNull(8, Types.NULL);
+			ps.setInt(8,r.getNumeroNinos());
 			ps.setInt(9, r.getNumeroAdultos());
 			ps.setDate(10, Date.valueOf(r.getFechaYhora()));
 			ps.setString(11, r.getTipo().toString());
@@ -47,16 +47,14 @@ public class ReservaAdultosDAO extends ReservaDAO {
 		
 	}
 	
-	
-	
 	/* 
-	 * @Resumen Buscar la reserva de tipo adultos
+	 * @Resumen Buscar la reserva de tipo familiar
 	 * @Param Id de la reserva
-	 * @Return Reserva tipo Adulto
+	 * @Return Reserva tipo familiar
 	 */
 	
-	public ReservaAdultosDTO buscarReservaA(String idReserva) {
-		ReservaAdultosDTO r= null;
+	public ReservaFamiliarDTO buscarReservaF(String idReserva) {
+		ReservaFamiliarDTO r= null;
 		try {
 			Connection connection = getConnection();
 			PreparedStatement ps = con.prepareStatement(getProps().getProperty("buscar-reserva"));
@@ -69,12 +67,13 @@ public class ReservaAdultosDAO extends ReservaDAO {
 			 int idPista = rs.getInt(7);
 			 float precioPista = rs.getFloat(4);
 			 int descuento = rs.getInt(5);		
+			 int numeroNinos = rs.getInt(8);
 			 int numeroAdultos = rs.getInt(9);
 			 TipoReserva tipoReserva = TipoReserva.valueOf(rs.getString(11));
 			 String modalidad = rs.getString(6);	 
 			
-			r = new  ReservaAdultosDTO(idReserva,idUsuario, minutosReserva,precioPista, descuento,
-					modalidad, numeroAdultos,fechaYhora);
+			r = new  ReservaFamiliarDTO(idReserva,idUsuario, minutosReserva,precioPista, descuento,
+					modalidad, numeroNinos, numeroAdultos, fechaYhora);
 			}	
 		}
 		catch (Exception e) {
@@ -87,14 +86,12 @@ public class ReservaAdultosDAO extends ReservaDAO {
 		return r;
 	}
 	
-	
-
 	/* 
-	 * @Resumen Modifica una reserva de tipo adultos
-	 * @Param Reserva de tipo Adultos
+	 * @Resumen Modifica una reserva de tipo familiar
+	 * @Param Reserva de tipo familiar
 	 */
-	
-public void modificaReservaAdultos(ReservaAdultosDTO r) {
+
+	public void modificaReservaFamiliar(ReservaFamiliarDTO r) {
 		
 		try{
 			Connection con = getConnection();
@@ -105,7 +102,7 @@ public void modificaReservaAdultos(ReservaAdultosDTO r) {
 			ps.setInt(4, r.getDescuento());
 			ps.setString(5, r.getModalidad());
 			ps.setInt(6, r.getIdPista());
-			ps.setInt(7,Types.NULL);
+			ps.setInt(7,r.getNumeroNinos());
 			ps.setInt(8, r.getNumeroAdultos());
 			ps.setDate(9, Date.valueOf(r.getFechaYhora()));
 			ps.setString(10, r.getTipo().toString());
@@ -121,6 +118,10 @@ public void modificaReservaAdultos(ReservaAdultosDTO r) {
 		close();
 		
 	}
+	
+
+
+
 	
 
 }

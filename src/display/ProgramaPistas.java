@@ -3,11 +3,11 @@ package display;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import business.Dificultades;
-import business.Estados;
-import business.GestorPistas;
-import business.KartDTO;
-import business.PistaDTO;
+import business.Pista_Kart.Dificultades;
+import business.Pista_Kart.Estados;
+import business.Pista_Kart.GestorPistas;
+import business.Pista_Kart.KartDTO;
+import business.Pista_Kart.PistaDTO;
 
 public class ProgramaPistas {
 

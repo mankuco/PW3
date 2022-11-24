@@ -1,8 +1,9 @@
-package data;
+package data.Usuario;
 
 import java.util.ArrayList;
 
-import business.UsuarioDTO;
+import business.Usuario.UsuarioDTO;
+import data.DAO;
 
 import java.sql.*;
 

@@ -1,4 +1,4 @@
-package data;
+package data.Reserva;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import business.ReservaInfantilDTO;
-import business.TipoReserva;
+import business.Reserva.ReservaInfantilDTO;
+import business.Reserva.TipoReserva;
 
 import java.sql.Types;
 

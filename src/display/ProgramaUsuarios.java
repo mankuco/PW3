@@ -3,8 +3,8 @@ package display;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import business.GestorReservas;
-import business.GestorUsuario;
+import business.Reserva.GestorReservas;
+import business.Reserva.GestorUsuario;
 
 
 	public class ProgramaUsuarios {

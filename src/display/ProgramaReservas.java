@@ -3,9 +3,9 @@ package display;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import business.GestorReservas;
-import business.GestorUsuario;
-import business.UsuarioDTO;
+import business.Reserva.GestorReservas;
+import business.Reserva.GestorUsuario;
+import business.Usuario.UsuarioDTO;
 
 public class ProgramaReservas{
 	

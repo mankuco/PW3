@@ -1,9 +1,10 @@
-package data;
+package data.Pista_Kart;
 
 import java.util.ArrayList;
 
-import business.Dificultades;
-import business.PistaDTO;
+import business.Pista_Kart.Dificultades;
+import business.Pista_Kart.PistaDTO;
+import data.DAO;
 
 import java.sql.*;
 
