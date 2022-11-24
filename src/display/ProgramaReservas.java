@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 import business.Reserva.GestorReservas;
-import business.Reserva.GestorUsuario;
+import business.Usuario.GestorUsuario;
 import business.Usuario.UsuarioDTO;
 
 public class ProgramaReservas{

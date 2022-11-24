@@ -114,6 +114,14 @@ public class GestorPistas {
 		return lista;
 	}
 	
+	/*
+	 * @Resumen devuelve un numero aleatorio
+	 * @return int
+	 */
+	public int numerorandom() {
+		return (int)(Math.random()*99999+1);
+	}
+	
 	/* 
 	 * @Resumen Devuelve una cadena con la informacion del kart
 	 * @return string

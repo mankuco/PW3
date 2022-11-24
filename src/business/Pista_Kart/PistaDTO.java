@@ -1,11 +1,5 @@
 package business.Pista_Kart;
 
-import java.util.ArrayList;
-
-import data.Pista_Kart.KartDAO;
-import data.Pista_Kart.PistaDAO;
-
-
 public class PistaDTO {
 	
 	private String nombrePista;
@@ -13,7 +7,6 @@ public class PistaDTO {
 	private Dificultades dificultad;
 	private int maxKarts;
 	private int nkartsasociados;
-	private ArrayList<KartDTO> listaKarts;
 	
 	//CONSTRUCTOR PARAMETRIZADO
 	public PistaDTO(String nombrePista, boolean tipoEstado, Dificultades dificultad, int maxKarts) {

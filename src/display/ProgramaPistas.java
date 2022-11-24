@@ -3,12 +3,7 @@ package display;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import business.Pista_Kart.Dificultades;
-import business.Pista_Kart.Estados;
-import business.Pista_Kart.GestorPistas;
-import business.Pista_Kart.KartDTO;
-import business.Pista_Kart.PistaDTO;
-import data.Pista_Kart.PistaDAO;
+import business.Pista_Kart.*;
 
 public class ProgramaPistas {
 
@@ -84,63 +79,48 @@ public class ProgramaPistas {
 					case 2:
 						int dif = 0, idKart = 0;
 						String opcion;
-						while(dif == 0) {
-							System.out.println("Introduce el id del kart");
+						while(factoryGestor.existeKart(idKart) != null) {
+							idKart = factoryGestor.numerorandom();
+						}
+						Estados estado = Estados.DISPONIBLE;
+						while((dif != 1) && (dif != 2) && (dif != 3)) {
+							System.out.println("Introduce el estado del kart");
+							System.out.println("1. Disponible");
+							System.out.println("2. Reservado");
+							System.out.println("3. Mantenimiento");
 							opcion = scanpistas.nextLine();
 							try {
-								idKart = Integer.parseInt(opcion);
-								dif = 1;
+								dif = Integer.parseInt(opcion);
 					        }
 					        catch (NumberFormatException e) {
 								System.out.println("Formato no valido");
-								dif = 0;
 							}
 						}
-						if (factoryGestor.existeKart(idKart) != null) {
-							System.out.println("El kart ya existe");
+						if(dif == 2) {
+							estado=Estados.RESERVADO;
 						}
-						else {
-							Estados estado = Estados.DISPONIBLE;
-							dif = 0;
-							while((dif != 1) && (dif != 2) && (dif != 3)) {
-								System.out.println("Introduce el estado del kart");
-								System.out.println("1. Disponible");
-								System.out.println("2. Reservado");
-								System.out.println("3. Mantenimiento");
-								opcion = scanpistas.nextLine();
-								try {
-									dif = Integer.parseInt(opcion);
-						        }
-						        catch (NumberFormatException e) {
-									System.out.println("Formato no valido");
-								}
-							}
-							if(dif == 2) {
-								estado=Estados.RESERVADO;
-							}
-							else if(dif == 3) {
-								estado=Estados.MANTENIMIENTO;
-							}
-							boolean tipoKart = false;
-							dif = 0;
-							while((dif != 1) && (dif != 2)) {
-								System.out.println("Introduce el tipo de kart");
-								System.out.println("1. Adulto");
-								System.out.println("2. Infantil");
-								opcion = scanpistas.nextLine();
-								try {
-									dif = Integer.parseInt(opcion);
-						        }
-						        catch (NumberFormatException e) {
-									System.out.println("Formato no valido");
-								}
-							}
-							if(dif == 1) {
-								tipoKart=true;
-							}
-							factoryGestor.crearKart(idKart,tipoKart, estado);
-							System.out.println("Kart creado");
+						else if(dif == 3) {
+							estado=Estados.MANTENIMIENTO;
 						}
+						boolean tipoKart = false;
+						dif = 0;
+						while((dif != 1) && (dif != 2)) {
+							System.out.println("Introduce el tipo de kart");
+							System.out.println("1. Adulto");
+							System.out.println("2. Infantil");
+							opcion = scanpistas.nextLine();
+							try {
+								dif = Integer.parseInt(opcion);
+					        }
+					        catch (NumberFormatException e) {
+								System.out.println("Formato no valido");
+							}
+						}
+						if(dif == 1) {
+							tipoKart=true;
+						}
+						factoryGestor.crearKart(idKart,tipoKart, estado);
+						System.out.println("Kart creado");
 						break;
 					//Asociar kart a pista
 					case 3:
@@ -286,6 +266,6 @@ public class ProgramaPistas {
 				System.out.println("Formato no valido");
 			}
 		}
-		
+		scanpistas.close();
 	}
 }
