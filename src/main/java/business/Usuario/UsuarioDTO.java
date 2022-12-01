@@ -12,8 +12,10 @@ public class UsuarioDTO {
 	private String nombre;
 	private String apellidos;
 	private String email;
+	private String contrasena;
 	private LocalDate fechaNacimiento;
 	private LocalDate fechaInscripcion;
+	private boolean rol; //true=cliente false=administrador
 	
 	/**
 	 * Constructor parametrizado
@@ -21,16 +23,20 @@ public class UsuarioDTO {
 	 * @param nombre
 	 * @param apellidos
 	 * @param email
+	 * @param contrasena
 	 * @param fechaNacimiento
 	 * @param fechaInscripcion
+	 * @param rol
 	 */
-	public UsuarioDTO(String nombre, String apellidos, String email, LocalDate fechaNacimiento, LocalDate fechaInscripcion) {
+	public UsuarioDTO(String nombre, String apellidos, String email, String contrasena, LocalDate fechaNacimiento, LocalDate fechaInscripcion, boolean rol) {
 		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
+		this.contrasena = contrasena;
 		this.fechaNacimiento = fechaNacimiento;
 		this.fechaInscripcion = fechaInscripcion;
+		this.rol = rol;
 	}
 	
 		
@@ -66,6 +72,12 @@ public class UsuarioDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getContrasena() {
+		return contrasena;
+	}
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
+	}
 	public LocalDate getFechaNacimiento() {
 		return fechaNacimiento;
 	}
@@ -77,6 +89,12 @@ public class UsuarioDTO {
 	}
 	public void setFechaInscripcion(LocalDate fechaInscripcion) {
 		this.fechaInscripcion = fechaInscripcion;
+	}
+	public boolean getRol() {
+		return rol;
+	}
+	public void setRol(boolean rol) {
+		this.rol = rol;
 	}
 	
 	public long CalcularAntiguedad() throws ParseException {
@@ -100,7 +118,7 @@ public class UsuarioDTO {
 	@Override
 	public String toString() {
 		return "Usuario [ nombre=" + nombre + ", apellidos=" + apellidos + ", email="
-				+ email + ", fechaNacimiento=" + fechaNacimiento + ", fechaInscripcion=" + fechaInscripcion + "]";
+				+ email + ", fechaNacimiento=" + fechaNacimiento + ", fechaInscripcion=" + fechaInscripcion + ", rol=" + rol + "]";
 	}
 
 

@@ -17,11 +17,14 @@ public class UsuarioDAO extends DAO {
     public void guardarUsuario(UsuarioDTO usuario) {
         try {
         	Connection con = getConnection();
-        	PreparedStatement ps = con.prepareStatement(getProps().getProperty("inserta-usuario"), PreparedStatement.RETURN_GENERATED_KEYS);            ps.setString(1, usuario.getNombre());
+        	PreparedStatement ps = con.prepareStatement(getProps().getProperty("inserta-usuario"), PreparedStatement.RETURN_GENERATED_KEYS);
+        	ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getApellidos());
             ps.setString(3, usuario.getEmail());
             ps.setDate(4, Date.valueOf(usuario.getFechaNacimiento()));
             ps.setDate(5, Date.valueOf(usuario.getFechaInscripcion()));
+            ps.setString(6, usuario.getContrasena());
+            ps.setBoolean(7, usuario.getRol());
             ps.executeUpdate();
         } catch (SQLException e) {
             close();

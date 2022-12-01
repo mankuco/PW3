@@ -1,3 +1,14 @@
+<jsp:useBean id="userBean" scope="session" class="display.CustomerBean"></jsp:useBean>
+<%
+	if (userBean.getEmail() != null){
+		if(userBean.getRol() == true){
+			response.sendRedirect(request.getContextPath() + "/clienteServlet");
+		}
+		else{
+			response.sendRedirect(request.getContextPath() + "/administradorServlet");
+		}
+	}
+%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
