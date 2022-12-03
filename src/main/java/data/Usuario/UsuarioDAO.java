@@ -59,7 +59,7 @@ public class UsuarioDAO extends DAO {
          	PreparedStatement ps = con.prepareStatement(getProps().getProperty("lista-usuarios"), PreparedStatement.RETURN_GENERATED_KEYS);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                usuarios.add(new UsuarioDTO(rs.getString("nombre"), rs.getString("apellidos"), rs.getString("email"), rs.getDate("fechaNacimiento").toLocalDate(), rs.getDate("fechaInscripcion").toLocalDate()));
+                usuarios.add(new UsuarioDTO(rs.getString("nombre"), rs.getString("apellidos"), rs.getString("email"), rs.getString("contrasena"), rs.getDate("fechaNacimiento").toLocalDate(), rs.getDate("fechaInscripcion").toLocalDate(), rs.getBoolean("rol")));
             }
         } catch (SQLException e) {
             close();
@@ -77,7 +77,7 @@ public class UsuarioDAO extends DAO {
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                usuario = new UsuarioDTO(rs.getString("nombre"), rs.getString("apellidos"), rs.getString("email"), rs.getDate("fechaNacimiento").toLocalDate(), rs.getDate("fechaInscripcion").toLocalDate());
+                usuario = new UsuarioDTO(rs.getString("nombre"), rs.getString("apellidos"), rs.getString("email"), rs.getString("contrasena"), rs.getDate("fechaNacimiento").toLocalDate(), rs.getDate("fechaInscripcion").toLocalDate(), rs.getBoolean("rol"));
             }
         } catch (SQLException e) {
             close();

@@ -1,11 +1,11 @@
 package business.Usuario;
 
 import java.text.ParseException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.UUID;
+
 public class UsuarioDTO {
 	
 	
@@ -97,6 +97,8 @@ public class UsuarioDTO {
 		this.rol = rol;
 	}
 	
+	
+	//////QUITAR
 	public long CalcularAntiguedad() throws ParseException {
 
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
