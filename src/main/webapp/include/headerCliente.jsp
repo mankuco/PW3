@@ -1,18 +1,18 @@
-<header class="navbarC">
-	<ul class="navbarC-left">
-		<li class="navbarC-item"> //Inicio Cliente
+<header class="navbar">
+	<ul class="navbar-left">
+		<li class="navbar-item"> 
 			<a href="<%=request.getContextPath()%>/misReservasServlet">Inicio</a>
 		</li>
-		<li class="navbarC-item"> //Reservas
+		<li class="navbar-item"> 
 			<a href="<%=request.getContextPath()%>/misReservasServlet">Reservas</a>
 		</li>
 	</ul>
 	
-	<ul class="navbarC-right">
-		<li class="navbarC-item"> //Perfil
+	<ul class="navbar-right">
+		<li class="navbar-item"> 
 			<a href="<%=request.getContextPath()%>/MVC/View/editProfile.jsp">Perfil</a>
 		</li>
-		<li class="navbarC-item" style="background-color: #db2121;"> //Cerrar sesion
+		<li class="navbar-item" style="background-color: #db2121;"> 
 			<a href="<%= request.getContextPath() %>/cerrarServlet">Cerrar sesi&oacute;n</a>
 		</li>
 	</ul>

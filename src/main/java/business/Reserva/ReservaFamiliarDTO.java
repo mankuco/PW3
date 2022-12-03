@@ -22,8 +22,8 @@ public class ReservaFamiliarDTO extends Reserva {
 	 */
 
 	public ReservaFamiliarDTO(String idUsuario, int minutosReserva, float precioPista, int descuento,
-			String modalidad, int numeroNinos, int numeroAdultos, LocalDate fechaYhora) {
-		super(idUsuario, minutosReserva, precioPista, descuento, modalidad,fechaYhora);
+			String modalidad, int numeroNinos, int numeroAdultos, LocalDate fechaYhora,int borrado) {
+		super(idUsuario, minutosReserva, precioPista, descuento, modalidad,fechaYhora,borrado);
 		NumeroNinos = numeroNinos;
 		NumeroAdultos = numeroAdultos; 
 		this.tipo=TipoReserva.FAMILIAR;
@@ -45,8 +45,8 @@ public class ReservaFamiliarDTO extends Reserva {
 	 */
 	
 	public ReservaFamiliarDTO(String idR, String idUsuario, int minutosReserva, float precioPista, int descuento,
-			String modalidad, int numeroNinos, int numeroAdultos,LocalDate fechaYhora) {
-		super(idUsuario, minutosReserva, precioPista, descuento, modalidad, fechaYhora);
+			String modalidad, int numeroNinos, int numeroAdultos,LocalDate fechaYhora, int borrado) {
+		super(idUsuario, minutosReserva, precioPista, descuento, modalidad, fechaYhora,borrado);
 		this.idReserva = idR;
 		NumeroNinos = numeroNinos;
 		NumeroAdultos = numeroAdultos;

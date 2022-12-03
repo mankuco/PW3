@@ -24,8 +24,8 @@ public class ReservaAdultosDTO extends Reserva {
 			float precioPista,
 			int descuento,
 			String modalidad, 
-			int numeroAdultos,LocalDate fechaYhora) {
-		super(idUsuario, minutosReserva, precioPista, descuento, modalidad, fechaYhora);
+			int numeroAdultos,LocalDate fechaYhora, int borrado) {
+		super(idUsuario, minutosReserva, precioPista, descuento, modalidad, fechaYhora, borrado);
 		this.NumeroAdultos = numeroAdultos;
 		this.tipo=TipoReserva.ADULTOS;
 		this.idPista=02;
@@ -49,8 +49,8 @@ public class ReservaAdultosDTO extends Reserva {
 			float precioPista,
 			int descuento,
 			String modalidad, 
-			int numeroAdultos,LocalDate fechaYhora) {
-		super(idUsuario, minutosReserva, precioPista, descuento, modalidad, fechaYhora);
+			int numeroAdultos,LocalDate fechaYhora, int borrado) {
+		super(idUsuario, minutosReserva, precioPista, descuento, modalidad, fechaYhora,borrado);
 		this.idReserva=idReserva;
 		this.NumeroAdultos = numeroAdultos;
 		this.tipo=TipoReserva.ADULTOS;

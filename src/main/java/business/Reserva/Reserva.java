@@ -15,6 +15,7 @@ public abstract class Reserva {
 	protected int descuento;
 	protected TipoReserva tipo;
 	protected String modalidad;
+	protected int borrado;
 	
 	/**
 	 * Constructor parametrizado
@@ -25,7 +26,7 @@ public abstract class Reserva {
 	 * @param modalidad
 	 */
 	public Reserva(String idUsuario, int minutosReserva, float precioPista, int descuento,
-			 String modalidad , LocalDate fechaYhora) {
+			 String modalidad , LocalDate fechaYhora ,int borrado) {
 				
 		this.idReserva = generarIdUnico();
 		this.idUsuario = idUsuario;
@@ -34,6 +35,7 @@ public abstract class Reserva {
 		this.precioPista = precioPista;
 		this.descuento = descuento;
 		this.modalidad = modalidad;
+		this.borrado = borrado;
 	}
 
 
@@ -147,6 +149,15 @@ public abstract class Reserva {
 
 	public void setIdReserva(String idReserva) {
 		this.idReserva = idReserva;
+	}
+	
+	public int getBorrado() {
+		return borrado;
+	}
+
+
+	public void setBorrado(int borrado) {
+		this.borrado = borrado;
 	}
 
 

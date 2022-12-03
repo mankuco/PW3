@@ -24,8 +24,11 @@ body{
 .mostrador .fila{
     width: 100%;
     display: flex;
-    justify-content: space-between;
     margin-bottom: 40px;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: space-evenly;
+    align-content: center;
 }
 
 .mostrador .fila .item{
@@ -34,7 +37,7 @@ body{
     height: 250px;
     /*border: 2px solid red;*/
     text-align: center;
-    margin: 0 10px;
+    margin: 10px 10px;
     cursor: pointer;
     border-radius: 5px;
     transition: .3s;
@@ -44,8 +47,8 @@ body{
     background-color: #e6e6e6;
 }
 .mostrador .fila .item img{
-    width: 100%;
-    margin: 30px 0;
+    width: 120%;
+    margin-left:-15px;
     border-radius: 5%;
 }
 .mostrador .fila .item .descripcion{
@@ -69,6 +72,7 @@ body{
     overflow: hidden;
     background-color:#DDDDDD;
     border-radius:2%;
+    margin-left:45px;
 
 }
 .cerrar{
@@ -126,7 +130,7 @@ body{
 }
 
 
-/* MENU DE NAVEGACION */
+/* HEADER */
 header.navbar {
     display: flex;
     top: 0;

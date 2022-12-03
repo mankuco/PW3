@@ -10,13 +10,9 @@ import java.sql.Types;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import business.Reserva;
+import business.Reserva.*;
 import business.Pista_Kart.Estados;
 import business.Pista_Kart.KartDTO;
-import business.Reserva.ReservaAdultosDTO;
-import business.Reserva.ReservaFamiliarDTO;
-import business.Reserva.ReservaInfantilDTO;
-import business.Reserva.TipoReserva;
 import business.Usuario.UsuarioDTO;
 import data.DAO;
 
@@ -199,6 +195,73 @@ public ArrayList<Reserva> verReservasFecha(LocalDate Fecha) {
 		if(tipoReserva == TipoReserva.ADULTOS) {
 			 ra = new  ReservaAdultosDTO(idReserva,idUsuario, minutosReserva,precioPista, descuento,
 					modalidad, numeroAdultos,fechaYhora);
+			 reservas.add(ra);	 
+		}
+			
+			
+				
+			
+			}
+		
+		
+		
+	} catch (SQLException e) {
+		close();
+		System.out.println(e);
+	}
+	close();
+	return reservas;
+	
+}
+
+
+
+public ArrayList<Reserva> verReservasUsuario(String IdUsuario) {
+
+	ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+	ReservaFamiliarDTO rf= null;
+	ReservaAdultosDTO ra= null;
+	ReservaInfantilDTO ri= null;
+	
+	try {
+		Connection con = getConnection();
+		PreparedStatement ps = con.prepareStatement(getProps().getProperty("ver-reservas-usuario"));
+		ps.setString(1,LocalDate.now().toString());
+		ResultSet rs = ps.executeQuery();
+		
+		while(rs.next()) {
+			 String idReserva = rs.getString(1);
+			 String idUsuario = rs.getString(2);
+			 LocalDate fechaYhora =(rs.getDate(10)).toLocalDate();
+			 int minutosReserva = rs.getInt(3);
+			 int idPista = rs.getInt(7);
+			 float precioPista = rs.getFloat(4);
+			 int descuento = rs.getInt(5);		
+			 int numeroNinos = rs.getInt(8);
+			 int numeroAdultos = rs.getInt(9);
+			 TipoReserva tipoReserva = TipoReserva.valueOf(rs.getString(11));
+			 int borrado = rs.getInt(10);
+			 String modalidad = rs.getString(6);	
+			 
+		if(tipoReserva == TipoReserva.FAMILIAR) {
+			 rf = new  ReservaFamiliarDTO(idReserva,idUsuario, minutosReserva,precioPista, descuento,
+					modalidad, numeroNinos, numeroAdultos,fechaYhora,borrado);
+			 reservas.add(rf);	 
+		}
+			
+			
+			
+			if(tipoReserva == TipoReserva.INFANTIL) {
+				 ri = new  ReservaInfantilDTO(idReserva,idUsuario, minutosReserva,precioPista, descuento,
+						modalidad, numeroNinos,fechaYhora,borrado);
+					reservas.add(ri);	 
+			}
+				
+			
+				
+		if(tipoReserva == TipoReserva.ADULTOS) {
+			 ra = new  ReservaAdultosDTO(idReserva,idUsuario, minutosReserva,precioPista, descuento,
+					modalidad, numeroAdultos,fechaYhora,borrado);
 			 reservas.add(ra);	 
 		}
 			

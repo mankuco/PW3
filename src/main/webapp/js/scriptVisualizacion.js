@@ -16,7 +16,8 @@ function cargar(item){
 
     reservaSeleccionado.innerHTML =  item.getElementsByTagName("p")[0].innerHTML;
 
-    descripSeleccionada.innerHTML = "manueldelacueva@gmail.com";
+    descripSeleccionada.innerHTML = item.getElementsByTagName("descripcion")[0].innerHTML;
+
 
     fechaSeleccionado.innerHTML =  item.getElementsByTagName("span")[0].innerHTML;
 

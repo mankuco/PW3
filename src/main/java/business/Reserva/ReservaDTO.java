@@ -18,8 +18,8 @@ public class ReservaDTO extends Reserva implements Serializable {
 	 * @param modalidad
 	 */
 	public ReservaDTO(String idUsuario, int minutosReserva, float precioPista, int descuento,
-			 String modalidad, LocalDate fechaYhora) {
-		super(idUsuario,minutosReserva,precioPista,descuento,modalidad,fechaYhora);
+			 String modalidad, LocalDate fechaYhora, int borrado) {
+		super(idUsuario,minutosReserva,precioPista,descuento,modalidad,fechaYhora,borrado);
 }
 	/**
 	 * Constructor parametrizado 2
