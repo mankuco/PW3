@@ -6,6 +6,7 @@
 	if (CustomerBean.getEmail() != null) {
 		CustomerBean.setEmail(null);
 		CustomerBean.setNombre(null);
+		CustomerBean.setApellidos(null);
 		CustomerBean.setID(-1);
 	}
 

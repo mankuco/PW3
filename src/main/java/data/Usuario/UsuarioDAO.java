@@ -4,13 +4,20 @@ import java.util.ArrayList;
 
 import business.Usuario.UsuarioDTO;
 import data.DAO;
+import es.uco.pw.p2.data.ServletContext;
 
 import java.sql.*;
 
 
 
 public class UsuarioDAO extends DAO {
-
+	/**
+	 * Constructor con servletcontext
+	 * @param context ServletContext
+	 */
+	public UsuarioDAO(ServletContext context) {
+		super(context);
+	}
     /*
      * @Resumen Guarda en la base de datos un nuevo usuario
      */

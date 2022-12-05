@@ -29,8 +29,8 @@
 	            <label for="email">Email:</label>
 	            <input type="text" class="input-form" name="email">
 	            <br/>
-	            <label for="password">Contraseña:</label>
-	            <input type="password" class="input-form" name="password">
+	            <label for="contrasena">Contraseña:</label>
+	            <input type="password" class="input-form" name="contrasena">
 	            <br/>
 	            <input type="submit" class="small-button" id="button-submit-login" value="Iniciar sesión">
 	        </form>

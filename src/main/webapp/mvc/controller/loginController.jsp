@@ -18,9 +18,10 @@
 		}
 		else {
 			if (loginSuccessful) {
-				CustomerBean.setID(user.getID());
+				CustomerBean.setID(user.getID());//no hay id en dto no se si añadirlo o quitar la linea
 				CustomerBean.setEmail(user.getEmail());
 				CustomerBean.setNombre(user.getNombre());
+				CustomerBean.setApellidos(user.getApellidos());
 				response.sendRedirect("/PW3/src/main/webapp/mvc/view/loginView.jsp");
 			}
 			else { 
