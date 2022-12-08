@@ -66,9 +66,9 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color:rgb(224, 245, 255);
+    background-color:rgb(250, 240, 255);
     border-radius: 10px;
-    border: solid 4px rgb(112, 186, 255);
+    border: solid 4px rgb(106, 0, 106);
 }
 
 
@@ -182,7 +182,7 @@ header.navbar {
     top: 0;
     margin: 0;
     width: 100%;
-    background-color: #333;
+    background-color: rgb(106, 0, 106);
 }
 
 ul.navbar-left {
@@ -193,7 +193,7 @@ ul.navbar-left {
   margin-bottom: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  background-color: rgb(106, 0, 106);
 }
 
 li.navbar-item {
@@ -220,7 +220,7 @@ ul.navbar-right {
   margin-bottom: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  background-color: rgb(106, 0, 106);
 }
 
 /* MENSAJE DE �XITO */

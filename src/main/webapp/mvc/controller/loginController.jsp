@@ -22,6 +22,9 @@
 				CustomerBean.setEmail(user.getEmail());
 				CustomerBean.setNombre(user.getNombre());
 				CustomerBean.setApellidos(user.getApellidos());
+				CustomerBean.setRol(user.getRol());
+				CustomerBean.setFechaNacimiento(user.getFechaNacimiento());
+				CustomerBean.setFechaInscripcion(user.getFechaInscripcion());
 				response.sendRedirect("/PW3/src/main/webapp/mvc/view/loginView.jsp");
 			}
 			else { 

@@ -25,7 +25,7 @@
 			<p><%= userBean.getNombre() + " " + userBean.getApellidos() %></p>
 			<p>Fecha: <%= LocalDate.now() %></p>
 			<% GestorUsuario gestor = new GestorUsuario(); %>
-			<p>Antiguedad: <%= gestor.CalcularAntiguedad(userBean.getFechaInscripcion()) %> a&ntildeos</p>
+			<p>Antiguedad:  a&ntildeos</p>
 			<% ReservaDAO reserva = new ReservaDAO(); %>
 			<p>Fecha de la proxima reserva:</p>
 		</div>
