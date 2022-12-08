@@ -3,7 +3,7 @@
 <%@ page import="business.Usuario.UsuarioDTO, data.Usuario.UsuarioDAO" %>
 <jsp:useBean id="CustomerBean" scope="session" class="display.CustomerBean"></jsp:useBean>
 <%
-		UsuarioDAO usuarioDAO = new UsuarioDAO(request.getServletContext());
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		String email = request.getParameter("email");
 		String contrasena = request.getParameter("contrasena");
 		UsuarioDTO user = usuarioDAO.buscarUsuario(email);
@@ -18,7 +18,7 @@
 		}
 		else {
 			if (loginSuccessful) {
-				CustomerBean.setID(user.getID());//no hay id en dto no se si añadirlo o quitar la linea
+				CustomerBean.setContrasena(user.getContrasena());
 				CustomerBean.setEmail(user.getEmail());
 				CustomerBean.setNombre(user.getNombre());
 				CustomerBean.setApellidos(user.getApellidos());

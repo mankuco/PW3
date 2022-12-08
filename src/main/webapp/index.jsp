@@ -1,6 +1,6 @@
 <jsp:useBean id="userBean" scope="session" class="display.CustomerBean"></jsp:useBean>
 <%
-	if (userBean.getEmail() != null){ //Si está registrado
+	if (userBean.getEmail() != null){
 		response.sendRedirect(request.getContextPath() + "/usuarioServlet");
 	}
 %>
@@ -9,7 +9,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="css/style.css"></head>
+	<link rel="stylesheet" href="css/styles.css"></head>
 	<title>PR&Aacute;CTICA 3</title>
 </head>
 <body>
@@ -20,8 +20,8 @@
 					<p id="bienvenida">Bienvenido</p>
 				</div>
 				<div class="main">
-					<button type="button" class="small-button" onclick="window.location.href='<%= request.getContextPath() %>/MVC/View/login.jsp'">Iniciar sesi&oacute;n</button>
-					<button type="button" class="small-button" onclick="window.location.href='<%= request.getContextPath() %>/MVC/View/register.jsp'">Registro</button>
+					<button type="button" class="small-button" onclick="window.location.href='<%= request.getContextPath() %>/mvc/view/loginView.jsp'">Iniciar sesi&oacute;n</button>
+					<button type="button" class="small-button" onclick="window.location.href='<%= request.getContextPath() %>/mvc/view/registerView.jsp'">Registro</button>
 				</div>
 			</div>
 		</div>

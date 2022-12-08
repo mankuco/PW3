@@ -15,7 +15,7 @@
 		response.sendRedirect("/PW3/errorPage.jsp?msg=Uno o mas campos de registro estaban incompletos");
 	}
 	else{
-		UsuarioDAO usuarioDAO = new UsuarioDAO(request.getServletContext());
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		UsuarioDTO user = usuarioDAO.buscarUsuario(request.getParameter("email"));
 		
 		if (CustomerBean.getEmail() != null) {
@@ -28,11 +28,12 @@
 			else {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				try {
-					LocalDate fechaNacimiento = LocalDate.parse(fechanacimiento, formatter);
-					LocalDate fechaInscripcion = LocalDate.parse(fechainscripcion, formatter);
-					user = new UsuarioDTO(email, contrasena, nombre,apellidos, fechaNacimiento, fechaInscripcion);
+					LocalDate fechanacimiento = LocalDate.parse(fechaNacimiento, formatter);
+					LocalDate fechainscripcion = LocalDate.parse(fechaInscripcion, formatter);
+					user = new UsuarioDTO(email, contrasena, nombre,apellidos, fechanacimiento, fechainscripcion, true);
 					usuarioDAO.guardarUsuario(user);
-				} catch(Exception e){
+				}
+				catch(Exception e) {
 					e.printStackTrace();
 				}
 				

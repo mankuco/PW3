@@ -7,7 +7,7 @@
 		CustomerBean.setEmail(null);
 		CustomerBean.setNombre(null);
 		CustomerBean.setApellidos(null);
-		CustomerBean.setID(-1);
+		CustomerBean.setContrasena(null);
 	}
 
 	response.sendRedirect("/PW3/");

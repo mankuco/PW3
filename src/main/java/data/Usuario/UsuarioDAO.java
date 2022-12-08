@@ -4,19 +4,15 @@ import java.util.ArrayList;
 
 import business.Usuario.UsuarioDTO;
 import data.DAO;
-import es.uco.pw.p2.data.ServletContext;
 
 import java.sql.*;
 
-
-
 public class UsuarioDAO extends DAO {
 	/**
-	 * Constructor con servletcontext
-	 * @param context ServletContext
+	 * Constructor 
 	 */
-	public UsuarioDAO(ServletContext context) {
-		super(context);
+	public UsuarioDAO() {
+		super();
 	}
     /*
      * @Resumen Guarda en la base de datos un nuevo usuario
@@ -63,7 +59,7 @@ public class UsuarioDAO extends DAO {
         ArrayList<UsuarioDTO> usuarios = new ArrayList<UsuarioDTO>();
         try {
         	 Connection con = getConnection();
-         	PreparedStatement ps = con.prepareStatement(getProps().getProperty("lista-usuarios"), PreparedStatement.RETURN_GENERATED_KEYS);
+         	PreparedStatement ps = con.prepareStatement("select * from Usuario where rol = true", PreparedStatement.RETURN_GENERATED_KEYS);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 usuarios.add(new UsuarioDTO(rs.getString("nombre"), rs.getString("apellidos"), rs.getString("email"), rs.getString("contrasena"), rs.getDate("fechaNacimiento").toLocalDate(), rs.getDate("fechaInscripcion").toLocalDate(), rs.getBoolean("rol")));
@@ -79,8 +75,8 @@ public class UsuarioDAO extends DAO {
     public UsuarioDTO buscarUsuario(String email) {
     	UsuarioDTO usuario = null;
         try {
-        	 Connection con = getConnection();
-         	PreparedStatement ps = con.prepareStatement(getProps().getProperty("busca-usuario"), PreparedStatement.RETURN_GENERATED_KEYS);
+        	Connection con = getConnection();
+         	PreparedStatement ps = con.prepareStatement("select * from Usuario where email = ?", PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

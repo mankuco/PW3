@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
- * Clase que gestiona la conexión a la base de datos
+ * Clase que gestiona la conexiï¿½n a la base de datos
  */
 
 public abstract class DAO {
@@ -17,7 +17,7 @@ public abstract class DAO {
 	protected static Connection con = null;
 	
 	/**
-	 * Método que obtiene las sentencias SQL 
+	 * Mï¿½todo que obtiene las sentencias SQL 
 	 */
 	
 	public static Properties getProps() {
@@ -25,7 +25,7 @@ public abstract class DAO {
 		
 		InputStream inputStream;
 		try {
-			inputStream = new FileInputStream("./sql.properties");
+			inputStream = new FileInputStream("../sql.properties");
 			prop.load(inputStream);
 		}
 		catch(FileNotFoundException e1){
@@ -38,7 +38,7 @@ public abstract class DAO {
     }
 	
 	/**
-	 * Método que obtiene los parámetros para la conexión a la base de datos
+	 * Mï¿½todo que obtiene los parï¿½metros para la conexiï¿½n a la base de datos
 	 */
 	
 	public static Properties getLoginProps() {
@@ -46,7 +46,7 @@ public abstract class DAO {
 		
 		FileInputStream inputStream;
 		try {
-			inputStream = new FileInputStream("./config.properties");
+			inputStream = new FileInputStream("../../config.properties");
 			prop.load(inputStream);
 		}
 		catch(FileNotFoundException e1){
@@ -61,7 +61,7 @@ public abstract class DAO {
 	protected static Connection getConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection(getLoginProps().getProperty("jdbc"), getLoginProps().getProperty("user"), getLoginProps().getProperty("password"));
+			con = DriverManager.getConnection("jdbc:mysql://oraclepr.uco.es:3306/i92curam","i92curam", "pw1234");
 		} catch(SQLException e) {
 			System.out.println(e);
 		} catch (ClassNotFoundException e) {

@@ -7,7 +7,6 @@ public class CustomerBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private int id = -1;
 	private String nombre;
 	private String apellidos;
 	private String email;
@@ -16,12 +15,6 @@ public class CustomerBean implements Serializable {
 	private LocalDate fechaInscripcion;
 	private boolean rol;
 
-	public int getID() {
-		return id;
-	}
-	public void setID(int id) {
-		this.id = id;
-	}
 	public String getNombre() {
 		return nombre;
 	}

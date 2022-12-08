@@ -6,8 +6,8 @@
 	if (userBean.getEmail() == null){
 		response.sendRedirect(request.getContextPath());
 	}
-	else if(userBean.getRol() == true){
-		response.sendRedirect(request.getContextPath() + "/clienteServlet");
+	else if(userBean.getRol() == false){
+		response.sendRedirect(request.getContextPath() + "/usuarioServlet");
 	}
 %>
 <!DOCTYPE html>
@@ -16,15 +16,16 @@
 		<meta charset="ISO-8859-1">
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Bienvenido/a</title>
-		<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
+		<link rel="stylesheet" href="<%= request.getContextPath() %>/css/styles.css">
 	</head>
 	<body>
 		<%@ include file="../../include/headerCliente.jsp" %>
 		<div class="container-users-main">
-			<h1><%= userBean.getNombre() + " " + userBean.getApellidos() %></h1>
-			<h1>Fecha: <%= LocalDate.now() %></h1>
-			<h1>Antiguedad: <%= ChronoUnit.YEARS.between(userBean.getFechaInscripcion(), LocalDate.now())%></h1>
-			<h1>Fecha de la proxima reserva:</h1>
+			<h1>Bienvenido/a</h1>
+			<p><%= userBean.getNombre() + " " + userBean.getApellidos() %></p>
+			<p>Fecha: <%= LocalDate.now() %></p>
+			<p>Antiguedad: </p>
+			<p>Fecha de la proxima reserva:</p>
 		</div>
 	</body>
 </html>
