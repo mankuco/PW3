@@ -1,7 +1,6 @@
 package data.Usuario;
 
 import java.util.ArrayList;
-
 import business.Usuario.UsuarioDTO;
 import data.DAO;
 

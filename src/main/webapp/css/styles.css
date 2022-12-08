@@ -34,6 +34,20 @@ body{
 	padding-bottom: 30px;
 }
 
+/* TABLA */
+
+#table{
+	border: 3px rgb(252, 252, 252);
+	margin: auto;
+	width: 100%;
+	height: 50%;
+}
+
+#td{
+	border: 3px solid black;
+	text-align: center;
+}
+
 /* CUADRO CENTRADO */
 .cuadro{
     display: flex;

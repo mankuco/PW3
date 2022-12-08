@@ -10,12 +10,11 @@ import data.Usuario.UsuarioDAO;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 
 public class GestorUsuario {
-	
-	private ArrayList<UsuarioDTO> usuarios = new ArrayList<UsuarioDTO>();
 	
 	public GestorUsuario() {};
 	
@@ -144,9 +143,15 @@ public class GestorUsuario {
         usuarioDAO.eliminarUsuario(nuevoEmail);
         System.out.println("Usuario eliminado con exito");
     }
-
-
-	public ArrayList<UsuarioDTO> getUsuarios() {
-		return usuarios;
+	
+	/*
+	 * @Resumen Calcula la antiguedad de un usuario
+	 * @param fechaInscripcion = LocalDate
+	 */
+	public int CalcularAntiguedad(LocalDate fechaInscripcion) throws ParseException {
+		LocalDate fecha = fechaInscripcion;
+		LocalDate hoy = LocalDate.now();
+		long antiguedad = ChronoUnit.YEARS.between(fecha, hoy);
+		return (int)antiguedad;
 	}
 }

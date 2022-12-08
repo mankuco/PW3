@@ -97,32 +97,10 @@ public class UsuarioDTO {
 		this.rol = rol;
 	}
 	
-	
-	//////QUITAR
-	public long CalcularAntiguedad() throws ParseException {
-
-		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-		LocalDate fecha = this.fechaNacimiento;
-
-		LocalDate hoy = LocalDate.now();
-
-		long antiguedad = ChronoUnit.YEARS.between(fecha, hoy);
-
-		return antiguedad;
-	}
-
-
-	
-
-	
-	
 	@Override
 	public String toString() {
 		return "Usuario [ nombre=" + nombre + ", apellidos=" + apellidos + ", email="
 				+ email + ", fechaNacimiento=" + fechaNacimiento + ", fechaInscripcion=" + fechaInscripcion + ", rol=" + rol + "]";
 	}
-
-
 
 }
