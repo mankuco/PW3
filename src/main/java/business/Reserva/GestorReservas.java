@@ -149,7 +149,7 @@ public class GestorReservas {
 						encontrado++;
 					}
 				}
-				else if(comparador > 0) {
+				else if(comparador < 0) {
 					//Fecha futura
 					fecha = a.getFecha() + " " + a.getHora();
 					encontrado++;
@@ -158,6 +158,36 @@ public class GestorReservas {
 		}
 		
 		return fecha;
+	}
+	
+	/**
+	 * @Resume Metodo que calcula el numero de reservas completadas
+	 * @param email = email del usuario
+	 * @return N = int
+	 */
+	public int reservasCompletadas(String email) {
+		int N = 0;
+		LocalDate hoy = LocalDate.now();
+		LocalTime ahora = LocalTime.now();
+		
+		ReservaDAO r = new ReservaDAO();
+		ArrayList<Reserva> reservas = r.verReservasUsuario(email);
+		int comparador;
+		for (Reserva a : reservas) {
+			comparador = hoy.compareTo(a.getFecha());
+			if(comparador == 0) {
+				//Hoy, comparamos por horas
+				if(ahora.compareTo(a.getHora()) >= 0) {
+					N++;
+				}
+			}
+			else if(comparador > 0) {
+				//Fecha pasada
+				N++;
+			}
+		}
+		
+		return N;
 	}
 	
 	/**
