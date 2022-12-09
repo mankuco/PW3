@@ -11,9 +11,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import data.Reserva.ReservaDAO;
+import data.Reserva.*;
 import data.Usuario.UsuarioDAO;
-import business.Reserva.ReservaDTO;
+import business.Reserva.*;
 import business.Usuario.UsuarioDTO;
 
 public class GestorReservas {
@@ -23,7 +23,7 @@ public class GestorReservas {
 	/**
 	 * @Resumen Metodo que crea una reserva
 	 */
-	public void crearReserva(String idUsuario, int minutosReserva, int idPista, TipoReserva tipo, String modalidad, LocalDate fecha, LocalTime hora, int numeroNinos, int numeroAdultos) {
+	public void crearReserva(String idUsuario, int minutosReserva, String idPista, TipoReserva tipo, String modalidad, LocalDate fecha, LocalTime hora, int numeroNinos, int numeroAdultos) {
 		UsuarioDAO user = new UsuarioDAO();
 		UsuarioDTO u = user.buscarUsuario(idUsuario);
 		float precioPista;
@@ -32,7 +32,7 @@ public class GestorReservas {
 		}
 		else { precioPista = calcularPrecioReservaInd(minutosReserva, u.getFechaInscripcion()); }
 		String idReserva = generarIdUnico();
-		ReservaDTO reserva = new ReservaDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipo, modalidad , fecha, hora, 0, numeroNinos, numeroAdultos);
+		Reserva reserva = new Reserva(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipo, modalidad , fecha, hora, 0, numeroNinos, numeroAdultos);
 		new ReservaDAO().insertaReserva(reserva);
 	}
 	
@@ -47,7 +47,7 @@ public class GestorReservas {
 			precioPista = calcularPrecioReservaBono(minutosReserva);
 		}
 		else { precioPista = calcularPrecioReservaInd(minutosReserva, u.getFechaInscripcion()); }
-		ReservaDTO reserva = new ReservaDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipo, modalidad , fecha, hora, 0, numeroNinos, numeroAdultos);
+		Reserva reserva = new Reserva(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipo, modalidad , fecha, hora, 0, numeroNinos, numeroAdultos);
 		new ReservaDAO().modificarReserva(reserva);
 	}
 
@@ -115,9 +115,9 @@ public class GestorReservas {
 		int encontrado = 0;
 		
 		ReservaDAO r = new ReservaDAO();
-		ArrayList<ReservaDTO> reservas = r.verReservasUsuario(email);
+		ArrayList<Reserva> reservas = r.verReservasUsuario(email);
 		int comparador;
-		for (ReservaDTO a : reservas) {
+		for (Reserva a : reservas) {
 			if(encontrado == 0) {
 				comparador = hoy.compareTo(a.getFecha());
 				if(comparador == 0) {
