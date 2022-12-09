@@ -32,14 +32,25 @@ public class GestorReservas {
 		}
 		else { precioPista = calcularPrecioReservaInd(minutosReserva, u.getFechaInscripcion()); }
 		String idReserva = generarIdUnico();
-		Reserva reserva = new Reserva(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipo, modalidad , fecha, hora, 0, numeroNinos, numeroAdultos);
-		new ReservaDAO().insertaReserva(reserva);
+		
+		if(tipo == TipoReserva.FAMILIAR) {
+			ReservaFamiliarDTO reserva = new ReservaFamiliarDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipo, modalidad , fecha, hora, 0, numeroNinos, numeroAdultos);
+			new ReservaFamiliarDAO().insertaReserva(reserva);
+		}
+		else if(tipo == TipoReserva.ADULTOS) {
+			ReservaAdultosDTO reserva = new ReservaAdultosDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipo, modalidad , fecha, hora, 0, numeroAdultos);
+			new ReservaAdultosDAO().insertaReserva(reserva);
+		}
+		else {
+			ReservaInfantilDTO reserva = new ReservaInfantilDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipo, modalidad , fecha, hora, 0, numeroNinos);
+			new ReservaInfatilDAO().insertaReserva(reserva);
+		}
 	}
 	
 	/**
 	 * @Resumen Metodo que modifica una reserva de tipo Familiar
 	 */
-	public void modificarReserva(String idReserva, String idUsuario, int minutosReserva, int idPista, TipoReserva tipo, String modalidad, LocalDate fecha, LocalTime hora, int numeroNinos, int numeroAdultos) {
+	public void modificarReserva(String idReserva, String idUsuario, int minutosReserva, String idPista, TipoReserva tipo, String modalidad, LocalDate fecha, LocalTime hora, int numeroNinos, int numeroAdultos) {
 		UsuarioDAO user = new UsuarioDAO();
 		UsuarioDTO u = user.buscarUsuario(idUsuario);
 		float precioPista;
@@ -47,8 +58,19 @@ public class GestorReservas {
 			precioPista = calcularPrecioReservaBono(minutosReserva);
 		}
 		else { precioPista = calcularPrecioReservaInd(minutosReserva, u.getFechaInscripcion()); }
-		Reserva reserva = new Reserva(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipo, modalidad , fecha, hora, 0, numeroNinos, numeroAdultos);
-		new ReservaDAO().modificarReserva(reserva);
+		
+		if(tipo == TipoReserva.FAMILIAR) {
+			ReservaFamiliarDTO reserva = new ReservaFamiliarDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipo, modalidad , fecha, hora, 0, numeroNinos, numeroAdultos);
+			new ReservaFamiliarDAO().modificarReserva(reserva);
+		}
+		else if(tipo == TipoReserva.ADULTOS) {
+			ReservaAdultosDTO reserva = new ReservaAdultosDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipo, modalidad , fecha, hora, 0, numeroAdultos);
+			new ReservaAdultosDAO().modificarReserva(reserva);
+		}
+		else {
+			ReservaInfantilDTO reserva = new ReservaInfantilDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipo, modalidad , fecha, hora, 0, numeroNinos);
+			new ReservaInfatilDAO().modificarReserva(reserva);
+		}
 	}
 
 	/**

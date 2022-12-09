@@ -16,7 +16,7 @@ public class ReservaAdultosDAO extends ReservaDAO {
 	 * @Resumen Introduce en la base de datos la reserva de tipo Adultos
 	 * @Param Reserva de tipo Adultos
 	 */
-	public void insertaReservaAdultos(ReservaAdultosDTO r) {
+	public void insertaReserva(ReservaAdultosDTO r) {
 	
 		try{
 			Connection con = getConnection();
@@ -48,7 +48,7 @@ public class ReservaAdultosDAO extends ReservaDAO {
 	 * @Param Id de la reserva
 	 * @Return Reserva tipo Adulto
 	 */
-	public ReservaAdultosDTO buscarReservaA(String idReserva) {
+	public ReservaAdultosDTO buscarReserva(String idReserva) {
 		ReservaAdultosDTO r= null;
 		try {
 			Connection con = getConnection();
@@ -83,7 +83,7 @@ public class ReservaAdultosDAO extends ReservaDAO {
 	 * @Param Reserva de tipo Adultos
 	 */
 	
-	public void modificaReservaAdultos(ReservaAdultosDTO r) {
+	public void modificarReserva(ReservaAdultosDTO r) {
 		
 		try{
 			Connection con = getConnection();

@@ -15,7 +15,7 @@ public class ReservaFamiliarDAO extends ReservaDAO {
 	 * @Resumen Introduce en la base de datos la reserva
 	 * @Param Reserva
 	 */
-	public void insertaReservaFamiliar(ReservaFamiliarDTO r) {
+	public void insertaReserva(ReservaFamiliarDTO r) {
 	
 		try{
 			Connection con = getConnection();
@@ -47,7 +47,7 @@ public class ReservaFamiliarDAO extends ReservaDAO {
 	 * @Param Id de la reserva
 	 * @Return Reserva
 	 */
-	public ReservaFamiliarDTO buscarReservaA(String idReserva) {
+	public ReservaFamiliarDTO buscarReserva(String idReserva) {
 		ReservaFamiliarDTO r= null;
 		try {
 			Connection con = getConnection();
@@ -83,7 +83,7 @@ public class ReservaFamiliarDAO extends ReservaDAO {
 	 * @Param Reserva
 	 */
 	
-	public void modificaReservaFamiliar(ReservaFamiliarDTO r) {
+	public void modificarReserva(ReservaFamiliarDTO r) {
 		
 		try{
 			Connection con = getConnection();

@@ -8,10 +8,10 @@ import business.Reserva.*;
 public class ReservaInfatilDAO extends ReservaDAO {
 	
 	/* 
-	 * @Resumen Introduce en la base de datos la reserva de tipo Adultos
-	 * @Param Reserva de tipo Adultos
+	 * @Resumen Introduce en la base de datos la reserva
+	 * @Param Reserva 
 	 */
-	public void insertaReservaInfantil(ReservaInfantilDTO r) {
+	public void insertaReserva(ReservaInfantilDTO r) {
 	
 		try{
 			Connection con = getConnection();
@@ -43,7 +43,7 @@ public class ReservaInfatilDAO extends ReservaDAO {
 	 * @Param Id de la reserva
 	 * @Return Reserva
 	 */
-	public ReservaInfantilDTO buscarReservaA(String idReserva) {
+	public ReservaInfantilDTO buscarReserva(String idReserva) {
 		ReservaInfantilDTO r= null;
 		try {
 			Connection con = getConnection();
@@ -78,7 +78,7 @@ public class ReservaInfatilDAO extends ReservaDAO {
 	 * @Param Reserva
 	 */
 	
-	public void modificaReservaInfantil(ReservaInfantilDTO r) {
+	public void modificarReserva(ReservaInfantilDTO r) {
 		
 		try{
 			Connection con = getConnection();
