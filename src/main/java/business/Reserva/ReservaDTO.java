@@ -1,9 +1,8 @@
 package business.Reserva;
 
 import java.time.*;
-import java.util.UUID;
 
-public abstract class ReservaDTO {
+public class ReservaDTO {
 
 	protected String idReserva;
 	protected String idUsuario;
@@ -12,7 +11,6 @@ public abstract class ReservaDTO {
 	protected int minutosReserva;
 	protected int idPista;
 	protected float precioPista;
-	protected int descuento;
 	protected TipoReserva tipo;
 	protected String modalidad;
 	protected int borrado;
@@ -22,17 +20,16 @@ public abstract class ReservaDTO {
 	/**
 	 * Constructor parametrizado
 	 */
-	public ReservaDTO(String idUsuario, int minutosReserva, int idPista, float precioPista, int descuento,
+	public ReservaDTO(String idReserva, String idUsuario, int minutosReserva, int idPista, float precioPista,
 			 TipoReserva tipo, String modalidad , LocalDate fecha, LocalTime hora, int borrado, int numeroNinos, int numeroAdultos) {
 				
-		this.idReserva = generarIdUnico();
+		this.idReserva = idReserva;
 		this.idUsuario = idUsuario;
 		this.fecha = fecha;
 		this.hora = hora;
 		this.minutosReserva = minutosReserva;
 		this.idPista = idPista;
 		this.precioPista = precioPista;
-		this.descuento = descuento;
 		this.tipo = tipo;
 		this.modalidad = modalidad;
 		this.borrado = borrado;
@@ -49,16 +46,6 @@ public abstract class ReservaDTO {
 	public ReservaDTO() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * Metodo que genera un id unico para cada reserva
-	 * @return Id
-	 */
-	
-	public String generarIdUnico(){
-	    UUID uuid = UUID.randomUUID();
-	    return uuid.toString();
 	}
 	
 	/**
@@ -104,13 +91,6 @@ public abstract class ReservaDTO {
 	}
 	public void setPrecioPista(float precioPista) {
 		this.precioPista = precioPista;
-	}
-
-	public int getDescuento() {
-		return descuento;
-	}
-	public void setDescuento(int descuento) {
-		this.descuento = descuento;
 	}
 
 	public TipoReserva getTipo() {
@@ -159,7 +139,7 @@ public abstract class ReservaDTO {
 	public String toString() {
 		return "Reserva [idReserva=" + idReserva + ", idUsuario=" + idUsuario + ", fecha=" + fecha + ", hora=" + hora 
 				+ ", minutosReserva=" + minutosReserva + ", idPista=" + idPista + ", precioPista=" + precioPista
-				+ ", descuento=" + descuento + ", tipo=" + tipo + ", modalidad=" + modalidad + "]";
+				+ ", tipo=" + tipo + ", modalidad=" + modalidad + "]";
 	}
 	
 }

@@ -5,48 +5,49 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import data.Reserva.ReservaDAO;
+import data.Usuario.UsuarioDAO;
 import business.Reserva.ReservaDTO;
+import business.Usuario.UsuarioDTO;
 
 public class GestorReservas {
 	
-	/** Instancia singleton */
-	public static GestorReservas instance = null;
+	public GestorReservas() { }
 	
 	/**
 	 * @Resumen Metodo que crea una reserva
-	 * 
-	 * @param idU
-	 * @param minR
-	 * @param precioP
-	 * @param Descuento
-	 * @param modalidad
-	 * @param numeroNinos
-	 * @param numeroAdultos
 	 */
-	public void crearReserva(String idUsuario, int minutosReserva, int idPista, float precioPista, int descuento, TipoReserva tipo, String modalidad, LocalDateTime fechaYhora, int borrado, int numeroNinos, int numeroAdultos) {
-		ReservaDTO reserva = new ReservaDTO(idUsuario, minutosReserva, idPista, precioPista, descuento, tipo, modalidad, fechaYhora, borrado, numeroNinos, numeroAdultos);
+	public void crearReserva(String idUsuario, int minutosReserva, int idPista, TipoReserva tipo, String modalidad, LocalDate fecha, LocalTime hora, int numeroNinos, int numeroAdultos) {
+		UsuarioDAO user = new UsuarioDAO();
+		UsuarioDTO u = user.buscarUsuario(idUsuario);
+		float precioPista;
+		if(modalidad != null) {
+			precioPista = calcularPrecioReservaBono(minutosReserva);
+		}
+		else { precioPista = calcularPrecioReservaInd(minutosReserva, u.getFechaInscripcion()); }
+		String idReserva = generarIdUnico();
+		ReservaDTO reserva = new ReservaDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipo, modalidad , fecha, hora, 0, numeroNinos, numeroAdultos);
 		new ReservaDAO().insertaReserva(reserva);
 	}
 	
 	/**
 	 * @Resumen Metodo que modifica una reserva de tipo Familiar
-	 * @param idR
-	 * @param idU
-	 * @param minR
-	 * @param precioP
-	 * @param Descuento
-	 * @param modalidad
-	 * @param numeroNinos
-	 * @param numeroAdultos
 	 */
-	public void modificarReserva(String idUsuario, int minutosReserva, int idPista, float precioPista, int descuento, TipoReserva tipo, String modalidad, LocalDateTime fechaYhora, int borrado, int numeroNinos, int numeroAdultos) {
-		ReservaDTO reserva = new ReservaDTO(idUsuario, minutosReserva, idPista, precioPista, descuento, tipo, modalidad, fechaYhora, borrado, numeroNinos, numeroAdultos);
+	public void modificarReserva(String idReserva, String idUsuario, int minutosReserva, int idPista, TipoReserva tipo, String modalidad, LocalDate fecha, LocalTime hora, int numeroNinos, int numeroAdultos) {
+		UsuarioDAO user = new UsuarioDAO();
+		UsuarioDTO u = user.buscarUsuario(idUsuario);
+		float precioPista;
+		if(modalidad != null) {
+			precioPista = calcularPrecioReservaBono(minutosReserva);
+		}
+		else { precioPista = calcularPrecioReservaInd(minutosReserva, u.getFechaInscripcion()); }
+		ReservaDTO reserva = new ReservaDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipo, modalidad , fecha, hora, 0, numeroNinos, numeroAdultos);
 		new ReservaDAO().modificarReserva(reserva);
 	}
 
@@ -54,15 +55,15 @@ public class GestorReservas {
 	 * @Resumen Metodo elimina una reserva 
 	 * @param id de la reserva
 	 */
-	public  void eliminaReserva(String ID){
+	public void eliminaReserva(String ID){
 		new ReservaDAO().borraReserva(ID);
 	}
 	
 	/**
-	 * @Resume Metodo que calcula el precio de la reserva
-	 * @param MinReserva
-	 * @param fechaInscripcion
-	 * @return
+	 * @Resume Metodo que calcula el precio de la reserva sin bono
+	 * @param MinReserva = int
+	 * @param fechaInscripcion = LocalDate
+	 * @return precio = float
 	 */
 	public float calcularPrecioReservaInd(int MinReserva , LocalDate fechaInscripcion) {
 		
@@ -75,18 +76,22 @@ public class GestorReservas {
 
 		if(antiguedad>=2) {
 			if(MinReserva <= 60){ precio = 18; }
-			if(MinReserva >= 90 && MinReserva < 120){ precio = 27; }
+			if(MinReserva > 60 && MinReserva < 120){ precio = 27; }
 			if(MinReserva >= 120){ precio = 36; }
 		}
 		else {
 			if(MinReserva <= 60){ precio = 20; }
-			if(MinReserva >= 90 && MinReserva < 120){ precio = 30; }
+			if(MinReserva > 60 && MinReserva < 120){ precio = 30; }
 			if(MinReserva >= 120){ precio = 40; }
 		}
 		
 		return precio;
 	}
-	
+	/**
+	 * @Resume Metodo que calcula el precio de la reserva con bono
+	 * @param MinReserva = int
+	 * @return precio = float
+	 */
 	public float calcularPrecioReservaBono(int MinReserva) {
 		
 		float precio = 0;
@@ -98,4 +103,47 @@ public class GestorReservas {
 		return precio;
 	}
 	
+	/**
+	 * @Resume Metodo que calcula el precio de la reserva sin bono
+	 * @param email = email del usuario
+	 * @return fecha = LocalDate
+	 */
+	public String proximaReserva(String email) {
+		String fecha = "No tienes reservas proximas";
+		LocalDate hoy = LocalDate.now();
+		LocalTime ahora = LocalTime.now();
+		int encontrado = 0;
+		
+		ReservaDAO r = new ReservaDAO();
+		ArrayList<ReservaDTO> reservas = r.verReservasUsuario(email);
+		int comparador;
+		for (ReservaDTO a : reservas) {
+			if(encontrado == 0) {
+				comparador = hoy.compareTo(a.getFecha());
+				if(comparador == 0) {
+					//Hoy, comparamos por horas
+					if(ahora.compareTo(a.getHora()) < 0) {
+						fecha = a.getFecha() + " " + a.getHora();
+						encontrado++;
+					}
+				}
+				else if(comparador > 0) {
+					//Fecha futura
+					fecha = a.getFecha() + " " + a.getHora();
+					encontrado++;
+				}
+			}
+		}
+		
+		return fecha;
+	}
+	
+	/**
+	 * Metodo que genera un id unico para cada reserva
+	 * @return Id
+	 */
+	public String generarIdUnico(){
+	    double id = Math.random()*99999+1;
+	    return String.valueOf(id);
+	}
 }

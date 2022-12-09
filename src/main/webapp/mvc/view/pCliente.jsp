@@ -1,4 +1,4 @@
-<%@ page import="business.Usuario.UsuarioDTO, business.Usuario.GestorUsuario, data.Reserva.ReservaDAO, java.util.ArrayList, java.time.format.DateTimeFormatter, java.time.LocalDate, java.time.temporal.ChronoUnit" %>
+<%@ page import="business.Usuario.UsuarioDTO, business.Usuario.GestorUsuario, business.Reserva.GestorReservas, data.Reserva.ReservaDAO, java.util.ArrayList, java.time.format.DateTimeFormatter, java.time.LocalDate, java.time.temporal.ChronoUnit" %>
 <jsp:useBean id="userBean" scope="session" class="display.CustomerBean"></jsp:useBean>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -25,9 +25,9 @@
 			<p><%= userBean.getNombre() + " " + userBean.getApellidos() %></p>
 			<p>Fecha: <%= LocalDate.now() %></p>
 			<% GestorUsuario gestor = new GestorUsuario(); %>
-			<p>Antiguedad:  a&ntildeos</p>
-			<% ReservaDAO reserva = new ReservaDAO(); %>
-			<p>Fecha de la proxima reserva:</p>
+			<p>Antiguedad: <%= gestor.CalcularAntiguedad(userBean.getEmail()) %> a&ntildeos</p>
+			<% GestorReservas gest = new GestorReservas(); %>
+			<p>Pr&oacutexima reserva: <%= gest.proximaReserva(userBean.getEmail()) %></p>
 		</div>
 	</body>
 </html>

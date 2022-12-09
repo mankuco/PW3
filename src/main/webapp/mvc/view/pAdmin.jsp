@@ -42,7 +42,7 @@
 								<td><%= a.getNombre() %></td>
 								<td><%= a.getApellidos() %></td>
 								<td><%= a.getEmail() %></td>
-								<td><%= gestor.CalcularAntiguedad(a.getFechaInscripcion())%></td>
+								<td><%= gestor.CalcularAntiguedad(a.getEmail())%></td>
 								<td> POR HACER </td>
 							</tr>
 						<% } %>

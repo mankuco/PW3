@@ -5,6 +5,7 @@ import business.Usuario.UsuarioDTO;
 import data.DAO;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class UsuarioDAO extends DAO {
 	/**
@@ -75,13 +76,14 @@ public class UsuarioDAO extends DAO {
     	UsuarioDTO usuario = null;
         try {
         	Connection con = getConnection();
-         	PreparedStatement ps = con.prepareStatement("select * from Usuario where email = ?", PreparedStatement.RETURN_GENERATED_KEYS);
+         	PreparedStatement ps = con.prepareStatement("select * from Usuario where email = ? and borrado = 0", PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 usuario = new UsuarioDTO(rs.getString("nombre"), rs.getString("apellidos"), rs.getString("email"), rs.getString("contrasena"), rs.getDate("fechaNacimiento").toLocalDate(), rs.getDate("fechaInscripcion").toLocalDate(), rs.getBoolean("rol"));
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             close();
             System.out.println(e);
         }

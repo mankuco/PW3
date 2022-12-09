@@ -43,7 +43,8 @@ public class GestorPistas {
 	 * @Resumen Llama a la funcion void guardarKart(Kart kart)
 	 * @param Entran como parametros todos los datos necesarios para crear un kart
 	 */
-	public void crearKart(int idKart, boolean tipoKart, Estados estado) {
+	public void crearKart(boolean tipoKart, Estados estado) {
+		int idKart = numerorandom();
 		KartDTO kart = new KartDTO(idKart,tipoKart, estado);
 		KartDAO crear = new KartDAO();
 		crear.guardarKart(kart);
@@ -69,7 +70,7 @@ public class GestorPistas {
 	}
 	
 	/* 
-	 * @Resumen Lista todas las pistas que no estén en mantenimiento
+	 * @Resumen Lista todas las pistas que no estï¿½n en mantenimiento
 	 */
 	public ArrayList<PistaDTO> listarPistasmantenimiento() {
 		PistaDAO listar= new PistaDAO();

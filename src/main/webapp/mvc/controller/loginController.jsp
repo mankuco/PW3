@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="business.Usuario.UsuarioDTO, data.Usuario.UsuarioDAO" %>
+<%@ page import="business.Usuario.UsuarioDTO, data.Usuario.UsuarioDAO, java.time.format.DateTimeFormatter, java.time.LocalDate, java.time.temporal.ChronoUnit" %>
 <jsp:useBean id="CustomerBean" scope="session" class="display.CustomerBean"></jsp:useBean>
 <%
 		UsuarioDAO usuarioDAO = new UsuarioDAO();

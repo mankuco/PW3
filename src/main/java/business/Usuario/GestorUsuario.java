@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import data.Usuario.UsuarioDAO;
+import business.Usuario.UsuarioDTO;
 
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -129,29 +130,22 @@ public class GestorUsuario {
 	 * @Resumen Pide los datos para un usuario y lo elimina de la base de datos
 	 */
 	
-	public void eliminarUsuario() {
-        Scanner esc = new Scanner(System.in);
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
-        System.out.println("Introduzca el email");
-        String nuevoEmail = esc.nextLine();
-        while (!usuarioDAO.existeUsuario(nuevoEmail)) {
-            System.out.println("Usuario no registrado.");
-            System.out.println("Introduzca el email");
-            nuevoEmail = esc.nextLine();
-        }
-       
-        usuarioDAO.eliminarUsuario(nuevoEmail);
-        System.out.println("Usuario eliminado con exito");
+	public void eliminarUsuario(String email) {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();       
+        usuarioDAO.eliminarUsuario(email);
     }
 	
 	/*
 	 * @Resumen Calcula la antiguedad de un usuario
-	 * @param fechaInscripcion = LocalDate
+	 * @param email = String
 	 */
-	public int CalcularAntiguedad(LocalDate fechaInscripcion) throws ParseException {
-		LocalDate fecha = fechaInscripcion;
+	public int CalcularAntiguedad(String email) throws ParseException {
+		UsuarioDAO user = new UsuarioDAO();
+		UsuarioDTO usuario = user.buscarUsuario(email);
+		
+		LocalDate fechaInscripcion = usuario.getFechaInscripcion();
 		LocalDate hoy = LocalDate.now();
-		long antiguedad = ChronoUnit.YEARS.between(fecha, hoy);
+		long antiguedad = ChronoUnit.YEARS.between(fechaInscripcion, hoy);
 		return (int)antiguedad;
 	}
 }
