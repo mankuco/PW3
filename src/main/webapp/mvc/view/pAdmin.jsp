@@ -30,12 +30,12 @@
 			
 		<% } else { %>
 		
-			<table width="1000" height="200" border="1" style="margin: 0 auto;">
+			<table width="1000" height="200" border="3" bordercolor=rgb(106,0,106) style="margin: 0 auto;">
 				<tr style="text-align:center">
 					<td>Nombre</td>
 					<td>Apellidos</td>
 					<td>Email</td>
-					<td>Antiguedad (en a&ntildeos)  td>
+					<td>Antiguedad (en a&ntilde;os)</td>
 					<td>Nº Reservas Completadas</td>
 				</tr>
 				<% for (UsuarioDTO a : usuarios){ %>

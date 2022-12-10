@@ -20,12 +20,12 @@
 	</head>
 	<body>
 		<%@ include file="../../include/headerCliente.jsp" %>
-			<h1 style="text-align:center">Bienvenido/a</h1>
-			<h3 style="margin-left:20px">Nombre y Apellidos: <%= userBean.getNombre() + " " + userBean.getApellidos() %></h3>
-			<h3 style="margin-left:20px">Fecha: <%= LocalDate.now() %> </h3>
-			<% GestorUsuario gestor = new GestorUsuario(); %>
-			<h3 style="margin-left:20px">Antiguedad: <%= gestor.CalcularAntiguedad(userBean.getEmail()) %> a&ntildeos</h3>
-			<% GestorReservas gest = new GestorReservas(); %>
-			<h3 style="margin-left:20px">Pr&oacutexima reserva: <%= gest.proximaReserva(userBean.getEmail()) %></h3>
+		<h1 style="text-align:center">Bienvenido/a</h1>
+		<h3 style="margin-left:20px">Nombre y Apellidos: <%= userBean.getNombre() + " " + userBean.getApellidos() %></h3>
+		<h3 style="margin-left:20px">Fecha: <%= LocalDate.now() %> </h3>
+		<% GestorUsuario gestor = new GestorUsuario(); %>
+		<h3 style="margin-left:20px">Antiguedad: <%= gestor.CalcularAntiguedad(userBean.getEmail()) %> a&ntilde;os</h3>
+		<% GestorReservas gest = new GestorReservas(); %>
+		<h3 style="margin-left:20px">Pr&oacute;xima reserva: <%= gest.proximaReserva(userBean.getEmail()) %></h3>
 	</body>
 </html>
