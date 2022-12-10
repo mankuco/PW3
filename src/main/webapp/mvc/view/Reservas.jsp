@@ -52,23 +52,27 @@ else{
                 &#x2715
             </div>
             <div class="info">
-                <img src="" alt="" id="img">
-                <h2 id="reserva"></h2>
-                <p id="usuario"></p>
-                 <h5>PISTA:</h5>
-                <p id="pista"></p>
-                 <h5>PRECIO:</h5>
-                <p id="precio"></p>
-                <h5>DURACION:</h5>
-                <p id="minutos"></p>
-                 <h5>HORA:</h5>
-                <p id="hora"></p>       
-             	<span id="fechaR" class="fecha"> </span>
-
-                <div class="fila">
-
-                    <button>CANCELAR RESERVA</button>
-                </div>
+	                <img src="" alt="" id="img">
+	                <h2 id="reserva"></h2>
+	                 <p id="usuario"></p>
+	                 <h5>PISTA:</h5>
+	                 <p id="pista"></p>
+	                 <h5>PRECIO:</h5>
+	                <p id="precio"></p>
+	                <h5>DURACION:</h5>
+	                <p id="minutos"></p>
+	                 <h5>HORA:</h5>
+	                <p id="hora"></p>       
+	             	<span id="fechaR" class="fecha"> </span>
+	
+	                <div class="fila">
+						 <form action="cancelarReserva" method="POST">
+	                      <button  type="submit" >CANCELAR RESERVA</button>
+	               	  </form>
+	                	 <form action="modificarReservaServlet" method="POST">
+	                 	   <button class="buttonMod"  type="submit">MODIFICAR RESERVA</button>
+	                 	</form>
+                	</div>
             </div>
         </div>
     </section>

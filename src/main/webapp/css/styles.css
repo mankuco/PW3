@@ -352,6 +352,7 @@ body{
 
 .info{
     padding: 20px;
+    margin:10px;
 }
 .info img{
     display: block;
@@ -394,6 +395,20 @@ body{
     padding: 0 10px;
     color: #fff;
     background-color: #f85151;
+    border-radius: 5px;
+    margin:20px;
+    cursor:pointer;
+    
+}
+
+.info .fila .buttonMod{
+    height: 40px;
+    border: none;
+    padding: 0 10px;
+    color: #fff;
+    background-color: #0080ff;
+    border-radius: 5px;
+    cursor:pointer;
 }
 
 
