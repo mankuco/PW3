@@ -1,4 +1,4 @@
-package servlet.reservasServlet;
+package servlets;
 
 
 import java.io.IOException;
@@ -51,7 +51,7 @@ public class misReservasServlet extends HttpServlet {
 				
 				request.setAttribute("verReservasADM", reservasADM);
 				request.setAttribute("verReservasUsuario", reservasUsuario);
-				RequestDispatcher rd = request.getRequestDispatcher("src/main/webapp/Reservas.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("./mvc/view/Reservas.jsp");
 				rd.forward(request, response);
 				
 			}

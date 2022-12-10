@@ -2,8 +2,14 @@ let mostrador = document.getElementById("mostrador");
 let seleccion = document.getElementById("seleccion");
 let imgSeleccionada = document.getElementById("img");
 let reservaSeleccionado = document.getElementById("reserva");
-let descripSeleccionada = document.getElementById("descripcion");
-let fechaSeleccionado = document.getElementById("fecha");
+let usuarioSeleccionado = document.getElementById("usuario");
+let pistaSeleccionado = document.getElementById("pista");
+let precioSeleccionado = document.getElementById("precio");
+let minutosSeleccionado = document.getElementById("minutos");
+let horaSeleccionado = document.getElementById("hora");
+let fechaSeleccionado = document.getElementById("fechaR");
+
+
 
 function cargar(item){
     quitarBordes();
@@ -15,13 +21,14 @@ function cargar(item){
     imgSeleccionada.src = item.getElementsByTagName("img")[0].src;
 
     reservaSeleccionado.innerHTML =  item.getElementsByTagName("p")[0].innerHTML;
-
-    descripSeleccionada.innerHTML = item.getElementsByTagName("descripcion")[0].innerHTML;
-
-
+    usuarioSeleccionado.innerHTML =  item.getElementsByTagName("p")[1].innerHTML;
+    pistaSeleccionado.innerHTML =  item.getElementsByTagName("p")[2].innerHTML;
+    precioSeleccionado.innerHTML =  item.getElementsByTagName("p")[3].innerHTML;
+    minutosSeleccionado.innerHTML =  item.getElementsByTagName("p")[4].innerHTML;
+    horaSeleccionado.innerHTML =  item.getElementsByTagName("h4")[0].innerHTML;
     fechaSeleccionado.innerHTML =  item.getElementsByTagName("span")[0].innerHTML;
-
-
+  
+     
 }
 function cerrar(){
     mostrador.style.width = "100%";

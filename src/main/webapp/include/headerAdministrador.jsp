@@ -4,13 +4,13 @@
 			<a href="<%=request.getContextPath()%>/usuarioServlet">Inicio</a>
 		</li>
 		<li class="navbar-item">
-			<a href="<%=request.getContextPath()%>/misReservasServlet">Karts</a>
+			<a href="<%=request.getContextPath()%>/misKartsServlet">Karts</a>
 		</li>
 		<li class="navbar-item">
-			<a href="<%=request.getContextPath()%>/nuevaReservaServlet">Pistas</a>
+			<a href="<%=request.getContextPath()%>/misPistasServlet">Pistas</a>
 		</li>
 		<li class="navbar-item"> 
-			<a href="<%=request.getContextPath()%>/nuevaReservaServlet">Reservas</a>
+			<a href="<%=request.getContextPath()%>/misReservasServlet">Reservas</a>
 		</li>
 	</ul>
 	

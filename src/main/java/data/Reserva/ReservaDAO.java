@@ -87,7 +87,6 @@ public class ReservaDAO extends DAO {
 		try {
 			Connection con = getConnection();
 			PreparedStatement ps = con.prepareStatement("SELECT * FROM Reservas WHERE borrado = 0");
-			ps.setString(1,LocalDate.now().toString());
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {

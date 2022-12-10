@@ -33,6 +33,7 @@ public abstract class Reserva {
 		this.idUsuario = idUsuario;
 		this.fecha = fecha;
 		this.hora = hora;
+		this.idPista=idPista;
 		this.minutosReserva = minutosReserva;
 		this.precioPista = precioPista;
 		this.modalidad = modalidad;
