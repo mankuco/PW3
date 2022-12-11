@@ -1,42 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.time.LocalDate,business.Usuario.UsuarioDTO, data.Usuario.UsuarioDAO" %>
-<jsp:useBean id="CustomerBean" scope="session" class="display.CustomerBean"></jsp:useBean>
-<%
+<jsp:useBean id="userBean" scope="session" class="display.CustomerBean"></jsp:useBean>
+<% 	
+	if (userBean.getEmail() == null){
+		response.sendRedirect(request.getContextPath());
+	}
+
 	String nombre = request.getParameter("nombre");
 	String apellidos = request.getParameter("apellidos");
-	String contrasena = request.getParameter("contrasena");
 	String fechaNacimiento = request.getParameter("fechaNacimiento");
-	String fechaInscripcion = request.getParameter("fechaInscripcion");
-	String rol = request.getParameter("rol");
 	
-	if (nombre == null || apellidos == null|| contrasena == null || fechaNacimiento == null || fechaInscripcion == null || rol == null || rol == "" || nombre == ""|| apellidos == "" || contrasena == "" || fechaNacimiento == ""|| fechaInscripcion == ""){
-		response.sendRedirect("/PW3/errorPage.jsp?msg=Uno o mas campos estaban incompletos");
-	}
+	if (nombre == null || apellidos == null|| fechaNacimiento == null || nombre == ""|| apellidos == "" || fechaNacimiento == "") { %>
+		<jsp:forward page="../view/editarPerfil.jsp">
+			<jsp:param value="Campos incompletos" name="msg"/>
+		</jsp:forward>
+	<%}
 	else{
-		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		
-		if (CustomerBean.getEmail() != null) {
+		if (userBean.getEmail() != null) {
 			try{
-				LocalDate fechanacimiento = LocalDate.parse(fechaNacimiento);
-				LocalDate fechainscripcion = LocalDate.parse(fechaInscripcion);
-				boolean Rol = false;
-				try{
-					if(rol == "true"){
-						Rol = true;
-					}
-				}
-				catch (Exception e){
-					e.printStackTrace();
-				}
-				UsuarioDTO user = new UsuarioDTO(CustomerBean.getEmail(), contrasena, nombre, apellidos, fechanacimiento, fechainscripcion, Rol);
-				usuarioDAO.modificarUsuario(user);
+				LocalDate fecha = LocalDate.parse(fechaNacimiento);
+				
+				UsuarioDAO usuarioDAO = new UsuarioDAO();
+				UsuarioDTO usuario = usuarioDAO.buscarUsuario(userBean.getEmail());
+				
+				usuario.setFechaNacimiento(fecha);
+				usuario.setApellidos(apellidos);
+				usuario.setNombre(nombre);
+				
+				usuarioDAO.modificarUsuario(usuario);
+				
+				userBean.setApellidos(apellidos);
+				userBean.setNombre(nombre);
+				userBean.setFechaNacimiento(fecha);
 			}
 			catch (Exception e){
 				e.printStackTrace();
 			}
 			
-		}
-		response.sendRedirect("/PW3/");
-	}
-%>
+		}%>
+		<jsp:forward page="../view/editarPerfil.jsp">
+			<jsp:param value="Perfil editado de forma correcta" name="msg"/>
+		</jsp:forward>
+		<%} %>

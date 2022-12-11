@@ -20,7 +20,7 @@ public class UsuarioDAO extends DAO {
     public void guardarUsuario(UsuarioDTO usuario) {
         try {
         	Connection con = getConnection();
-        	PreparedStatement ps = con.prepareStatement(getProps().getProperty("inserta-usuario"), PreparedStatement.RETURN_GENERATED_KEYS);
+        	PreparedStatement ps = con.prepareStatement("insert into Usuario (nombre, apellidos, email, fechaNacimiento, fechaInscripcion, contrasena, rol) values(?,?,?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
         	ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getApellidos());
             ps.setString(3, usuario.getEmail());
@@ -40,13 +40,11 @@ public class UsuarioDAO extends DAO {
     public void modificarUsuario(UsuarioDTO usuario) {
         try {
             Connection con = getConnection();
-        	PreparedStatement ps = con.prepareStatement(getProps().getProperty("modifica-usuario"), PreparedStatement.RETURN_GENERATED_KEYS);
+        	PreparedStatement ps = con.prepareStatement("update Usuario set nombre = ?, apellidos = ?, fechaNacimiento = ? where email = ? and borrado = 0", PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getApellidos());
-            ps.setString(3, usuario.getEmail());
-            ps.setDate(4, Date.valueOf(usuario.getFechaNacimiento()));
-            ps.setDate(5, Date.valueOf(usuario.getFechaInscripcion()));
-            ps.setString(6, usuario.getEmail());
+            ps.setDate(3, Date.valueOf(usuario.getFechaNacimiento()));
+            ps.setString(4, usuario.getEmail());
             ps.executeUpdate();
         } catch (SQLException e) {
             close();
@@ -102,24 +100,5 @@ public class UsuarioDAO extends DAO {
             close();
             System.out.println(e);
         }
-    }
-
-    //Existe usuario base de datos
-    public boolean existeUsuario(String email) {
-        boolean existe = false;
-        try {
-        	
-        	 Connection con = getConnection();
-         	PreparedStatement ps = con.prepareStatement(getProps().getProperty("existe-usuario"), PreparedStatement.RETURN_GENERATED_KEYS);
-            ps.setString(1, email);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                existe = true;
-            }
-        } catch (SQLException e) {
-            close();
-            System.out.println(e);
-        }
-        return existe;
     }
 }

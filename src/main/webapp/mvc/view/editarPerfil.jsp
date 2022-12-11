@@ -24,11 +24,14 @@
 		<h1 style="text-align:center">Modificar perfil</h1>
 		<h2 style="text-align:center"><%= userBean.getEmail() %></h2>
 		
-		<% String msg = (String)request.getAttribute("msg"); %>
-    	<% if (msg != null) { %>
+		<% String msg = (String)request.getParameter("msg"); %>
+    	<% if (msg != null) { 
+    			if (msg.equals("Perfil editado de forma correcta")){%>
     		<p style="background-color: #abedb2; text-align: center;"><%= msg %></p>
-    	<% } %>
-	    <form class="modify-form" action="<%= request.getContextPath() %>/editarPerfilServlet" method="POST" style="text-align: center">
+    	<% 		} else { %>
+    	<p style="background-color: #ff9999; text-align: center;"><%= msg %></p>
+    	<% } } %>
+	    <form class="modify-form" action="/PW3/mvc/controller/modifyController.jsp" method="POST" style="text-align: center">
             <label for="nombre">Nombre:</label>
             <input type="text" style="border: solid 2px #cf74f2;" class="input-form" id="name" name="nombre" value="<%= userBean.getNombre() %>">
             <br/>
