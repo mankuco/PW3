@@ -188,4 +188,42 @@ public class PistaDAO extends DAO {
 		}
 		return listadisponibles;
 	}
+	
+	
+	/* 
+	 * @Resumen Devuelve la lista con todas las pistas que estan en mantenimiento
+	 * @return listamantenimiento = ArrayList<Pista>
+	 */
+	public ArrayList<PistaDTO> verPistas() {
+		ArrayList<PistaDTO> listaPistas = new ArrayList<PistaDTO>();
+		try {
+			Connection connection =getConnection();
+			PreparedStatement ps=connection.prepareStatement("Select * from Pista");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String nombrePista = rs.getString("nombrePista");
+				boolean tipoEstado = false;
+				String dif = rs.getString("dificultad");
+				Dificultades dificultad = Dificultades.FAMILIAR;
+				if(dif.equals("ADULTOS")) {
+					dificultad = Dificultades.ADULTOS;
+				}
+				if(dif.equals("INFANTIL")) {
+					dificultad = Dificultades.INFANTIL;
+				}
+				int maxKarts = rs.getInt("maxKarts");
+				int nkartsasociados = rs.getInt("nkartsasociados");
+				listaPistas.add(new PistaDTO(nombrePista, tipoEstado, dificultad, maxKarts,nkartsasociados));
+			}
+			if (ps != null){ 
+				ps.close(); 
+			}
+			close();
+		}
+		catch (Exception e) {
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return listaPistas;
+	}
 }

@@ -25,7 +25,7 @@ public abstract class DAO {
 		
 		InputStream inputStream;
 		try {
-			inputStream = new FileInputStream("../sql.properties");
+			inputStream = new FileInputStream("/sql.properties");
 			prop.load(inputStream);
 		}
 		catch(FileNotFoundException e1){
@@ -46,7 +46,7 @@ public abstract class DAO {
 		
 		FileInputStream inputStream;
 		try {
-			inputStream = new FileInputStream("../../config.properties");
+			inputStream = new FileInputStream("/config.properties");
 			prop.load(inputStream);
 		}
 		catch(FileNotFoundException e1){

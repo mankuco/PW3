@@ -17,6 +17,16 @@ public class PistaDTO {
 		this.maxKarts = maxKarts;
 		this.nkartsasociados=0;
 	}
+	
+	//CONSTRUCTOR PARAMETRIZADO2
+	public PistaDTO(String nombrePista, boolean tipoEstado, Dificultades dificultad, int maxKarts, int nkartsasociados) {
+		super();
+		this.nombrePista = nombrePista;
+		this.tipoEstado = tipoEstado;
+		this.dificultad = dificultad;
+		this.maxKarts = maxKarts;
+		this.nkartsasociados=nkartsasociados;
+	}
 	//CONSTRUCTOR
 	public PistaDTO() {
 		super();
