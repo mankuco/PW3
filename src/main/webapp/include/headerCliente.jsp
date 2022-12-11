@@ -3,6 +3,9 @@
 		<li class="navbar-item"> 
 			<a href="<%=request.getContextPath()%>/usuarioServlet">Inicio</a>
 		</li>
+		<li class="navbar-item">
+			<a href="<%=request.getContextPath()%>/misPistasServlet">Pistas</a>
+		</li>
 		<li class="navbar-item"> 
 			<a href="<%=request.getContextPath()%>/misReservasServlet">Reservas</a>
 		</li>
@@ -13,7 +16,7 @@
 			<a href="<%=request.getContextPath()%>/mvc/view/editarPerfil.jsp">Editar Perfil</a>
 		</li>
 		<li class="navbar-item" style="background-color:  #cf74f2;"> 
-			<a href="<%= request.getContextPath() %>/cerrarServlet">Cerrar sesi&oacute;n</a>
+			<a href="<%= request.getContextPath() %>/mvc/controller/logoutController.jsp">Cerrar sesi&oacute;n</a>
 		</li>
 	</ul>
 </header>

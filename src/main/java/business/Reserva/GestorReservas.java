@@ -134,29 +134,40 @@ public class GestorReservas {
 		String fecha = "No tienes reservas proximas";
 		LocalDate hoy = LocalDate.now();
 		LocalTime ahora = LocalTime.now();
-		int encontrado = 0;
 		
 		ReservaDAO r = new ReservaDAO();
 		ArrayList<Reserva> reservas = r.verReservasUsuario(email);
+		ArrayList<Reserva> validas = new ArrayList<Reserva>();
 		int comparador;
 		for (Reserva a : reservas) {
-			if(encontrado == 0) {
-				comparador = hoy.compareTo(a.getFecha());
-				if(comparador == 0) {
-					//Hoy, comparamos por horas
-					if(ahora.compareTo(a.getHora()) < 0) {
-						fecha = a.getFecha() + " " + a.getHora();
-						encontrado++;
-					}
-				}
-				else if(comparador < 0) {
-					//Fecha futura
-					fecha = a.getFecha() + " " + a.getHora();
-					encontrado++;
+			comparador = hoy.compareTo(a.getFecha());
+			if(comparador == 0) {
+				//Hoy, comparamos por horas
+				if(ahora.compareTo(a.getHora()) < 0) {
+					validas.add(a);
 				}
 			}
+			else if(comparador < 0) {
+				//Fecha futura
+				validas.add(a);
+			}
 		}
-		
+		if(!reservas.isEmpty()) {
+			Reserva reserva = reservas.get(0);
+			for(Reserva b : validas) {
+				comparador = (reserva.getFecha()).compareTo(b.getFecha());
+				if(comparador == 0) {
+					if((reserva.getHora()).compareTo(b.getHora()) > 0) {
+						reserva = b;
+					}
+				}
+				else if(comparador > 0) {
+					reserva = b;
+				}
+			}
+			fecha = reserva.getFecha() + " " + reserva.getHora();
+		}
+
 		return fecha;
 	}
 	

@@ -1,7 +1,7 @@
 /* GENERAL */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;800&display=swap');
 body{
-    background-color: rgb(252, 252, 252);
+    background-color: #6a006a;
     padding: 0px;
     margin: auto;
     font-family: 'Open Sans';
@@ -181,7 +181,7 @@ header.navbar {
     top: 0;
     margin: 0;
     width: 100%;
-    background-color: rgb(106, 0, 106);
+    background-color: #6a006a;
 }
 
 ul.navbar-left {
@@ -192,7 +192,7 @@ ul.navbar-left {
   margin-bottom: 0;
   padding: 0;
   overflow: hidden;
-  background-color: rgb(106, 0, 106);
+  background-color: #6a006a;
 }
 
 li.navbar-item {
@@ -219,7 +219,7 @@ ul.navbar-right {
   margin-bottom: 0;
   padding: 0;
   overflow: hidden;
-  background-color: rgb(106, 0, 106);
+  background-color: #6a006a;
 }
 
 /* MENSAJE DE �XITO */
@@ -409,52 +409,4 @@ body{
     background-color: #0080ff;
     border-radius: 5px;
     cursor:pointer;
-}
-
-
-/* HEADER */
-header.navbar {
-    display: flex;
-    top: 0;
-    margin: 0;
-    width: 100%;
-    background-color: #333;
-}
-
-ul.navbar-left {
-  list-style-type: none;
-  display: flex;
-  margin-right: auto;
-  margin-top: 0;
-  margin-bottom: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-}
-
-li.navbar-item {
-  float: left;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover {
-  background-color: #111;
-}
-
-ul.navbar-right {
-  list-style-type: none;
-  display: flex;
-  margin-left: auto;
-  margin-top: 0;
-  margin-bottom: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
 }

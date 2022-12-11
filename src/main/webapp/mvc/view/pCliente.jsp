@@ -21,11 +21,11 @@
 	<body>
 		<%@ include file="../../include/headerCliente.jsp" %>
 		<h1 style="text-align:center">Bienvenido/a</h1>
-		<h3 style="margin-left:20px">Nombre y Apellidos: <%= userBean.getNombre() + " " + userBean.getApellidos() %></h3>
-		<h3 style="margin-left:20px">Fecha: <%= LocalDate.now() %> </h3>
+		<p style="margin-left:20px; font-size: 16px;">Nombre y Apellidos: <%= userBean.getNombre() + " " + userBean.getApellidos() %></p>
+		<p style="margin-left:20px; font-size: 16px;">Fecha: <%= LocalDate.now() %> </p>
 		<% GestorUsuario gestor = new GestorUsuario(); %>
-		<h3 style="margin-left:20px">Antiguedad: <%= gestor.CalcularAntiguedad(userBean.getEmail()) %> a&ntilde;os</h3>
+		<p style="margin-left:20px; font-size: 16px;">Antiguedad: <%= gestor.CalcularAntiguedad(userBean.getEmail()) %> a&ntilde;os</p>
 		<% GestorReservas gest = new GestorReservas(); %>
-		<h3 style="margin-left:20px">Pr&oacute;xima reserva: <%= gest.proximaReserva(userBean.getEmail()) %></h3>
+		<p style="margin-left:20px; font-size: 16px;">Pr&oacute;xima reserva: <%= gest.proximaReserva(userBean.getEmail()) %></p>
 	</body>
 </html>

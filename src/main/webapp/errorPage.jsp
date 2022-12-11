@@ -10,7 +10,7 @@
     </head>
     <body>
 		<h1>ERROR</h1>
-		<p><%= (String)request.getParameter("errorMsg")%> </p>
+		<p><%= (String)request.getParameter("msg")%> </p>
 		<br/>
 		<button type="button" onclick="window.location.href='/PW3/';">Volver al inicio</button>
     </body>

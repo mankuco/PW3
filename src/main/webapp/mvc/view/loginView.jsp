@@ -12,7 +12,7 @@
     <meta charset="ISO-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/styles.css">
-    <title>Iniciar sesión</title>
+    <title>Iniciar sesion</title>
 </head>
 <body>
 	<div class="cuadro">
@@ -21,16 +21,15 @@
 				<h1 class="page-title">Iniciar sesi&oacute;n</h1>
 				<p class="subtitle">Introduzca su email y contrase&ntilde;a</p>
 		    </div>
-		    <% String msg = (String)request.getAttribute("msg"); // Mensaje de respuesta %>
-	    	<% if (msg != null) { %>
-	    		<p class="message-success"><%= msg %></p>
+	    	<% if (request.getParameter("msg") != null) { %>
+	    		<p style="background-color: #ff9999; text-align: center;"><%= request.getParameter("msg") %></p>
 	    	<% } %>
-	        <form class="form-login" action="<%= request.getContextPath() %>/loginServlet" method="post">
+	        <form action="../controller/loginController.jsp" method="post" style="text-align: center">
 	            <label for="email">Email:</label>
 	            <input type="text" class="input-form" name="email">
 	            <br/>
-	            <label for="password">Contraseña:</label>
-	            <input type="password" class="input-form" name="password">
+	            <label for="contrasena">Contrase&ntilde;a:</label>
+	            <input type="password" class="input-form" name="contrasena">
 	            <br/>
 	            <input type="submit" class="small-button" id="button-submit-login" value="Iniciar sesión">
 	        </form>
