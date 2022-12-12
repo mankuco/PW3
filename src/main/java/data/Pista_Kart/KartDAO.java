@@ -152,4 +152,45 @@ public class KartDAO extends DAO {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	public ArrayList<KartDTO> listartodoskart(){
+		ArrayList<KartDTO> listakart = new ArrayList<KartDTO>();
+		try {
+		
+			Connection connection = getConnection();
+			PreparedStatement ps=connection.prepareStatement("Select * from Kart");
+		
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String nombrePista =rs.getString("nombrePista");
+				int i = rs.getInt("tipoKart");
+				boolean tipoKart = true;
+				if(i == 0) {
+					tipoKart = false;
+				}
+				String est = rs.getString("estado");
+				Estados estado = Estados.RESERVADO;
+				if(est.equals("ADULTOS")) {
+					estado = Estados.MANTENIMIENTO;
+				}
+				if(est.equals("DISPONIBLE")) {
+					estado = Estados.DISPONIBLE;
+				}
+				int idKart = rs.getInt("idKart");
+				KartDTO kart = new KartDTO(idKart, tipoKart, estado);
+				kart.setnombrePista(nombrePista);
+				listakart.add(kart);
+			}
+			if (ps != null){ 
+				ps.close(); 
+			}
+			close();
+		}
+		catch (Exception e) {
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return listakart;
+	}
 }

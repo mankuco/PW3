@@ -14,7 +14,7 @@
 <body >
 <% 
 ArrayList<Reserva> reservas;
-if(userBean.getRol()== true){
+if(userBean.getRol()== false){
 	reservas= (ArrayList<Reserva>)request.getAttribute("verReservasADM");
 	%><%@ include file="../../include/headerAdministrador.jsp" %><% }
 else{
