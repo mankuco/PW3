@@ -77,12 +77,11 @@ else{
         </div>
     </section>
         <div style="text-align: center">
-			<br/><br/>
 			<%if(userBean.getRol() == true){ %>
 				<button type="button" class="big-button" style="width: 300px; border: solid 2px #cf74f2;" onclick="window.location.href='<%= request.getContextPath() %>/mvc/view/addReserva.jsp'">Crear Reserva</button>
 			<%} %>
 		</div>
-
+	<br/>
     <script src="js/scriptVisualizacionReservas.js"></script>
 </body>
 </html>

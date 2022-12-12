@@ -60,13 +60,6 @@ if(userBean.getRol()== false){ karts = (ArrayList<KartDTO>)request.getAttribute(
                 	</div>
             </div>
         </div>
-        
-        <div style="text-align: center">
-			<br/><br/>
-			<%if(userBean.getRol() == false){ %>
-				<button type="button" class="big-button" style="width: 300px; border: solid 2px #cf74f2;" onclick="window.location.href='<%= request.getContextPath() %>/mvc/view/addKart.jsp'">A&ntilde;adir kart</button>
-			<%} %>
-		</div>
     </section>
 
     <script src="js/scriptVisualizacionPistas.js"></script>

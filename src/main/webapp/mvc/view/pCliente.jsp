@@ -9,6 +9,7 @@
 	else if(userBean.getRol() == false){
 		response.sendRedirect(request.getContextPath() + "/usuarioServlet");
 	}
+	else {
 %>
 <!DOCTYPE html>
 <html>
@@ -27,5 +28,6 @@
 		<p style="margin-left:20px; font-size: 16px;">Antiguedad: <%= gestor.CalcularAntiguedad(userBean.getEmail()) %> a&ntilde;os</p>
 		<% GestorReservas gest = new GestorReservas(); %>
 		<p style="margin-left:20px; font-size: 16px;">Pr&oacute;xima reserva: <%= gest.proximaReserva(userBean.getEmail()) %></p>
+		<%} %>
 	</body>
 </html>

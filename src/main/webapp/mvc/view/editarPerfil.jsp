@@ -6,6 +6,7 @@
 	if (userBean.getEmail() == null){
 		response.sendRedirect(request.getContextPath());
 	}
+	else {
 %>
 <!DOCTYPE html>
 <html>
@@ -53,7 +54,7 @@
 			<br/><br/>
 			<%if(userBean.getRol() == false){ %>
 				<button type="button" class="big-button" style="width: 300px; border: solid 2px #cf74f2;" onclick="window.location.href='<%= request.getContextPath() %>/mvc/view/registerView.jsp'">A&ntilde;adir nuevo administrador</button>
-			<%} %>
+			<%} }%>
 		</div>
 	</body>
 </html>
