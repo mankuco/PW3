@@ -40,11 +40,12 @@ public class UsuarioDAO extends DAO {
     public void modificarUsuario(UsuarioDTO usuario) {
         try {
             Connection con = getConnection();
-        	PreparedStatement ps = con.prepareStatement("update Usuario set nombre = ?, apellidos = ?, fechaNacimiento = ? where email = ? and borrado = 0", PreparedStatement.RETURN_GENERATED_KEYS);
+        	PreparedStatement ps = con.prepareStatement("update Usuario set nombre = ?, apellidos = ?, fechaNacimiento = ?, contrasena = ? where email = ? and borrado = 0", PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getApellidos());
             ps.setDate(3, Date.valueOf(usuario.getFechaNacimiento()));
-            ps.setString(4, usuario.getEmail());
+            ps.setString(4, usuario.getContrasena());
+            ps.setString(5, usuario.getEmail());
             ps.executeUpdate();
         } catch (SQLException e) {
             close();

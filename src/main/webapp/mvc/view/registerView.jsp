@@ -16,6 +16,10 @@
     </head>
     <body style="text-align: center">
 		<h1 style="text-align:center">Registro</h1>
+		<% String msg = (String)request.getParameter("msg"); %>
+    	<% if (msg != null) { %>
+    		<p style="background-color: #ff9999; text-align: center;"><%= msg %></p>
+    	<% } %>
 	    <form action="../controller/registerController.jsp" method="POST">
             <label for="email">Email:</label>
             <input type="text" style="border: solid 2px #cf74f2;" class="input-form" id="email" name="email"><br/>
@@ -32,8 +36,8 @@
             <input type="text" style="border: solid 2px #cf74f2;" class="input-form" id="apellidos" name="apellidos">
             <br/>
 
-            <label for="fechaNacimiento">Fecha de nacimiento:</label>
-            <input type="date" style="border: solid 2px #cf74f2;" class="input-form" id="fechaNacimiento" name="fechaNacimiento">
+            <label for="fechanacimiento">Fecha de nacimiento:</label>
+            <input type="date" style="border: solid 2px #cf74f2;" class="input-form" id="fechanacimiento" name="fechanacimiento">
             <br/>
             
             <input type="submit" class="small-button" value="Registrarse" style="border: solid 2px #cf74f2;">

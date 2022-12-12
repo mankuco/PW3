@@ -40,7 +40,6 @@ public class misReservasServlet extends HttpServlet {
 		CustomerBean userBean = (CustomerBean) request.getSession().getAttribute("userBean");
 		if (userBean != null) {
 			if (userBean.getEmail() != null) {
-				ServletContext context = getServletContext();
 				
 				UsuarioDAO UsuarioDAO = new UsuarioDAO();
 				UsuarioDTO user = UsuarioDAO.buscarUsuario(userBean.getEmail());

@@ -92,15 +92,15 @@ public class ReservaDAO extends DAO {
 			while(rs.next()) {
 				String idReserva = rs.getString(1);
 				String idUsuario = rs.getString(2);
-				LocalDate fecha = rs.getDate(9).toLocalDate();
-				LocalTime hora = rs.getTime(12).toLocalTime();
+				LocalDate fecha = rs.getDate(8).toLocalDate();
+				LocalTime hora = rs.getTime(11).toLocalTime();
 				int minutosReserva = rs.getInt(3);
-				String idPista = rs.getString(6);
+				String idPista = rs.getString(5);
 				float precioPista = rs.getFloat(4);	
-				int numeroNinos = rs.getInt(7);
-				int numeroAdultos = rs.getInt(8);
-				TipoReserva tipoReserva = TipoReserva.valueOf(rs.getString(10));
-				String modalidad = rs.getString(5);	
+				int numeroNinos = rs.getInt(6);
+				int numeroAdultos = rs.getInt(7);
+				TipoReserva tipoReserva = TipoReserva.valueOf(rs.getString(9));
+				String modalidad = rs.getString(12);	
 				 
 				if(tipoReserva == TipoReserva.FAMILIAR) {
 					 rf = new ReservaFamiliarDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipoReserva, modalidad , fecha, hora, 0, numeroAdultos, numeroNinos);
@@ -146,15 +146,15 @@ public class ReservaDAO extends DAO {
 			while(rs.next()) {
 				String idReserva = rs.getString(1);
 				String idUsuario = rs.getString(2);
-				LocalDate fecha = rs.getDate(9).toLocalDate();
-				LocalTime hora = rs.getTime(12).toLocalTime();
+				LocalDate fecha = rs.getDate(8).toLocalDate();
+				LocalTime hora = rs.getTime(11).toLocalTime();
 				int minutosReserva = rs.getInt(3);
-				String idPista = rs.getString(6);
+				String idPista = rs.getString(5);
 				float precioPista = rs.getFloat(4);	
-				int numeroNinos = rs.getInt(7);
-				int numeroAdultos = rs.getInt(8);
-				TipoReserva tipoReserva = TipoReserva.valueOf(rs.getString(10));
-				String modalidad = rs.getString(5);	
+				int numeroNinos = rs.getInt(6);
+				int numeroAdultos = rs.getInt(7);
+				TipoReserva tipoReserva = TipoReserva.valueOf(rs.getString(9));
+				String modalidad = rs.getString(12);	
 				 
 				if(tipoReserva == TipoReserva.FAMILIAR) {
 					 rf = new ReservaFamiliarDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipoReserva, modalidad , fecha, hora, 0, numeroAdultos, numeroNinos);
@@ -198,15 +198,15 @@ public class ReservaDAO extends DAO {
 			while(rs.next()) {
 				String idReserva = rs.getString(1);
 				String idUsuario = rs.getString(2);
-				LocalDate fecha = rs.getDate(9).toLocalDate();
-				LocalTime hora = rs.getTime(12).toLocalTime();
+				LocalDate fecha = rs.getDate(8).toLocalDate();
+				LocalTime hora = rs.getTime(11).toLocalTime();
 				int minutosReserva = rs.getInt(3);
-				String idPista = rs.getString(6);
+				String idPista = rs.getString(5);
 				float precioPista = rs.getFloat(4);	
-				int numeroNinos = rs.getInt(7);
-				int numeroAdultos = rs.getInt(8);
-				TipoReserva tipoReserva = TipoReserva.valueOf(rs.getString(10));
-				String modalidad = rs.getString(5);	
+				int numeroNinos = rs.getInt(6);
+				int numeroAdultos = rs.getInt(7);
+				TipoReserva tipoReserva = TipoReserva.valueOf(rs.getString(9));
+				String modalidad = rs.getString(12);	
 				 
 				if(tipoReserva == TipoReserva.FAMILIAR) {
 					 rf = new ReservaFamiliarDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipoReserva, modalidad , fecha, hora, 0, numeroAdultos, numeroNinos);

@@ -66,16 +66,22 @@ else{
 	             	<span id="fechaR" class="fecha"> </span>
 	
 	                <div class="fila">
-						 <form action="cancelarReserva" method="POST">
-	                      <button  type="submit" >CANCELAR RESERVA</button>
-	               	  </form>
-	                	 <form action="modificarReservaServlet" method="POST">
-	                 	   <button class="buttonMod"  type="submit">MODIFICAR RESERVA</button>
+						<form action="cancelarReserva" method="POST">
+	                    	<button  type="submit" >CANCELAR RESERVA</button>
+	               	  	</form>
+	                	<form action="modificarReservaServlet" method="POST">
+	                 		<button class="buttonMod"  type="submit">MODIFICAR RESERVA</button>
 	                 	</form>
                 	</div>
             </div>
         </div>
     </section>
+        <div style="text-align: center">
+			<br/><br/>
+			<%if(userBean.getRol() == true){ %>
+				<button type="button" class="big-button" style="width: 300px; border: solid 2px #cf74f2;" onclick="window.location.href='<%= request.getContextPath() %>/mvc/view/addReserva.jsp'">Crear Reserva</button>
+			<%} %>
+		</div>
 
     <script src="js/scriptVisualizacionReservas.js"></script>
 </body>

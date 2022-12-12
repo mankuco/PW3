@@ -8,35 +8,37 @@
 	String contrasena = request.getParameter("contrasena");
 	String fechanacimiento= request.getParameter("fechanacimiento");
 	
-	if (nombre == null || apellidos == null || email == null || contrasena == null || fechanacimiento == null || nombre == ""|| apellidos == "" || email == "" || contrasena == "" || fechanacimiento == "") {
-		response.sendRedirect("/PW3/errorPage.jsp?msg=Uno o mas campos de registro estaban incompletos");
-	}
+	if (nombre == null || apellidos == null || email == null || contrasena == null || fechanacimiento == null || nombre == ""|| apellidos == "" || email == "" || contrasena == "" || fechanacimiento == "") { %>
+		<jsp:forward page="../view/registerView.jsp">
+			<jsp:param value="Campos incompletos" name="msg"/>
+		</jsp:forward>
+<%	}
 	else{
-		UsuarioDAO usuarioDAO = new UsuarioDAO();
-		UsuarioDTO usuario = usuarioDAO.buscarUsuario(request.getParameter("email"));
 		
 		if ((userBean.getEmail() != null) && (userBean.getRol() == true)){
-			response.sendRedirect("/PW3/errorPage.jsp?msg=Debe cerrar la sesion antes de registrar un usuario");
+			response.sendRedirect("/PW3/");
 		}
 		else {		
-			if (usuario != null) {
-				response.sendRedirect("/PW3/errorPage.jsp?msg=Ya existe un usuario con ese email");
-			}
+
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+			UsuarioDTO usuario = usuarioDAO.buscarUsuario(email);
+			if (usuario != null) {%>
+				<jsp:forward page="../view/registerView.jsp">
+					<jsp:param value="Ya existe un usuario con ese email" name="msg"/>
+				</jsp:forward>
+			<%}
 			else {
-				
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				try {
 					LocalDate fechaNacimiento = LocalDate.parse(fechanacimiento, formatter);
 					boolean rol = true;
-					//if (userBean.getRol() == false) { rol = false; }
+					if (userBean.getEmail() != null) { rol = false; }
 					usuario = new UsuarioDTO(nombre, apellidos, email, contrasena, fechaNacimiento, LocalDate.now(), rol);
 					usuarioDAO.guardarUsuario(usuario);
 				}
 				catch(Exception e) {
 					e.printStackTrace();
 				}
-				
-				
 				response.sendRedirect("/PW3/");
 			}
 		}

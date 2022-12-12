@@ -26,10 +26,10 @@
 		
 		<% String msg = (String)request.getParameter("msg"); %>
     	<% if (msg != null) { 
-    			if (msg.equals("Perfil editado de forma correcta")){%>
-    		<p style="background-color: #abedb2; text-align: center;"><%= msg %></p>
+    			if (msg.equals("Campos incompletos")){%>
+    				<p style="background-color: #ff9999; text-align: center;"><%= msg %></p>
     	<% 		} else { %>
-    	<p style="background-color: #ff9999; text-align: center;"><%= msg %></p>
+    				<p style="background-color: #abedb2; text-align: center;"><%= msg %></p>
     	<% } } %>
 	    <form class="modify-form" action="/PW3/mvc/controller/modifyController.jsp" method="POST" style="text-align: center">
             <label for="nombre">Nombre:</label>
@@ -49,7 +49,6 @@
             <input type="submit" class="small-button" value="Modificar" style="border: solid 2px #cf74f2;">
 		</form>
 		<div style="text-align: center">
-			<%int i = 0; %>
 			<button type="button" class="small-button" style="width: 200px; border: solid 2px #cf74f2;" onclick="window.location.href='<%= request.getContextPath() %>/mvc/view/cambiarContrasena.jsp'">Cambiar contrase&ntilde;a</button>
 			<br/><br/>
 			<%if(userBean.getRol() == false){ %>

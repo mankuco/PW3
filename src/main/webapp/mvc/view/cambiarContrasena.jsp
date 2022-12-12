@@ -24,12 +24,12 @@
 		<h1 style="text-align:center">Modificar contrase&ntilde;a</h1>
 		<h2 style="text-align:center"><%= userBean.getEmail() %></h2>
 		
-		<% String msg = (String)request.getAttribute("msg"); %>
+		<% String msg = (String)request.getParameter("msg"); %>
     	<% if (msg != null) { %>
-    		<p style="background-color: #abedb2; text-align: center;"><%= msg %></p>
+    		<p style="background-color: #ff9999; text-align: center;"><%= msg %></p>
     	<% } %>
 		<div style="text-align: center">
-			<form action="<%= request.getContextPath() %>/cambiarContrasenaServlet" method="POST">
+			<form action="/PW3/mvc/controller/contrasenaController.jsp" method="POST">
 				<label for="contrasena">Contrase&ntilde;a actual</label>
 				<input type="password" class="input-form" name="contrasena">
 				<br/>
