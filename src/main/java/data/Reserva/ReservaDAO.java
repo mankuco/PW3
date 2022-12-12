@@ -86,7 +86,7 @@ public class ReservaDAO extends DAO {
 		
 		try {
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM Reservas WHERE borrado = 0");
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM Reservas WHERE borrado = 0", PreparedStatement.RETURN_GENERATED_KEYS);
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -139,7 +139,7 @@ public class ReservaDAO extends DAO {
 		
 		try {
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM Reservas WHERE fecha = ? and borrado = 0");
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM Reservas WHERE fecha = ? and borrado = 0", PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(1,LocalDate.now().toString());
 			ResultSet rs = ps.executeQuery();
 			
@@ -191,7 +191,7 @@ public class ReservaDAO extends DAO {
 		
 		try {
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM Reservas WHERE idUsuario = ? and borrado = 0");
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM Reservas WHERE idUsuario = ? and borrado = 0", PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(1,IdUsuario);
 			ResultSet rs = ps.executeQuery();
 			
@@ -232,6 +232,56 @@ public class ReservaDAO extends DAO {
 		
 	}
 
+	public Reserva getreserva(String id) {
+		
+		Reserva reservas = null;
+		ReservaFamiliarDTO rf= null;
+		ReservaAdultosDTO ra= null;
+		ReservaInfantilDTO ri= null;
+		
+		try {
+			Connection con = getConnection();
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM Reservas WHERE id = ? and borrado = 0", PreparedStatement.RETURN_GENERATED_KEYS);
+			ps.setString(1,id);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				String idReserva = rs.getString(1);
+				String idUsuario = rs.getString(2);
+				LocalDate fecha = rs.getDate(8).toLocalDate();
+				LocalTime hora = rs.getTime(11).toLocalTime();
+				int minutosReserva = rs.getInt(3);
+				String idPista = rs.getString(5);
+				float precioPista = rs.getFloat(4);	
+				int numeroNinos = rs.getInt(6);
+				int numeroAdultos = rs.getInt(7);
+				TipoReserva tipoReserva = TipoReserva.valueOf(rs.getString(9));
+				String modalidad = rs.getString(12);	
+				 
+				if(tipoReserva == TipoReserva.FAMILIAR) {
+					 rf = new ReservaFamiliarDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipoReserva, modalidad , fecha, hora, 0, numeroAdultos, numeroNinos);
+					 reservas=rf;	 
+				}
+				if(tipoReserva == TipoReserva.INFANTIL) {
+					 ri = new  ReservaInfantilDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipoReserva, modalidad , fecha, hora, 0, numeroNinos);
+						reservas=ri;	 
+				}	
+				if(tipoReserva == TipoReserva.ADULTOS) {
+					 ra = new  ReservaAdultosDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipoReserva, modalidad , fecha, hora, 0, numeroAdultos);
+					 reservas=ra;	 
+				}
+			}
+		
+		}
+		catch (SQLException e) {
+			close();
+			System.out.println(e);
+		}
+		close();
+		return reservas;
+		
+	}
+	
 }
 	
 

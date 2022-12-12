@@ -2,17 +2,17 @@ package business.Reserva;
 
 public class BonoReservaDTO {
 
-	private int idBono;
-	private int idReserva1;
-	private int idReserva2;
-	private int idReserva3;
-	private int idReserva4;
-	private int idReserva5;
+	private String idBono;
+	private String idReserva1;
+	private String idReserva2;
+	private String idReserva3;
+	private String idReserva4;
+	private String idReserva5;
 	
 	/**
 	 * Constructor parametrizado
 	 */
-	public BonoReservaDTO(int idBono, int idReserva1, int idReserva2, int idReserva3, int idReserva4, int idReserva5) {
+	public BonoReservaDTO(String idBono, String idReserva1, String idReserva2, String idReserva3, String idReserva4, String idReserva5) {
 		this.idBono = idBono;
 		this.idReserva1 = idReserva1;
 		this.idReserva2 = idReserva2;
@@ -24,45 +24,45 @@ public class BonoReservaDTO {
 	/**
 	 * Getters y setters
 	 */
-	public int getIdBono() {
+	public String getIdBono() {
 		return idBono;
 	}
-	public void setIdBono(int idBono) {
+	public void setIdBono(String idBono) {
 		this.idBono = idBono;
 	}
 
-	public int getIdReserva1() {
+	public String getIdReserva1() {
 		return idReserva1;
 	}
-	public void setIdReserva1(int idReserva) {
+	public void setIdReserva1(String idReserva) {
 		this.idReserva1 = idReserva;
 	}
 	
-	public int getIdReserva2() {
+	public String getIdReserva2() {
 		return idReserva2;
 	}
-	public void setIdReserva2(int idReserva) {
+	public void setIdReserva2(String idReserva) {
 		this.idReserva2 = idReserva;
 	}
 	
-	public int getIdReserva3() {
+	public String getIdReserva3() {
 		return idReserva3;
 	}
-	public void setIdReserva31(int idReserva) {
+	public void setIdReserva31(String idReserva) {
 		this.idReserva3 = idReserva;
 	}
 	
-	public int getIdReserva4() {
+	public String getIdReserva4() {
 		return idReserva4;
 	}
-	public void setIdReserva4(int idReserva) {
+	public void setIdReserva4(String idReserva) {
 		this.idReserva4 = idReserva;
 	}
 
-	public int getIdReserva5() {
+	public String getIdReserva5() {
 		return idReserva5;
 	}
-	public void setIdReserva5(int idReserva) {
+	public void setIdReserva5(String idReserva) {
 		this.idReserva5 = idReserva;
 	}
 

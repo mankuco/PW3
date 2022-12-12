@@ -9,8 +9,6 @@ import data.DAO;
 
 import java.sql.*;
 
-
-
 public class KartDAO extends DAO {
 
 	/* 
