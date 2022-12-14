@@ -40,7 +40,11 @@ else{
                        <p id="precioPista"  style=display:none; >  <%= r.getPrecioPista() %> $</p>
                        <p id="NumMinutos"  style=display:none; >  <%= r.getMinutosReserva() %> minutos</p>             
                       <h4 id="Reservahora"><%= r.getHora() %>  </h4>
-                    <span class="fecha"> <%= r.getFecha() %></span>
+                      <% if(r.getFecha().compareTo(LocalDate.now())<0){ %>
+                    <span class="fechaVencida"> <%= r.getFecha() %></span>
+                     <%}else{%>
+                     <span class="fecha"> <%= r.getFecha() %></span>
+                     <% }%>
                 </div>
                 <% count++; if (count % 3 == 0) {%>  </div>  <div class="fila"> <%} }  } %>
             </div>

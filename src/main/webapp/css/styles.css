@@ -309,10 +309,13 @@ body{
     cursor: pointer;
     border-radius: 5px;
     transition: .3s;
+    box-shadow: 10px 5px 5px #c0c0c0;
     background-color: #DDDDDD;
 }
 .mostrador .fila .item:hover{
     background-color: #e6e6e6;
+    box-shadow: 10px 5px 5px #de98ef;
+
 }
 .mostrador .fila .item img{
     width: 100%;
@@ -322,8 +325,13 @@ body{
     color: #707070;
     font-weight: bold;
 }
-.mostrador .fila .item .fecha{
+.mostrador .fila .item .fechaVencida{
     color: #f85151;
+    font-weight: bold;
+    font-size: 18px;
+}
+.mostrador .fila .item .fecha{
+    color: #008000;
     font-weight: bold;
     font-size: 18px;
 }
@@ -340,6 +348,7 @@ body{
     background-color:#DDDDDD;
     border-radius:2%;
     margin-left:45px;
+    box-shadow: 10px 5px 5px #c0c0c0;
 
 }
 .cerrar{
@@ -371,7 +380,7 @@ body{
 .info .fecha{
     font-size: 30px;
     font-weight: bold;
-    color: #f85151;
+    color: rgb(37, 37, 37);
     margin-bottom: 10px;
     display: block;
 }
@@ -398,8 +407,10 @@ body{
     border-radius: 5px;
     margin:20px;
     cursor:pointer;
+    box-shadow: 2px 5px 5px #ff8080;
     
 }
+
 
 .info .fila .buttonMod{
     height: 40px;
@@ -409,4 +420,24 @@ body{
     background-color: #0080ff;
     border-radius: 5px;
     cursor:pointer;
+     box-shadow: 2px 5px 5px #8080ff;
+}
+
+
+.buttonAdd{
+    height: 40px;
+    width: 130px;
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    background-color: #b838a5;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 10px -10px 25px;
+    box-shadow: 5px 5px 5px #dcb4dc;
+}
+
+.buttonAdd:hover{
+    width: 200px;
+    transition:1000ms;
 }
