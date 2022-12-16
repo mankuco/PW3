@@ -13,9 +13,15 @@
 </head>
 <body >
 <%@ include file="../../include/headerAdministrador.jsp" %>
+<div >
+		
+			<%if(userBean.getRol() == false){ %>
+				<button class="buttonAdd" onclick="window.location.href='<%= request.getContextPath() %>/mvc/view/addPista.jsp'"> + A&ntilde;adir Pista</button>
+			<%} %>
+		</div>
 <%  ArrayList<PistaDTO> pistas = null;
 if(userBean.getRol()== false){ pistas = (ArrayList<PistaDTO>)request.getAttribute("verPistas"); }			
-   if (pistas == null || pistas.size() == 0) { %>
+   if (pistas == null || pistas.size() == 0) { %> 
  <h3 style=text-align:center; >No hay pistas que mostrar.</h3>
  <% } else {
 	 Integer count = 0; %>
@@ -31,9 +37,13 @@ if(userBean.getRol()== false){ pistas = (ArrayList<PistaDTO>)request.getAttribut
                      <p id="nombre">  <%= p.getDificultad() %></p>
                        <p id="nombrepista"  style=display:none; >  <%= p.getnkartsasociados() %></p>
                        <p id="precioPista"  style=display:none; >  <%= p.getMaxKarts() %> </p>
-                
+                 <% if( p.getTipoEstado() == false){ %>
+                    <span class="fechaVencida"> <%= Estados.MANTENIMIENTO %></span>
+                     <%}else{%>
+                     <span class="fecha"> <%= Estados.DISPONIBLE %></span>
+                     <% }%>
                  
-                    <span class="fecha"> <% if( p.getTipoEstado() == true){ out.println("Disponible");}else {out.println("Mantenimiento");} %></span>
+                   
                 </div>
                 <% count++; if (count % 3 == 0) {%>  </div>  <div class="fila"> <%} }  } %>
             </div>
@@ -65,6 +75,7 @@ if(userBean.getRol()== false){ pistas = (ArrayList<PistaDTO>)request.getAttribut
                 	</div>
             </div>
         </div>
+
     </section>
 
     <script src="js/scriptVisualizacionPistas.js"></script>

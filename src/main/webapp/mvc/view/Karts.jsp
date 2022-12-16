@@ -13,6 +13,11 @@
 </head>
 <body >
 <%@ include file="../../include/headerAdministrador.jsp" %>
+<div>		
+<%if(userBean.getRol() == false){ %>
+				<button class="buttonAdd" onclick="window.location.href='<%= request.getContextPath() %>/mvc/view/addKart.jsp'"> + A&ntilde;adir kart</button>
+			<%} %>
+		</div>
 <%  ArrayList<KartDTO> karts = null;
 if(userBean.getRol()== false){ karts = (ArrayList<KartDTO>)request.getAttribute("verPistas"); }			
    if (karts == null || karts.size() == 0) { %>
@@ -30,7 +35,13 @@ if(userBean.getRol()== false){ karts = (ArrayList<KartDTO>)request.getAttribute(
                     <p class="descripcion">KART Nº<%= k.getIdKart() %></p>
                      <p id="nombre"><% if( k.getTipoKart()== true){ out.println("Infantil");}else {out.println("Adultos");} %> </p>
                        <p id="precioPista"  style=display:none; >  <% if(k.getnombrePista()==null){ out.println("Sin asociar");}else{ %> <%= k.getnombrePista() %><%}%> </p>
-                    <span class="fecha"><%= k.getEstado() %> </span>
+                     <% if( k.getEstado() == Estados.MANTENIMIENTO){ %>
+                    <span class="fechaVencida"> <%= Estados.MANTENIMIENTO %></span>
+                     <%} if( k.getEstado() == Estados.DISPONIBLE){ %>
+                     <span class="fecha" > <%= Estados.DISPONIBLE %></span>
+                     <%} if( k.getEstado() == Estados.RESERVADO){ %>
+                     <span class="fecha" style="color: #dc7605;"> <%= Estados.RESERVADO %></span>
+                     <% }%>
                 </div>
                 <% count++; if (count % 3 == 0) {%>  </div>  <div class="fila"> <%} }  } %>
             </div>
@@ -60,6 +71,7 @@ if(userBean.getRol()== false){ karts = (ArrayList<KartDTO>)request.getAttribute(
                 	</div>
             </div>
         </div>
+
     </section>
 
     <script src="js/scriptVisualizacionPistas.js"></script>
