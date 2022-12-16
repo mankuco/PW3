@@ -22,7 +22,7 @@
     	<% } %>
 	    <form action="../controller/registerController.jsp" method="POST">
             <label for="email">Email:</label>
-            <input type="text" style="border: solid 2px #cf74f2;" class="input-form" id="email" name="email"><br/>
+            <input type="email" style="border: solid 2px #cf74f2;" class="input-form" id="email" name="email"><br/>
             
             <label for="contrasena">Contrase&ntilde;a:</label>
             <input type="password" style="border: solid 2px #cf74f2;" class="input-form" id="contrasena" name="contrasena">

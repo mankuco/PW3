@@ -29,7 +29,9 @@
     	<% if (msg != null) { 
     			if (msg.equals("Campos incompletos")){%>
     				<p style="background-color: #ff9999; text-align: center;"><%= msg %></p>
-    	<% 		} else { %>
+    	<% 		} else if(msg.equals("No se puede eliminar este prefil, debe de haber al menos un administrador")){ %>
+    				<p style="background-color: #ff9999; text-align: center;"><%= msg %></p>
+    			<%} else { %>
     				<p style="background-color: #abedb2; text-align: center;"><%= msg %></p>
     	<% } } %>
 	    <form class="modify-form" action="/PW3/mvc/controller/modifyController.jsp" method="POST" style="text-align: center">
@@ -51,6 +53,8 @@
 		</form>
 		<div style="text-align: center">
 			<button type="button" class="small-button" style="width: 200px; border: solid 2px #cf74f2;" onclick="window.location.href='<%= request.getContextPath() %>/mvc/view/cambiarContrasena.jsp'">Cambiar contrase&ntilde;a</button>
+			<br/><br/>
+			<button type="button" class="small-button" style="width: 300px; border: solid 2px #cf74f2;" onclick="window.location.href='<%= request.getContextPath() %>/mvc/controller/eliminarPerfilController.jsp'">Eliminar Perfil</button>
 			<br/><br/>
 			<%if(userBean.getRol() == false){ %>
 				<button type="button" class="big-button" style="width: 300px; border: solid 2px #cf74f2;" onclick="window.location.href='<%= request.getContextPath() %>/mvc/view/registerView.jsp'">A&ntilde;adir nuevo administrador</button>

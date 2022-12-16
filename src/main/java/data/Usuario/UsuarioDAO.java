@@ -16,19 +16,6 @@ public class UsuarioDAO extends DAO {
 		super(prop, jdbc, dbuser, dbpass);
 	}
 	
-	public Properties getprop() {
-		return prop;
-	}
-	public String getjdbc() {
-		return jdbc;
-	}
-	public String getdbuser() {
-		return dbuser;
-	}
-	public String getdbpass() {
-		return dbpass;
-	}
-	
     /*
      * @Resumen Guarda en la base de datos un nuevo usuario
      */
@@ -105,7 +92,6 @@ public class UsuarioDAO extends DAO {
     }
 
     //Eliminar usuario base de datos
-    
     public void eliminarUsuario(String email) {
         try {
         	 Connection con = getConnection();
@@ -116,5 +102,22 @@ public class UsuarioDAO extends DAO {
             close();
             System.out.println(e);
         }
+    }
+    
+    //Devuelve el numero de usuarios que son administradores
+    public int nAdmin() {
+    	int n = 0;
+    	try {
+    		Connection con = getConnection();
+        	PreparedStatement ps = con.prepareStatement(prop.getProperty("numero-admin"), PreparedStatement.RETURN_GENERATED_KEYS);
+        	ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+            	n++;
+            }
+    	} catch (SQLException e) {
+    		close();
+    		System.out.println(e);
+    	}
+    	return n;
     }
 }
