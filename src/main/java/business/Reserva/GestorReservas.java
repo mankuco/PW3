@@ -1,19 +1,13 @@
 package business.Reserva;
 
-import java.io.BufferedReader;
-
-import java.io.File;
-import java.io.FileReader;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Properties;
 
 import data.Reserva.*;
 import data.Usuario.UsuarioDAO;
-import business.Reserva.*;
 import business.Usuario.UsuarioDTO;
 
 public class GestorReservas {
@@ -23,8 +17,8 @@ public class GestorReservas {
 	/**
 	 * @Resumen Metodo que crea una reserva
 	 */
-	public void crearReserva(String idUsuario, int minutosReserva, String idPista, TipoReserva tipo, String modalidad, LocalDate fecha, LocalTime hora, int numeroNinos, int numeroAdultos) {
-		UsuarioDAO user = new UsuarioDAO();
+	public void crearReserva(String idUsuario, int minutosReserva, String idPista, TipoReserva tipo, String modalidad, LocalDate fecha, LocalTime hora, int numeroNinos, int numeroAdultos, Properties prop, String jdbc, String dbuser, String dbpass) {
+		UsuarioDAO user = new UsuarioDAO(prop, jdbc, dbuser, dbpass);
 		UsuarioDTO u = user.buscarUsuario(idUsuario);
 		float precioPista;
 		if(modalidad != null) {
@@ -35,23 +29,23 @@ public class GestorReservas {
 		
 		if(tipo == TipoReserva.FAMILIAR) {
 			ReservaFamiliarDTO reserva = new ReservaFamiliarDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipo, modalidad , fecha, hora, 0, numeroNinos, numeroAdultos);
-			new ReservaFamiliarDAO().insertaReserva(reserva);
+			new ReservaFamiliarDAO(prop, jdbc, dbuser, dbpass).insertaReserva(reserva);
 		}
 		else if(tipo == TipoReserva.ADULTOS) {
 			ReservaAdultosDTO reserva = new ReservaAdultosDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipo, modalidad , fecha, hora, 0, numeroAdultos);
-			new ReservaAdultosDAO().insertaReserva(reserva);
+			new ReservaAdultosDAO(prop, jdbc, dbuser, dbpass).insertaReserva(reserva);
 		}
 		else {
 			ReservaInfantilDTO reserva = new ReservaInfantilDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipo, modalidad , fecha, hora, 0, numeroNinos);
-			new ReservaInfatilDAO().insertaReserva(reserva);
+			new ReservaInfatilDAO(prop, jdbc, dbuser, dbpass).insertaReserva(reserva);
 		}
 	}
 	
 	/**
 	 * @Resumen Metodo que modifica una reserva de tipo Familiar
 	 */
-	public void modificarReserva(String idReserva, String idUsuario, int minutosReserva, String idPista, TipoReserva tipo, String modalidad, LocalDate fecha, LocalTime hora, int numeroNinos, int numeroAdultos) {
-		UsuarioDAO user = new UsuarioDAO();
+	public void modificarReserva(String idReserva, String idUsuario, int minutosReserva, String idPista, TipoReserva tipo, String modalidad, LocalDate fecha, LocalTime hora, int numeroNinos, int numeroAdultos, Properties prop, String jdbc, String dbuser, String dbpass) {
+		UsuarioDAO user = new UsuarioDAO(prop, jdbc, dbuser, dbpass);
 		UsuarioDTO u = user.buscarUsuario(idUsuario);
 		float precioPista;
 		if(modalidad != null) {
@@ -61,24 +55,16 @@ public class GestorReservas {
 		
 		if(tipo == TipoReserva.FAMILIAR) {
 			ReservaFamiliarDTO reserva = new ReservaFamiliarDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipo, modalidad , fecha, hora, 0, numeroNinos, numeroAdultos);
-			new ReservaFamiliarDAO().modificarReserva(reserva);
+			new ReservaFamiliarDAO(prop, jdbc, dbuser, dbpass).modificarReserva(reserva);
 		}
 		else if(tipo == TipoReserva.ADULTOS) {
 			ReservaAdultosDTO reserva = new ReservaAdultosDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipo, modalidad , fecha, hora, 0, numeroAdultos);
-			new ReservaAdultosDAO().modificarReserva(reserva);
+			new ReservaAdultosDAO(prop, jdbc, dbuser, dbpass).modificarReserva(reserva);
 		}
 		else {
 			ReservaInfantilDTO reserva = new ReservaInfantilDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipo, modalidad , fecha, hora, 0, numeroNinos);
-			new ReservaInfatilDAO().modificarReserva(reserva);
+			new ReservaInfatilDAO(prop, jdbc, dbuser, dbpass).modificarReserva(reserva);
 		}
-	}
-
-	/**
-	 * @Resumen Metodo elimina una reserva 
-	 * @param id de la reserva
-	 */
-	public void eliminaReserva(String ID){
-		new ReservaDAO().borraReserva(ID);
 	}
 	
 	/**
@@ -130,12 +116,12 @@ public class GestorReservas {
 	 * @param email = email del usuario
 	 * @return fecha = LocalDate
 	 */
-	public String proximaReserva(String email) {
+	public String proximaReserva(String email, Properties prop, String jdbc, String dbuser, String dbpass) {
 		String fecha = "No tienes reservas proximas";
 		LocalDate hoy = LocalDate.now();
 		LocalTime ahora = LocalTime.now();
 		
-		ReservaDAO r = new ReservaDAO();
+		ReservaDAO r = new ReservaDAO(prop, jdbc, dbuser, dbpass);
 		ArrayList<Reserva> reservas = r.verReservasUsuario(email);
 		ArrayList<Reserva> validas = new ArrayList<Reserva>();
 		int comparador;
@@ -176,12 +162,12 @@ public class GestorReservas {
 	 * @param email = email del usuario
 	 * @return N = int
 	 */
-	public int reservasCompletadas(String email) {
+	public int reservasCompletadas(String email, Properties prop, String jdbc, String dbuser, String dbpass) {
 		int N = 0;
 		LocalDate hoy = LocalDate.now();
 		LocalTime ahora = LocalTime.now();
 		
-		ReservaDAO r = new ReservaDAO();
+		ReservaDAO r = new ReservaDAO(prop, jdbc, dbuser, dbpass);
 		ArrayList<Reserva> reservas = r.verReservasUsuario(email);
 		int comparador;
 		for (Reserva a : reservas) {

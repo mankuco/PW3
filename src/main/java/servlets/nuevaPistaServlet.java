@@ -54,7 +54,7 @@ public class nuevaPista extends HttpServlet {
 			PistaDAO pistaDAO = new PistaDAO();
 			PistaDTO pista = new PistaDTO();
 			
-			pista.setNombrePista(nombrePista)
+			pista.setNombrePista(nombrePista);
 			pista.setTipoEstado(tipoEstado);
 			pista.setDificultad(dificultad);
 			pista.setMaxKarts(maxKarts);

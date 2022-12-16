@@ -3,7 +3,17 @@
 <%@ page import="business.Usuario.UsuarioDTO, data.Usuario.UsuarioDAO, java.time.format.DateTimeFormatter, java.time.LocalDate, java.time.temporal.ChronoUnit" %>
 <jsp:useBean id="userBean" scope="session" class="display.CustomerBean"></jsp:useBean>
 
-		<%UsuarioDAO usuarioDAO = new UsuarioDAO();
+		<%
+		String filename = application.getInitParameter("propertiesPath");
+		java.io.InputStream my = application.getResourceAsStream(filename);
+		java.util.Properties prop = new java.util.Properties();
+		prop.load(my);
+		UsuarioDAO usuarioDAO = new UsuarioDAO(prop, application.getInitParameter("jdbc"), application.getInitParameter("db-user"), application.getInitParameter("db-pass"));
+		userBean.setprop(prop);
+		userBean.setjdbc(application.getInitParameter("jdbc"));
+		userBean.setdbuser(application.getInitParameter("db-user"));
+		userBean.setdbpass(application.getInitParameter("db-pass"));
+		
 		String email = request.getParameter("email");
 		String contrasena = request.getParameter("contrasena");
 		UsuarioDTO user = usuarioDAO.buscarUsuario(email);

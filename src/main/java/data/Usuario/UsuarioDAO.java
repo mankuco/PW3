@@ -1,26 +1,41 @@
 package data.Usuario;
 
 import java.util.ArrayList;
-import business.Usuario.UsuarioDTO;
-import data.DAO;
-
 import java.sql.*;
-import java.time.LocalDate;
+import java.util.Properties;
+
+import business.Usuario.UsuarioDTO;
+import data.*;
 
 public class UsuarioDAO extends DAO {
+	
 	/**
 	 * Constructor 
 	 */
-	public UsuarioDAO() {
-		super();
+	public UsuarioDAO(Properties prop, String jdbc, String dbuser, String dbpass) {
+		super(prop, jdbc, dbuser, dbpass);
 	}
+	
+	public Properties getprop() {
+		return prop;
+	}
+	public String getjdbc() {
+		return jdbc;
+	}
+	public String getdbuser() {
+		return dbuser;
+	}
+	public String getdbpass() {
+		return dbpass;
+	}
+	
     /*
      * @Resumen Guarda en la base de datos un nuevo usuario
      */
     public void guardarUsuario(UsuarioDTO usuario) {
         try {
         	Connection con = getConnection();
-        	PreparedStatement ps = con.prepareStatement("insert into Usuario (nombre, apellidos, email, fechaNacimiento, fechaInscripcion, contrasena, rol) values(?,?,?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+        	PreparedStatement ps = con.prepareStatement(prop.getProperty("inserta-usuario"), PreparedStatement.RETURN_GENERATED_KEYS);
         	ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getApellidos());
             ps.setString(3, usuario.getEmail());
@@ -40,7 +55,7 @@ public class UsuarioDAO extends DAO {
     public void modificarUsuario(UsuarioDTO usuario) {
         try {
             Connection con = getConnection();
-        	PreparedStatement ps = con.prepareStatement("update Usuario set nombre = ?, apellidos = ?, fechaNacimiento = ?, contrasena = ? where email = ? and borrado = 0", PreparedStatement.RETURN_GENERATED_KEYS);
+        	PreparedStatement ps = con.prepareStatement(prop.getProperty("modifica-usuario"), PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getApellidos());
             ps.setDate(3, Date.valueOf(usuario.getFechaNacimiento()));
@@ -57,8 +72,8 @@ public class UsuarioDAO extends DAO {
     public ArrayList<UsuarioDTO> listarUsuarios() {
         ArrayList<UsuarioDTO> usuarios = new ArrayList<UsuarioDTO>();
         try {
-        	 Connection con = getConnection();
-         	PreparedStatement ps = con.prepareStatement("select * from Usuario where rol = true", PreparedStatement.RETURN_GENERATED_KEYS);
+        	Connection con = getConnection();
+         	PreparedStatement ps = con.prepareStatement(prop.getProperty("lista-usuarios"), PreparedStatement.RETURN_GENERATED_KEYS);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 usuarios.add(new UsuarioDTO(rs.getString("nombre"), rs.getString("apellidos"), rs.getString("email"), rs.getString("contrasena"), rs.getDate("fechaNacimiento").toLocalDate(), rs.getDate("fechaInscripcion").toLocalDate(), rs.getBoolean("rol")));
@@ -75,7 +90,7 @@ public class UsuarioDAO extends DAO {
     	UsuarioDTO usuario = null;
         try {
         	Connection con = getConnection();
-         	PreparedStatement ps = con.prepareStatement("select * from Usuario where email = ? and borrado = 0", PreparedStatement.RETURN_GENERATED_KEYS);
+         	PreparedStatement ps = con.prepareStatement(prop.getProperty("busca-usuario"), PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -94,7 +109,7 @@ public class UsuarioDAO extends DAO {
     public void eliminarUsuario(String email) {
         try {
         	 Connection con = getConnection();
-         	PreparedStatement ps = con.prepareStatement(getProps().getProperty("borra-usuario"), PreparedStatement.RETURN_GENERATED_KEYS);
+         	PreparedStatement ps = con.prepareStatement(prop.getProperty("borra-usuario"), PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, email);
             ps.executeUpdate();
         } catch (SQLException e) {

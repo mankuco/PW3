@@ -1,18 +1,23 @@
 package data.Pista_Kart;
 
 import java.util.ArrayList;
+import java.util.Properties;
+
+import java.sql.*;
 
 import business.Pista_Kart.Dificultades;
 import business.Pista_Kart.PistaDTO;
 import data.DAO;
 
-import java.sql.*;
-
-
-
-
 public class PistaDAO extends DAO {
 
+	/**
+	 * Constructor 
+	 */
+	public PistaDAO(Properties prop, String jdbc, String dbuser, String dbpass) {
+		super(prop, jdbc, dbuser, dbpass);
+	}
+	
 	/* 
 	 * @Resumen Guarda en la base de datos una nueva pista
 	 */
@@ -20,7 +25,7 @@ public class PistaDAO extends DAO {
 		try {
 		
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement(getProps().getProperty("inserta-pista"));
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("inserta-pista"));
 			ps.setString(1,pista.getNombrePista());
 			if(pista.getTipoEstado()==true) {
 				ps.setInt(2, 1);
@@ -58,7 +63,7 @@ public class PistaDAO extends DAO {
 		try {
 		
 			Connection connection =getConnection();
-			PreparedStatement ps=connection.prepareStatement(getProps().getProperty("existe-pista"), PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps=connection.prepareStatement(prop.getProperty("existe-pista"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(1, nombrePista);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -99,7 +104,7 @@ public class PistaDAO extends DAO {
 	public void cambiarnkartsasociados(PistaDTO pista) {
 		try {
 			Connection connection =getConnection();
-			PreparedStatement ps=connection.prepareStatement(getProps().getProperty("cambiar-kart-asociado"), PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps=connection.prepareStatement(prop.getProperty("cambiar-kart-asociado"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setInt(1,pista.getnkartsasociados());
 			ps.setString(2,pista.getNombrePista());
 			ps.executeUpdate();
@@ -119,7 +124,7 @@ public class PistaDAO extends DAO {
 		ArrayList<PistaDTO> listamantenimiento = new ArrayList<PistaDTO>();
 		try {
 			Connection connection =getConnection();
-			PreparedStatement ps=connection.prepareStatement(getProps().getProperty("lista-mantenimiento"), PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps=connection.prepareStatement(prop.getProperty("lista-mantenimiento"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				String nombrePista = rs.getString("nombrePista");
@@ -157,7 +162,7 @@ public class PistaDAO extends DAO {
 		ArrayList<PistaDTO> listadisponibles = new ArrayList<PistaDTO>();
 		try {
 			Connection connection = getConnection();
-			PreparedStatement ps=connection.prepareStatement(getProps().getProperty("lista-disponibles"), PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps=connection.prepareStatement(prop.getProperty("lista-disponibles"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ResultSet rs = ps.executeQuery();
 			String dif = "FAMILIAR";
 			if(dificultad == Dificultades.ADULTOS) {
@@ -198,7 +203,7 @@ public class PistaDAO extends DAO {
 		ArrayList<PistaDTO> listaPistas = new ArrayList<PistaDTO>();
 		try {
 			Connection connection =getConnection();
-			PreparedStatement ps=connection.prepareStatement("Select * from Pista");
+			PreparedStatement ps=connection.prepareStatement(prop.getProperty("ver-pistas"));
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				String nombrePista = rs.getString("nombrePista");

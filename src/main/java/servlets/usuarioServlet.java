@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import data.Usuario.*;
 import business.Usuario.*;
-import display.CustomerBean;
+import display.*;
 
 /**
  * Servlet implementation class usuarioServlet
@@ -36,10 +36,10 @@ public class usuarioServlet extends HttpServlet {
 		CustomerBean userBean = (CustomerBean) request.getSession().getAttribute("userBean");
 		if (userBean != null) {
 			if (userBean.getEmail() != null) {
-				UsuarioDAO usuario = new UsuarioDAO();
+				UsuarioDAO usuario = new UsuarioDAO(userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
 				UsuarioDTO user = usuario.buscarUsuario(userBean.getEmail());
 				
-				UsuarioDAO DAO = new UsuarioDAO();
+				UsuarioDAO DAO = new UsuarioDAO(userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
 				ArrayList<UsuarioDTO> lusuarios = DAO.listarUsuarios();
 				
 				request.setAttribute("listaUsuarios", lusuarios);

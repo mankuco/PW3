@@ -18,7 +18,8 @@
 			</jsp:forward>
 		<% }
 		else {
-			UsuarioDAO usuarioDAO = new UsuarioDAO();
+			ServletContext context = getServletContext();
+			UsuarioDAO usuarioDAO = new UsuarioDAO(userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
 			UsuarioDTO usuario = usuarioDAO.buscarUsuario(userBean.getEmail());
 			if (usuario.getContrasena().equals(contrasena)) {
 				usuario.setContrasena(nueva);

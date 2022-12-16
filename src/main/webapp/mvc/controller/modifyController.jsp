@@ -22,9 +22,10 @@
 			
 			if (userBean.getEmail() != null) {
 				try{
+				
 					LocalDate fecha = LocalDate.parse(fechaNacimiento);
 					
-					UsuarioDAO usuarioDAO = new UsuarioDAO();
+					UsuarioDAO usuarioDAO = new UsuarioDAO(userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
 					UsuarioDTO usuario = usuarioDAO.buscarUsuario(userBean.getEmail());
 					
 					usuario.setFechaNacimiento(fecha);

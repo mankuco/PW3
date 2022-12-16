@@ -38,13 +38,14 @@
 					<td>Antiguedad (en a&ntilde;os)</td>
 					<td>Nº Reservas Completadas</td>
 				</tr>
+				<% ServletContext context = getServletContext(); %>
 				<% for (UsuarioDTO a : usuarios){ %>
 					<tr>
 						<td><%= a.getNombre() %></td>
 						<td><%= a.getApellidos() %></td>
 						<td><%= a.getEmail() %></td>
-						<td style="text-align:center"><%= gestorU.CalcularAntiguedad(a.getEmail())%></td>
-						<td style="text-align:center"><%= gestorR.reservasCompletadas(a.getEmail())%></td>
+						<td style="text-align:center"><%= gestorU.CalcularAntiguedad(a.getEmail(), userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass())%></td>
+						<td style="text-align:center"><%= gestorR.reservasCompletadas(a.getEmail(), userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass())%></td>
 					</tr>
 				<% } %>
 			</table>

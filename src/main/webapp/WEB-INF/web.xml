@@ -9,9 +9,8 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-  
-  
-   <context-param>
+    
+  <context-param>
   	<param-name>jdbc</param-name>
   	<param-value>jdbc:mysql://oraclepr.uco.es:3306/i92curam</param-value>
   </context-param>
@@ -23,7 +22,7 @@
   	<param-name>db-pass</param-name>
   	<param-value>pw1234</param-value>
   </context-param>
- 
+  
   <context-param>
   	<param-name>propertiesPath</param-name>
   	<param-value>/WEB-INF/sql.properties</param-value>

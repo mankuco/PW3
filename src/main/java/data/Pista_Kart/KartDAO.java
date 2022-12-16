@@ -1,6 +1,7 @@
 package data.Pista_Kart;
 
 import java.util.ArrayList;
+import java.util.Properties;
 
 import business.Pista_Kart.Estados;
 import business.Pista_Kart.KartDTO;
@@ -11,6 +12,13 @@ import java.sql.*;
 
 public class KartDAO extends DAO {
 
+	/**
+	 * Constructor 
+	 */
+	public KartDAO(Properties prop, String jdbc, String dbuser, String dbpass) {
+		super(prop, jdbc, dbuser, dbpass);
+	}
+	
 	/* 
 	 * @Resumen Guarda en la base de datos un nuevo kart
 	 */
@@ -18,7 +26,7 @@ public class KartDAO extends DAO {
 		try {
 			
 			Connection connection = getConnection();
-			PreparedStatement ps=connection.prepareStatement(getProps().getProperty("inserta-kart"), PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps=connection.prepareStatement(prop.getProperty("inserta-kart"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setInt(1,kart.getIdKart());
 			if(kart.getTipoKart()==true) {
 				ps.setInt(2, 1);
@@ -54,7 +62,7 @@ public class KartDAO extends DAO {
 		try {
 			
 			Connection connection = getConnection();
-			PreparedStatement ps=connection.prepareStatement(getProps().getProperty("existe-kart"), PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps=connection.prepareStatement(prop.getProperty("existe-kart"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, idKart);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -96,7 +104,7 @@ public class KartDAO extends DAO {
 		try {
 		
 			Connection connection = getConnection();
-			PreparedStatement ps=connection.prepareStatement(getProps().getProperty("ver-kart-pista"), PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps=connection.prepareStatement(prop.getProperty("ver-kart-pista"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(1, nombrePista);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -139,7 +147,7 @@ public class KartDAO extends DAO {
 		try {
 		
 			Connection connection =getConnection();
-			PreparedStatement ps=connection.prepareStatement(getProps().getProperty("cambiar-nombre-pista"), PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps=connection.prepareStatement(prop.getProperty("cambiar-nombre-pista"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(1,pista.getNombrePista());
 			ps.setInt(2,kart.getIdKart());
 			ps.executeUpdate();
@@ -157,7 +165,7 @@ public class KartDAO extends DAO {
 		try {
 		
 			Connection connection = getConnection();
-			PreparedStatement ps=connection.prepareStatement("Select * from Kart");
+			PreparedStatement ps=connection.prepareStatement(prop.getProperty("lista-kart"));
 		
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {

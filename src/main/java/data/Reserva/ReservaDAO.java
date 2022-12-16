@@ -1,7 +1,6 @@
 package data.Reserva;
 
 import java.sql.Connection;
-
 import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.time.*;
 import java.util.ArrayList;
+import java.util.Properties;
 
 import business.Reserva.*;
 import data.DAO;
@@ -19,6 +19,13 @@ import data.DAO;
 
 public class ReservaDAO extends DAO {
 	
+	/**
+	 * Constructor 
+	 */
+	public ReservaDAO(Properties prop, String jdbc, String dbuser, String dbpass) {
+		super(prop, jdbc, dbuser, dbpass);
+	}
+	
 	/* 
 	 * @Resumen Introduce en la base de datos la reserva 
 	 * @Param Reserva 
@@ -28,7 +35,7 @@ public class ReservaDAO extends DAO {
 		String id =r.getIdReserva();
 		
 		try{
-			PreparedStatement ps = con.prepareStatement("INSERT into Reservas (id,idUsuario,minutos,precio,modalidad,idPista,NumeroNinos,NumeroAdultos,fecha,hora,tipo) VALUES (?,?,?,?,?,?,?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("inserta-reserva"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(1,r.getIdReserva());
 			ps.setString(2,r.getIdUsuario());
 			ps.setInt(3,r.getMinutosReserva());
@@ -60,7 +67,7 @@ public class ReservaDAO extends DAO {
 		
 		try{
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement("Update Reservas set borrado = 1 WHERE id = ?", PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("elimina-reserva"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(1,id);
 			ps.executeUpdate();
 		}
@@ -86,7 +93,7 @@ public class ReservaDAO extends DAO {
 		
 		try {
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM Reservas WHERE borrado = 0", PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("ver-reservas"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -139,7 +146,7 @@ public class ReservaDAO extends DAO {
 		
 		try {
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM Reservas WHERE fecha = ? and borrado = 0", PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("ver-reservas-fecha"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(1,LocalDate.now().toString());
 			ResultSet rs = ps.executeQuery();
 			
@@ -191,7 +198,7 @@ public class ReservaDAO extends DAO {
 		
 		try {
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM Reservas WHERE idUsuario = ? and borrado = 0", PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("ver-reservas-usuario"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(1,IdUsuario);
 			ResultSet rs = ps.executeQuery();
 			
@@ -241,7 +248,7 @@ public class ReservaDAO extends DAO {
 		
 		try {
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM Reservas WHERE id = ? and borrado = 0", PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("buscar-reserva"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(1,id);
 			ResultSet rs = ps.executeQuery();
 			

@@ -1,11 +1,10 @@
 package servlets;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,13 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import business.Pista_Kart.KartDTO;
-import business.Pista_Kart.PistaDTO;
-import business.Reserva.Reserva;
-import business.Reserva.ReservaDTO;
-import business.Usuario.UsuarioDTO;
 import display.CustomerBean;
-import data.Reserva.ReservaDAO;
-import data.Usuario.UsuarioDAO;
 import data.Pista_Kart.*;
 
 /**
@@ -43,12 +36,8 @@ public class misKartsServlet extends HttpServlet {
 		CustomerBean userBean = (CustomerBean) request.getSession().getAttribute("userBean");
 		if (userBean != null) {
 			if (userBean.getEmail() != null) {
-				ServletContext context = getServletContext();
-				
-				UsuarioDAO UsuarioDAO = new UsuarioDAO();
-				UsuarioDTO user = UsuarioDAO.buscarUsuario(userBean.getEmail());
-				
-				KartDAO KartDAO = new KartDAO();
+								
+				KartDAO KartDAO = new KartDAO(userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
 				ArrayList<KartDTO> karts =  KartDAO.listartodoskart();
 				
 				request.setAttribute("verPistas", karts);

@@ -22,12 +22,13 @@
 	<body>
 		<%@ include file="../../include/headerCliente.jsp" %>
 		<h1 style="text-align:center">Bienvenido/a</h1>
+		<% ServletContext context = getServletContext(); %>
 		<p style="margin-left:20px; font-size: 16px;">Nombre y Apellidos: <%= userBean.getNombre() + " " + userBean.getApellidos() %></p>
 		<p style="margin-left:20px; font-size: 16px;">Fecha: <%= LocalDate.now() %> </p>
 		<% GestorUsuario gestor = new GestorUsuario(); %>
-		<p style="margin-left:20px; font-size: 16px;">Antiguedad: <%= gestor.CalcularAntiguedad(userBean.getEmail()) %> a&ntilde;os</p>
+		<p style="margin-left:20px; font-size: 16px;">Antiguedad: <%= gestor.CalcularAntiguedad(userBean.getEmail(), userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass()) %> a&ntilde;os</p>
 		<% GestorReservas gest = new GestorReservas(); %>
-		<p style="margin-left:20px; font-size: 16px;">Pr&oacute;xima reserva: <%= gest.proximaReserva(userBean.getEmail()) %></p>
+		<p style="margin-left:20px; font-size: 16px;">Pr&oacute;xima reserva: <%= gest.proximaReserva(userBean.getEmail(), userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass()) %></p>
 		<%} %>
 	</body>
 </html>

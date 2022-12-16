@@ -2,9 +2,6 @@ package business.Reserva;
 
 import java.time.*;
 
-import java.util.Date;
-import java.util.UUID;
-
 public abstract class Reserva {
 
 	protected String idReserva;

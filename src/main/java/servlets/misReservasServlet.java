@@ -1,11 +1,10 @@
 package servlets;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import business.Reserva.Reserva;
-import business.Reserva.ReservaDTO;
 import business.Usuario.UsuarioDTO;
 import display.CustomerBean;
 import data.Reserva.ReservaDAO;
@@ -41,10 +39,10 @@ public class misReservasServlet extends HttpServlet {
 		if (userBean != null) {
 			if (userBean.getEmail() != null) {
 				
-				UsuarioDAO UsuarioDAO = new UsuarioDAO();
-				UsuarioDTO user = UsuarioDAO.buscarUsuario(userBean.getEmail());
+				UsuarioDAO usuario = new UsuarioDAO(userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
+				UsuarioDTO user = usuario.buscarUsuario(userBean.getEmail());
 				
-				ReservaDAO ReservaDAO = new ReservaDAO();
+				ReservaDAO ReservaDAO = new ReservaDAO(userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
 				ArrayList<Reserva> reservasADM =  ReservaDAO.verReservas();
 				ArrayList<Reserva> reservasUsuario =  ReservaDAO.verReservasUsuario(user.getEmail());
 				

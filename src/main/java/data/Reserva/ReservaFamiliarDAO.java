@@ -1,15 +1,23 @@
 package data.Reserva;
 
 import java.sql.Connection;
-
 import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.*;
+import java.util.Properties;
 
 import business.Reserva.*;
+
 public class ReservaFamiliarDAO extends ReservaDAO {
+	
+	/**
+	 * Constructor 
+	 */
+	public ReservaFamiliarDAO(Properties prop, String jdbc, String dbuser, String dbpass) {
+		super(prop, jdbc, dbuser, dbpass);
+	}
 	
 	/* 
 	 * @Resumen Introduce en la base de datos la reserva
@@ -19,8 +27,7 @@ public class ReservaFamiliarDAO extends ReservaDAO {
 	
 		try{
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement("INSERT into Reservas (id,idUsuario,minutos,precio,modalidad,idPista,NumeroNinos,NumeroAdultos,fecha,hora,tipo) VALUES (?,?,?,?,?,?,?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
-			ps.setString(1,r.getIdReserva());
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("inserta-reserva"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(2,r.getIdUsuario());
 			ps.setInt(3,r.getMinutosReserva());
 			ps.setFloat(4, r.getPrecioPista());
@@ -51,7 +58,7 @@ public class ReservaFamiliarDAO extends ReservaDAO {
 		ReservaFamiliarDTO r= null;
 		try {
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement("Select id,idUsuario,minutos,precio,modalidad,idPista,NumeroNinos,NumeroAdultos,fecha,hora,tipo from Reservas WHERE id=? and borrado = 0");
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("buscar-reserva"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(1, idReserva);
 			ResultSet rs = ps.executeQuery();
 			
@@ -87,7 +94,7 @@ public class ReservaFamiliarDAO extends ReservaDAO {
 		
 		try{
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement("UPDATE Reservas SET idUsuario = ?, minutos= ? ,precio= ?, modalidad= ?, idPista= ?, NumeroNinos= ?, NumeroAdultos= ?, fecha= ?, hora=?, tipo= ? WHERE id = ? and borrado = 0", PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("edita-reserva"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(11,r.getIdReserva());
 			ps.setString(1,r.getIdUsuario());
 			ps.setInt(2,r.getMinutosReserva());

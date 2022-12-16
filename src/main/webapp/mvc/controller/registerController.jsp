@@ -2,6 +2,16 @@
 <%@ page import="java.time.LocalDate, java.time.format.DateTimeFormatter,business.Usuario.UsuarioDTO, data.Usuario.UsuarioDAO, data.DAO" %>
 <jsp:useBean id="userBean" scope="session" class="display.CustomerBean"></jsp:useBean>
 <%
+	String filename = application.getInitParameter("propertiesPath");
+	java.io.InputStream my = application.getResourceAsStream(filename);
+	java.util.Properties prop = new java.util.Properties();
+	prop.load(my);
+	UsuarioDAO usuarioDAO = new UsuarioDAO(prop, application.getInitParameter("jdbc"), application.getInitParameter("db-user"), application.getInitParameter("db-pass"));
+	userBean.setprop(prop);
+	userBean.setjdbc(application.getInitParameter("jdbc"));
+	userBean.setdbuser(application.getInitParameter("db-user"));
+	userBean.setdbpass(application.getInitParameter("db-pass"));
+
 	String nombre = request.getParameter("nombre");
 	String apellidos = request.getParameter("apellidos");
 	String email = request.getParameter("email");
@@ -18,9 +28,8 @@
 		if ((userBean.getEmail() != null) && (userBean.getRol() == true)){
 			response.sendRedirect("/PW3/");
 		}
-		else {		
-
-			UsuarioDAO usuarioDAO = new UsuarioDAO();
+		else {
+			
 			UsuarioDTO usuario = usuarioDAO.buscarUsuario(email);
 			if (usuario != null) {%>
 				<jsp:forward page="../view/registerView.jsp">

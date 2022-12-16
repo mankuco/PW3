@@ -1,19 +1,26 @@
 package data.Reserva;
 
 import java.sql.*;
-import java.util.ArrayList;
 
-import business.Pista_Kart.Estados;
-import business.Pista_Kart.KartDTO;
+import java.util.ArrayList;
+import java.util.Properties;
+
 import business.Reserva.*;
 import data.DAO;
 
 public class BonoDAO extends DAO {
 
+	/**
+	 * Constructor 
+	 */
+	public BonoDAO(Properties prop, String jdbc, String dbuser, String dbpass) {
+		super(prop, jdbc, dbuser, dbpass);
+	}
+	
 	public void guardar(BonoReservaDTO bono) {
 		try {
 			Connection connection = getConnection();
-			PreparedStatement ps=connection.prepareStatement(getProps().getProperty("inserta-bono"), PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps=connection.prepareStatement(prop.getProperty("inserta-bono"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(1,bono.getIdBono());
 			ps.setString(2,bono.getIdReserva1());
 			if(bono.getIdReserva2() != null) {
@@ -40,7 +47,7 @@ public class BonoDAO extends DAO {
 	public void editar(BonoReservaDTO bono) {
 		try {
 			Connection connection = getConnection();
-			PreparedStatement ps=connection.prepareStatement(getProps().getProperty("edita-bono"), PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps=connection.prepareStatement(prop.getProperty("edita-bono"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(6,bono.getIdBono());
 			ps.setString(1,bono.getIdReserva1());
 			if(bono.getIdReserva2() != null) {
@@ -68,7 +75,7 @@ public class BonoDAO extends DAO {
 		ArrayList<BonoReservaDTO> reservas = new ArrayList<BonoReservaDTO>();
 		try {
 			Connection connection = getConnection();
-			PreparedStatement ps=connection.prepareStatement(getProps().getProperty("lista-bono"), PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps=connection.prepareStatement(prop.getProperty("lista-bono"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				BonoReservaDTO bono = new BonoReservaDTO(rs.getString("id"),rs.getString("r1"),rs.getString("r2"),rs.getString("r3"),rs.getString("r4"),rs.getString("r5"));
@@ -90,10 +97,10 @@ public class BonoDAO extends DAO {
 		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 		try {
 			Connection connection = getConnection();
-			PreparedStatement ps=connection.prepareStatement(getProps().getProperty("listareservas-bono"), PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps=connection.prepareStatement(prop.getProperty("listareservas-bono"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(1,bono.getIdBono());
 			ResultSet rs = ps.executeQuery();
-			ReservaDAO resDAO = new ReservaDAO();
+			ReservaDAO resDAO = new ReservaDAO(prop, jdbc, dbuser, dbpass);
 			while (rs.next()) {
 				Reserva r = resDAO.getreserva(rs.getString("r1"));
 				reservas.add(r);

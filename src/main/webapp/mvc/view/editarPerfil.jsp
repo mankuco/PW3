@@ -41,7 +41,7 @@
             <input type="text" style="border: solid 2px #cf74f2;" class="input-form" id="lastname" name="apellidos" value="<%= userBean.getApellidos() %>">
             <br/>
 
-			<%UsuarioDAO user = new UsuarioDAO(); %>
+			<%UsuarioDAO user = new UsuarioDAO(userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass()); %>
 			<%UsuarioDTO usuario = user.buscarUsuario(userBean.getEmail()); %>
             <label for="fechaNacimiento">Fecha de nacimiento:</label>
             <input type="date" style="border: solid 2px #cf74f2;" class="input-form" id="birthdate" name="fechaNacimiento" value="<%= usuario.getFechaNacimiento() %>">

@@ -1,7 +1,10 @@
 package display;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 import java.time.LocalDate;
+import java.util.Properties;
+
+import data.Usuario.UsuarioDAO;
 
 public class CustomerBean implements Serializable {
 
@@ -14,6 +17,10 @@ public class CustomerBean implements Serializable {
 	private LocalDate fechaNacimiento;
 	private LocalDate fechaInscripcion;
 	private boolean rol;
+	private Properties prop;
+	private String jdbc;
+	private String dbuser;
+	private String dbpass;
 
 	public String getNombre() {
 		return nombre;
@@ -56,6 +63,30 @@ public class CustomerBean implements Serializable {
 	}
 	public void setRol(boolean rol) {
 		this.rol = rol;
+	}
+	public Properties getprop() {
+		return prop;
+	}
+	public void setprop(Properties prop) {
+		this.prop = prop;
+	}
+	public String getjdbc() {
+		return jdbc;
+	}
+	public void setjdbc(String jdbc) {
+		this.jdbc = jdbc;
+	}
+	public String getdbuser() {
+		return dbuser;
+	}
+	public void setdbuser(String dbuser) {
+		this.dbuser = dbuser;
+	}
+	public String getdbpass() {
+		return dbpass;
+	}
+	public void setdbpass(String dbpass) {
+		this.dbpass = dbpass;
 	}
 
 }
