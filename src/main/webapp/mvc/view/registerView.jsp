@@ -39,7 +39,7 @@
             <label for="fechanacimiento">Fecha de nacimiento:</label>
             <input type="date" style="border: solid 2px #cf74f2;" class="input-form" id="fechanacimiento" name="fechanacimiento">
             <br/>
-            <%if (userBean.getRol() == false){ %>
+            <%if (userBean.getEmail() != null){ %>
             	<input type="submit" class="small-button" value="Registrarle" style="border: solid 2px #cf74f2;">
             <%} else { %>
             	<input type="submit" class="small-button" value="Registrarse" style="border: solid 2px #cf74f2;">

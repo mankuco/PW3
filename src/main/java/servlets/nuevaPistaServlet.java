@@ -46,7 +46,7 @@ public class nuevaPistaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		CustomerBean userBean = (CustomerBean) request.getSession().getAttribute("userBean");
-		if (userBean == null || userBean.getEmail() != null) {
+		if (userBean != null || userBean.getEmail() != null) {
 			String nombrePista = request.getParameter("nombrePista");
 			String dificultad = request.getParameter("pistaType");
 			String maxkarts = request.getParameter("maxKarts");

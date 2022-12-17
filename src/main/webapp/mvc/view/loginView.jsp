@@ -33,6 +33,7 @@
 	            <br/>
 	            <input type="submit" class="small-button" id="button-submit-login" value="Iniciar sesión">
 	        </form>
+	        <button type="button" class="small-button" onclick="/PW3/" >Volver atr&aacute;s</button>
 		</div>
 	</div>
 </body>

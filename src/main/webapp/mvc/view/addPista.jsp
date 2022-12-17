@@ -6,6 +6,9 @@
 	if (userBean.getEmail() == null){
 		response.sendRedirect(request.getContextPath());
 	}
+	else if(userBean.getRol() == true){
+		response.sendRedirect(request.getContextPath() + "/usuarioServlet");
+	}
 	else {
 %>
     <!DOCTYPE html>
@@ -13,28 +16,33 @@
         <head>
             <meta charset="ISO-8859-1">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
+            <link rel="stylesheet" href="<%= request.getContextPath() %>/css/styles.css">
             <title>Nueva pista</title>
         </head>
-        <body>
-        <%@ include file="../../include/headerAdministrador.jsp" %>
-            <div class="container">
-                <h1>Crear pista</h1>
-                <form>
-                    <br/>
-                    <label for="pistaName">Nombre</label>
-                    <input type="text" class="input-form" name="pistaName">
-                    <label for="maxKarts">Numero de karts maximo</label>
-                    <input type="text" class="input-form" name="maxKarts">
-                    <br/>
-                    <label for="pistaType">Tipo</label>
-                    <select id="pistaType" class="select-type" name="pistaType">
-                        <option value="">INFANTIL</option>
-                        <option value="">FAMILIAR</option>
-                        <option value="">ADULTOS</option>
-                    </select>
-                    <br/>
-                    </div>
-                  </form> 
-                </body>
-		</html>
+        <body style="text-align: center">
+        	<%@ include file="../../include/headerAdministrador.jsp" %>
+            <h1>Crear pista</h1>
+            <form action="<%= request.getContextPath() %>/nuevaPista" method="POST">
+                <br/>
+                <label for="pistaName">Nombre</label>
+                <input type="text" class="input-form" name="pistaName">
+                
+                <br/>
+                
+                <label for="maxKarts">Numero de karts maximo</label>
+                <input type="number" class="input-form" name="maxKarts">
+                
+                <br/><br/>
+                <label for="pistaType">Tipo</label>
+                <select id="pistaType" class="select-type" name="pistaType">
+                    <option value="">INFANTIL</option>
+                    <option value="">FAMILIAR</option>
+                    <option value="">ADULTOS</option>
+                </select>
+                
+                <br/><br/>
+                <input type="submit" class="small-button" value="Crear" style="border: solid 2px #cf74f2;">
+             </form>
+		</body>
+	</html>
+	<%} %>
