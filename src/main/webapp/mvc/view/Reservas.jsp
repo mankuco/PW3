@@ -19,7 +19,13 @@ if(userBean.getRol()== false){
 	%><%@ include file="../../include/headerAdministrador.jsp" %><% }
 else{
 	reservas = (ArrayList<Reserva>)request.getAttribute("verReservasUsuario"); 
-%><%@ include file="../../include/headerCliente.jsp" %> <% }
+%><%@ include file="../../include/headerCliente.jsp" %> 
+<div >
+<%if(userBean.getRol() == true){ %>
+<button class="buttonAdd" onclick="window.location.href='<%= request.getContextPath() %>/mvc/view/addReserva.jsp'"> + Nueva Reserva</button>
+			<%} %>
+		</div>
+<% }
 		
 			
    if (reservas == null || reservas.size() == 0) { %>
@@ -81,11 +87,7 @@ else{
             </div>
         </div>
     </section>
-        <div style="text-align: center">
-			<%if(userBean.getRol() == true){ %>
-				<button type="button" class="big-button" style="width: 300px; border: solid 2px #cf74f2;" onclick="window.location.href='<%= request.getContextPath() %>/mvc/view/addReserva.jsp'">Crear Reserva</button>
-			<%} %>
-		</div>
+       
 	<br/>
     <script src="js/scriptVisualizacionReservas.js"></script>
     

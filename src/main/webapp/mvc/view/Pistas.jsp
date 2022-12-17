@@ -38,7 +38,7 @@ if(userBean.getRol()== false){ pistas = (ArrayList<PistaDTO>)request.getAttribut
                        <p id="nombrepista"  style=display:none; >  <%= p.getnkartsasociados() %></p>
                        <p id="precioPista"  style=display:none; >  <%= p.getMaxKarts() %> </p>
                         <p id="nPista" style=display:none;><%=p.getNombrePista()%></p>
-                 <% if( p.getTipoEstado() == false){ %>
+                     <% if( p.getTipoEstado() == false){ %>
                     <span class="fechaVencida"> <%= Estados.MANTENIMIENTO %></span>
                      <%}else{%>
                      <span class="fecha"> <%= Estados.DISPONIBLE %></span>
