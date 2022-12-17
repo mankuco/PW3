@@ -8,6 +8,7 @@ let precioSeleccionado = document.getElementById("precio");
 let minutosSeleccionado = document.getElementById("minutos");
 let horaSeleccionado = document.getElementById("hora");
 let fechaSeleccionado = document.getElementById("fechaR");
+let nPista = document.getElementById("nombrePista2");
 
 
 
@@ -25,12 +26,33 @@ function cargar(item){
     usuarioSeleccionado.innerHTML =  item.getElementsByTagName("p")[1].innerHTML;
     pistaSeleccionado.innerHTML =  item.getElementsByTagName("p")[2].innerHTML;
     precioSeleccionado.innerHTML =  item.getElementsByTagName("p")[3].innerHTML;
-    minutosSeleccionado.innerHTML =  item.getElementsByTagName("p")[4].innerHTML;
+
     horaSeleccionado.innerHTML =  item.getElementsByTagName("h4")[0].innerHTML;
     fechaSeleccionado.innerHTML =  item.getElementsByTagName("span")[0].innerHTML;
+    nPista.innerHTML = item.getElementsByTagName("p")[4].innerHTML;
   
      
 }
+
+function eliminar(item) {
+	
+	 const nPista2 =document.getElementById("reserva").innerHTML;
+	  if (confirm("¿Estas seguro de que quieres eliminar esta pista?")) {
+	
+  		 fetch(`misPistasServlet?id=${nPista2}`, { method: 'DELETE' })
+   		 .then(response =>{ response.json() 
+   		  location.reload() })
+  		 .then(data => {
+     		
+   		 })
+    	.catch(error => {
+      console.error(error);
+    });
+  
+  }
+ 
+}
+
 function cerrar(){
     mostrador.style.width = "100%";
     seleccion.style.width = "0%";

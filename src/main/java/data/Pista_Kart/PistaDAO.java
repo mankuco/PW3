@@ -231,4 +231,24 @@ public class PistaDAO extends DAO {
 		}
 		return listaPistas;
 	}
+	
+	/* 
+	 * @Resumen Cambia el valor de la variable nombrePista en el kart
+	 * @param kart = Kart, el kart que se quiere asociaciar
+	 * @param pista = Pista, la pista a la que se le quiere asociar un kart
+	 */
+	public void borraPista(String nombrePista) {
+		try {
+		
+			Connection connection =getConnection();
+			PreparedStatement ps=connection.prepareStatement("DELETE FROM Pista WHERE nombrePista=?");
+			ps.setString(1,nombrePista);
+			ps.executeUpdate();
+			close();
+		}
+		catch (Exception e) {
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
 }

@@ -60,5 +60,19 @@ public class misKartsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
+	
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		CustomerBean userBean = (CustomerBean) request.getSession().getAttribute("userBean");
+		if (userBean != null) {
+			if (userBean.getEmail() != null) {
+	    String kartID = request.getParameter("id");
+	
+	     KartDAO KartDAO = new KartDAO(userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
+	     KartDAO.eliminarKart(kartID);
+	 
+	      response.setStatus(HttpServletResponse.SC_OK);
+	      response.getWriter().println("Kart eliminado con éxito");
+		}else {response.sendRedirect(request.getContextPath());}
+		}else {response.sendRedirect(request.getContextPath());}
+		}
 }

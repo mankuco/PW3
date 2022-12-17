@@ -8,6 +8,7 @@ let precioSeleccionado = document.getElementById("precio");
 let minutosSeleccionado = document.getElementById("minutos");
 let horaSeleccionado = document.getElementById("hora");
 let fechaSeleccionado = document.getElementById("fechaR");
+let reservaID = document.getElementById("reservaid1");
 
 
 
@@ -28,9 +29,29 @@ function cargar(item){
     minutosSeleccionado.innerHTML =  item.getElementsByTagName("p")[4].innerHTML;
     horaSeleccionado.innerHTML =  item.getElementsByTagName("h4")[0].innerHTML;
     fechaSeleccionado.innerHTML =  item.getElementsByTagName("span")[0].innerHTML;
-  
-     
+    reservaID.innerHTML =  item.getElementsById("nPista").innerHTML;
 }
+
+function eliminar(item) {
+	
+	 const kartID =document.getElementById("reservaid1").innerHTML;
+	  if (confirm("¿Estás seguro de que quieres eliminar este reserva?")) {
+	
+  		 fetch(`misReservasServlet?id=${kartID}`, { method: 'DELETE' })
+   		 .then(response =>{ response.json() 
+   		  location.reload() })
+  		 .then(data => {
+     		
+   		 })
+    	.catch(error => {
+      console.error(error);
+    });
+  
+  }
+ 
+}
+
+
 function cerrar(){
     mostrador.style.width = "100%";
     seleccion.style.width = "0%";

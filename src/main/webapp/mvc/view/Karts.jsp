@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="stylesheet" href="<%=request.getContextPath()%>/css/styles.css">
-    <title>MIS PISTAS</title>
+    <title>MIS KARTS</title>
 </head>
 <body >
 <%@ include file="../../include/headerAdministrador.jsp" %>
@@ -32,7 +32,8 @@ if(userBean.getRol()== false){ karts = (ArrayList<KartDTO>)request.getAttribute(
                     <div class="contenedor-foto">
                     <img src="https://www.kartingangelburgueno.com/wp-content/uploads/2020/07/Rotax-2T-2020.jpg" alt="">        
                     </div>
-                    <p class="descripcion">KART Nº<%= k.getIdKart() %></p>
+                    <h3 id=kartid1> Kart Nº: <%= k.getIdKart() %></h3>
+                    <p class="descripcion"   style=display:none;><%= k.getIdKart() %></p>
                      <p id="nombre"><% if( k.getTipoKart()== true){ out.println("Infantil");}else {out.println("Adultos");} %> </p>
                        <p id="precioPista"  style=display:none; >  <% if(k.getnombrePista()==null){ out.println("Sin asociar");}else{ %> <%= k.getnombrePista() %><%}%> </p>
                      <% if( k.getEstado() == Estados.MANTENIMIENTO){ %>
@@ -54,17 +55,18 @@ if(userBean.getRol()== false){ karts = (ArrayList<KartDTO>)request.getAttribute(
             </div>
             <div class="info">
 	                <img src="" alt="" id="img">
-	                <h2 id="reserva"></h2>
+	                <h3 id=kartid></h3>
+	                <h2  style=display:none; id="reserva"></h2>
 	                 <p id="usuario"></p>
 	                 <h5>PISTA ASOCIADA:</h5>
 	                 <p id="pista"></p>
 	                <span class="fecha"></span>
-	             
+	             	<p id="idK"></p>
 	
 	                <div class="fila">
-						 <form action="cancelarReserva" method="POST">
-	                      <button  type="submit" >ELIMINAR KART</button>
-	               	  </form>
+						 
+	                      <button onclick="eliminar(this)" >ELIMINAR KART</button>
+	               	 
 	                	 <form action="modificarReservaServlet" method="POST">
 	                 	   <button class="buttonMod"  type="submit">MODIFICAR KART</button>
 	                 	</form>
@@ -74,6 +76,6 @@ if(userBean.getRol()== false){ karts = (ArrayList<KartDTO>)request.getAttribute(
 
     </section>
 
-    <script src="js/scriptVisualizacionPistas.js"></script>
+    <script src="js/scriptVisualizacionKart.js"></script>
 </body>
 </html>

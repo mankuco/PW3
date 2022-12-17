@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import business.Reserva.Reserva;
 import business.Usuario.UsuarioDTO;
 import display.CustomerBean;
+import data.Pista_Kart.KartDAO;
 import data.Reserva.ReservaDAO;
 import data.Usuario.UsuarioDAO;
 
@@ -67,5 +68,20 @@ public class misReservasServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
+	
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		CustomerBean userBean = (CustomerBean) request.getSession().getAttribute("userBean");
+		if (userBean != null) {
+			if (userBean.getEmail() != null) {
+	    String ReservaID = request.getParameter("id");
+	
+	     ReservaDAO ReservaDAO = new ReservaDAO(userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
+	     ReservaDAO.borraReserva(ReservaID);
+	 
+	      response.setStatus(HttpServletResponse.SC_OK);
+	      response.getWriter().println("Reserva eliminada con éxito");
+		}else {response.sendRedirect(request.getContextPath());}
+		}else {response.sendRedirect(request.getContextPath());}
+		}
 
 }

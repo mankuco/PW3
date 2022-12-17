@@ -8,6 +8,7 @@ let precioSeleccionado = document.getElementById("precio");
 let minutosSeleccionado = document.getElementById("minutos");
 let horaSeleccionado = document.getElementById("hora");
 let fechaSeleccionado = document.getElementById("fechaR");
+let kartID = document.getElementById("kartid");
 
 
 
@@ -15,12 +16,14 @@ function cargar(item){
     quitarBordes();
     mostrador.style.width = "60%";
     seleccion.style.width = "40%";
-     seleccion.style.height="20%";
+    seleccion.style.height = "15%"
     seleccion.style.opacity = "1";
     item.style.border = "2px solid red";
+   
 
     imgSeleccionada.src = item.getElementsByTagName("img")[0].src;
-
+	
+	kartID.innerHTML =  item.getElementsByTagName("h3")[0].innerHTML;
     reservaSeleccionado.innerHTML =  item.getElementsByTagName("p")[0].innerHTML;
     usuarioSeleccionado.innerHTML =  item.getElementsByTagName("p")[1].innerHTML;
     pistaSeleccionado.innerHTML =  item.getElementsByTagName("p")[2].innerHTML;
@@ -31,6 +34,33 @@ function cargar(item){
   
      
 }
+
+/* 
+function eliminar(item){
+	document.getElementById('idK').innerHTML = kartID.innerHTML;
+ 	
+}*/
+
+function eliminar(item) {
+	
+	 const kartID =document.getElementById("reserva").innerHTML; 
+	  if (confirm("¿Estás seguro de que quieres eliminar este elemento?")) {
+	
+  		 fetch(`misKartsServlet?id=${kartID}`, { method: 'DELETE' })
+   		 .then(response =>{ response.json() 
+   		  location.reload() })
+  		 .then(data => {
+     		
+   		 })
+    	.catch(error => {
+      console.error(error);
+    });
+  
+  }
+ 
+}
+
+
 function cerrar(){
     mostrador.style.width = "100%";
     seleccion.style.width = "0%";

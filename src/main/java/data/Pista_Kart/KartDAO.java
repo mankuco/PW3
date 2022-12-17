@@ -199,4 +199,23 @@ public class KartDAO extends DAO {
 		}
 		return listakart;
 	}
+	
+	/* 
+	 * @Resumen Eliminar el kart
+	 */
+	public void eliminarKart(String idkart) {
+		try {
+		
+			Connection connection =getConnection();
+			PreparedStatement ps=connection.prepareStatement("DELETE FROM Kart WHERE idKart=?");
+			ps.setString(1,idkart);
+			ps.executeUpdate();
+			close();
+		}
+		catch (Exception e) {
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	
 }

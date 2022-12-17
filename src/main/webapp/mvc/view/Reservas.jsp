@@ -44,7 +44,9 @@ else{
                     <span class="fechaVencida"> <%= r.getFecha() %></span>
                      <%}else{%>
                      <span class="fecha"> <%= r.getFecha() %></span>
+                     
                      <% }%>
+                     <p id=rid style=display:none;><%=r.getIdReserva()%></p>
                 </div>
                 <% count++; if (count % 3 == 0) {%>  </div>  <div class="fila"> <%} }  } %>
             </div>
@@ -68,14 +70,13 @@ else{
 	                 <h5>HORA:</h5>
 	                <p id="hora"></p>       
 	             	<span id="fechaR" class="fecha"> </span>
-	
+					<p id=reservaid1 style=display:none;></p>
 	                <div class="fila">
-						<form action="cancelarReserva" method="POST">
-	                    	<button  type="submit" >CANCELAR RESERVA</button>
-	               	  	</form>
-	                	<form action="modificarReservaServlet" method="POST">
-	                 		<button class="buttonMod"  type="submit">MODIFICAR RESERVA</button>
-	                 	</form>
+	                
+						 <button onclick="eliminar(this)" >CANCELAR RESERVA</button>
+
+		                 		<button class="buttonMod"  type="submit">MODIFICAR RESERVA</button>
+	                 	
                 	</div>
             </div>
         </div>
@@ -87,5 +88,8 @@ else{
 		</div>
 	<br/>
     <script src="js/scriptVisualizacionReservas.js"></script>
+    
+    
+    
 </body>
 </html>

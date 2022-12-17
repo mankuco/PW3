@@ -30,20 +30,19 @@ if(userBean.getRol()== false){ pistas = (ArrayList<PistaDTO>)request.getAttribut
             <div class="fila">
             <% for (PistaDTO p : pistas){ %> 
                 <div class="item" onclick="cargar(this)">
-                    <div class="contenedor-foto">
+                    <div class="contenedor-foto">      
                     <img src="https://www.diariodeleon.es/media/diariodeleon/images/2021/07/21/2021072109360110806.jpg" alt="">        
                     </div>
-                    <p class="descripcion">Pista <%= p.getNombrePista() %></p>
+                    <p class="descripcion"><%=p.getNombrePista()%></p>
                      <p id="nombre">  <%= p.getDificultad() %></p>
                        <p id="nombrepista"  style=display:none; >  <%= p.getnkartsasociados() %></p>
                        <p id="precioPista"  style=display:none; >  <%= p.getMaxKarts() %> </p>
+                        <p id="nPista" style=display:none;><%=p.getNombrePista()%></p>
                  <% if( p.getTipoEstado() == false){ %>
                     <span class="fechaVencida"> <%= Estados.MANTENIMIENTO %></span>
                      <%}else{%>
                      <span class="fecha"> <%= Estados.DISPONIBLE %></span>
-                     <% }%>
-                 
-                   
+                     <% }%>    
                 </div>
                 <% count++; if (count % 3 == 0) {%>  </div>  <div class="fila"> <%} }  } %>
             </div>
@@ -62,16 +61,17 @@ if(userBean.getRol()== false){ pistas = (ArrayList<PistaDTO>)request.getAttribut
 	                 <p id="pista"></p>
 	                 <h5>KARTS MAXIMOS:</h5>
 	                <p id="precio"></p>
+	               
 	          
 	             
 	
 	                <div class="fila">
-						 <form action="cancelarReserva" method="POST">
-	                      <button  type="submit" >ELIMINAR PISTA</button>
-	               	  </form>
-	                	 <form action="modificarReservaServlet" method="POST">
+						
+	                      <button onclick="eliminar(this)" >ELIMINAR PISTA</button>
+	               	 
+	                	
 	                 	   <button class="buttonMod"  type="submit">MODIFICAR PISTA</button>
-	                 	</form>
+	                 	
                 	</div>
             </div>
         </div>
