@@ -1,5 +1,7 @@
 package business.Reserva;
 
+import java.time.LocalDate;
+
 public class BonoReservaDTO {
 
 	private String idBono;
@@ -8,17 +10,23 @@ public class BonoReservaDTO {
 	private String idReserva3;
 	private String idReserva4;
 	private String idReserva5;
+	private TipoReserva tipo;
+	private LocalDate fecha;
+	private String email;
 	
 	/**
 	 * Constructor parametrizado
 	 */
-	public BonoReservaDTO(String idBono, String idReserva1, String idReserva2, String idReserva3, String idReserva4, String idReserva5) {
+	public BonoReservaDTO(String idBono, String idReserva1, String idReserva2, String idReserva3, String idReserva4, String idReserva5, TipoReserva tipo, LocalDate fecha, String email) {
 		this.idBono = idBono;
 		this.idReserva1 = idReserva1;
 		this.idReserva2 = idReserva2;
 		this.idReserva3 = idReserva3;
 		this.idReserva4 = idReserva4;
 		this.idReserva5 = idReserva5;
+		this.tipo = tipo;
+		this.fecha = fecha;
+		this.email = email;
 	}
 
 	/**
@@ -65,10 +73,25 @@ public class BonoReservaDTO {
 	public void setIdReserva5(String idReserva) {
 		this.idReserva5 = idReserva;
 	}
-
-	@Override
-	public String toString() {
-		return "BonoReserva [idBono=" + idBono + ", idReserva1=" + idReserva1 + ", idReserva2=" + idReserva2 + ", idReserva3=" + idReserva3 + ", idReserva4=" + idReserva4 + ", idReserva5=" + idReserva5 + "]";
+	
+	public TipoReserva getTipo() {
+		return tipo;
+	}
+	public void setTipo(TipoReserva tipo) {
+		this.tipo = tipo;
 	}
 	
+	public LocalDate getFecha() {
+		return fecha;
+	}
+	public void setFecha(LocalDate fecha) {
+		this.fecha = fecha;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }

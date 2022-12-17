@@ -1,6 +1,9 @@
 package business.Reserva;
 
 import java.time.LocalTime;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -185,6 +188,69 @@ public class GestorReservas {
 		}
 		
 		return N;
+	}
+	
+	/**
+	 * @Resumen Metodo que crea bono
+	 */
+	public boolean crearBono(String r1, String r2, String r3, String r4, String r5, TipoReserva tipo, LocalDate fecha, String email, Properties prop, String jdbc, String dbuser, String dbpass) {
+		BonoDAO dao = new BonoDAO(prop, jdbc, dbuser, dbpass);
+		ArrayList<BonoReservaDTO> lista = dao.listarBonosUsuario(email);
+		if(lista != null) {
+			for(BonoReservaDTO a : lista) {
+				if(a.getIdReserva5() != null) {
+					return false;
+				}
+			}
+		}
+		BonoReservaDTO bono = new BonoReservaDTO(generarIdUnico(),r1,r2,r3,r4,r5,tipo,fecha,email);
+		dao.insertar(bono);
+		return true;
+	}
+	
+	/**
+	 * @Resumen Modifica un bono
+	 */
+	public boolean modificarBono(String id, String r1, String r2, String r3, String r4, String r5, TipoReserva tipo, LocalDate fecha, String email, Properties prop, String jdbc, String dbuser, String dbpass) {
+		BonoDAO dao = new BonoDAO(prop, jdbc, dbuser, dbpass);
+		ArrayList<BonoReservaDTO> lista = dao.listarBonosUsuario(email);
+		if(lista != null) {
+			for(BonoReservaDTO a : lista) {
+				if(a.getIdReserva5() != null) {
+					return false;
+				}
+			}
+		}
+		BonoReservaDTO bono = new BonoReservaDTO(id,r1,r2,r3,r4,r5,tipo,fecha,email);
+		dao.insertar(bono);
+		return true;
+	}
+	
+	/**
+	 * @Resumen Devuelve una lista con todos los bonos de un usuario
+	 */
+	public ArrayList<BonoReservaDTO> listarBonosUsuario(String email, Properties prop, String jdbc, String dbuser, String dbpass) {
+		BonoDAO dao = new BonoDAO(prop, jdbc, dbuser, dbpass);
+		ArrayList<BonoReservaDTO> lista = dao.listarBonosUsuario(email);
+		return lista;
+	}
+	
+	/**
+	 * @Resumen Devuelve un bono si existe
+	 */
+	public BonoReservaDTO buscabono(String id, Properties prop, String jdbc, String dbuser, String dbpass) {
+		BonoDAO dao = new BonoDAO(prop, jdbc, dbuser, dbpass);
+		BonoReservaDTO bono = dao.existeBono(id);
+		return bono;
+	}
+	
+	/**
+	 * @Resumen Devuelve un el bono activo de un usuario si lo tiene
+	 */
+	public BonoReservaDTO bonoActivo(String email, Properties prop, String jdbc, String dbuser, String dbpass) {
+		BonoDAO dao = new BonoDAO(prop, jdbc, dbuser, dbpass);
+		BonoReservaDTO bono = dao.bonoActivo(email);
+		return bono;
 	}
 	
 	/**

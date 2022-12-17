@@ -17,7 +17,7 @@ public class BonoDAO extends DAO {
 		super(prop, jdbc, dbuser, dbpass);
 	}
 	
-	public void guardar(BonoReservaDTO bono) {
+	public void insertar(BonoReservaDTO bono) {
 		try {
 			Connection connection = getConnection();
 			PreparedStatement ps=connection.prepareStatement(prop.getProperty("inserta-bono"), PreparedStatement.RETURN_GENERATED_KEYS);
@@ -35,6 +35,16 @@ public class BonoDAO extends DAO {
 					}
 				}
 			}
+			String tipo = "INFANTIL";
+			if(bono.getTipo() == TipoReserva.ADULTOS) {
+				tipo = "ADULTOS";
+			}
+			if(bono.getTipo() == TipoReserva.FAMILIAR) {
+				tipo = "FAMILIAR";
+			}
+			ps.setString(7,tipo);
+			ps.setDate(8, Date.valueOf(bono.getFecha()));
+			ps.setString(9, bono.getEmail());
 			ps.executeUpdate();
 			close();
 		}
@@ -48,7 +58,7 @@ public class BonoDAO extends DAO {
 		try {
 			Connection connection = getConnection();
 			PreparedStatement ps=connection.prepareStatement(prop.getProperty("edita-bono"), PreparedStatement.RETURN_GENERATED_KEYS);
-			ps.setString(6,bono.getIdBono());
+			ps.setString(7,bono.getIdBono());
 			ps.setString(1,bono.getIdReserva1());
 			if(bono.getIdReserva2() != null) {
 				ps.setString(2,bono.getIdReserva2());
@@ -62,6 +72,7 @@ public class BonoDAO extends DAO {
 					}
 				}
 			}
+			ps.setDate(6, Date.valueOf(bono.getFecha()));
 			ps.executeUpdate();
 			close();
 		}
@@ -73,12 +84,19 @@ public class BonoDAO extends DAO {
 	
 	public ArrayList<BonoReservaDTO> listarBonos() {
 		ArrayList<BonoReservaDTO> reservas = new ArrayList<BonoReservaDTO>();
+		TipoReserva tipo = TipoReserva.ADULTOS;
 		try {
 			Connection connection = getConnection();
 			PreparedStatement ps=connection.prepareStatement(prop.getProperty("lista-bono"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				BonoReservaDTO bono = new BonoReservaDTO(rs.getString("id"),rs.getString("r1"),rs.getString("r2"),rs.getString("r3"),rs.getString("r4"),rs.getString("r5"));
+				if(rs.getString("tipo") == "INFANTIL") {
+					tipo = TipoReserva.INFANTIL;
+				}
+				else if(rs.getString("tipo") == "FAMILIAR") {
+					tipo = TipoReserva.FAMILIAR;
+				}
+				BonoReservaDTO bono = new BonoReservaDTO(rs.getString("id"),rs.getString("r1"),rs.getString("r2"),rs.getString("r3"),rs.getString("r4"),rs.getString("r5"),tipo,rs.getDate("fecha").toLocalDate(),rs.getString("email"));
 				reservas.add(bono);
 			}
 			if (ps != null){ 
@@ -133,4 +151,99 @@ public class BonoDAO extends DAO {
 		return reservas;
 	}
 	
+	public ArrayList<BonoReservaDTO> listarBonosUsuario(String email) {
+		ArrayList<BonoReservaDTO> bonos = new ArrayList<BonoReservaDTO>();
+		TipoReserva tipo = TipoReserva.ADULTOS;
+		try {
+			Connection connection = getConnection();
+			PreparedStatement ps=connection.prepareStatement(prop.getProperty("listabono-usuario"), PreparedStatement.RETURN_GENERATED_KEYS);
+			ps.setString(1,email);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				if(rs.getString("tipo") == "INFANTIL") {
+					tipo = TipoReserva.INFANTIL;
+				}
+				else if(rs.getString("tipo") == "FAMILIAR") {
+					tipo = TipoReserva.FAMILIAR;
+				}
+				BonoReservaDTO bono = new BonoReservaDTO(rs.getString("id"),rs.getString("r1"),rs.getString("r2"),rs.getString("r3"),rs.getString("r4"),rs.getString("r5"),tipo,rs.getDate("fecha").toLocalDate(),rs.getString("email"));
+				bonos.add(bono);
+			}
+			if (ps != null){ 
+				ps.close(); 
+			}
+			close();
+		}
+		catch (Exception e) {
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return bonos;
+	}
+	
+	public BonoReservaDTO existeBono(String id) {
+		BonoReservaDTO bono = null;
+		TipoReserva tipo = TipoReserva.ADULTOS;
+		try {
+			Connection connection = getConnection();
+			PreparedStatement ps=connection.prepareStatement(prop.getProperty("busca-bono"), PreparedStatement.RETURN_GENERATED_KEYS);
+			ps.setString(1,id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				if(rs.getString("tipo") == "INFANTIL") {
+					tipo = TipoReserva.INFANTIL;
+				}
+				else if(rs.getString("tipo") == "FAMILIAR") {
+					tipo = TipoReserva.FAMILIAR;
+				}
+				 bono = new BonoReservaDTO(rs.getString("id"),rs.getString("r1"),rs.getString("r2"),rs.getString("r3"),rs.getString("r4"),rs.getString("r5"),tipo,rs.getDate("fecha").toLocalDate(),rs.getString("email"));
+			}
+			if (ps != null){ 
+				ps.close(); 
+			}
+			close();
+		}
+		catch (Exception e) {
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return bono;
+	}
+	
+	public BonoReservaDTO bonoActivo(String email) {
+		ArrayList<BonoReservaDTO> bonos = new ArrayList<BonoReservaDTO>();
+		TipoReserva tipo = TipoReserva.ADULTOS;
+		try {
+			Connection connection = getConnection();
+			PreparedStatement ps=connection.prepareStatement(prop.getProperty("listabono-usuario"), PreparedStatement.RETURN_GENERATED_KEYS);
+			ps.setString(1,email);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				if(rs.getString("tipo") == "INFANTIL") {
+					tipo = TipoReserva.INFANTIL;
+				}
+				else if(rs.getString("tipo") == "FAMILIAR") {
+					tipo = TipoReserva.FAMILIAR;
+				}
+				BonoReservaDTO bono = new BonoReservaDTO(rs.getString("id"),rs.getString("r1"),rs.getString("r2"),rs.getString("r3"),rs.getString("r4"),rs.getString("r5"),tipo,rs.getDate("fecha").toLocalDate(),rs.getString("email"));
+				bonos.add(bono);
+			}
+			if (ps != null){ 
+				ps.close(); 
+			}
+			close();
+		}
+		catch (Exception e) {
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		if(bonos != null) {
+			for(BonoReservaDTO a : bonos) {
+				if(a.getIdReserva5() == null) {
+					return a;
+				}
+			}
+		}
+		return null;
+	}
 }
