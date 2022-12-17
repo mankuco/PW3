@@ -4,6 +4,7 @@ import java.sql.*;
 
 import java.util.ArrayList;
 import java.util.Properties;
+import java.time.*;
 
 import business.Reserva.*;
 import data.DAO;
@@ -239,7 +240,7 @@ public class BonoDAO extends DAO {
 		}
 		if(bonos != null) {
 			for(BonoReservaDTO a : bonos) {
-				if(a.getIdReserva5() == null) {
+				if((a.getIdReserva5() == null) && ((a.getFecha()).isAfter(LocalDate.now()))){
 					return a;
 				}
 			}

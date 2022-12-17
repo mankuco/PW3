@@ -254,6 +254,44 @@ public class GestorReservas {
 	}
 	
 	/**
+	 * @Resumen Devuelve un el bono activo de un usuario si lo tiene
+	 */
+	public boolean insertarReservaBono(String email, Reserva res, Properties prop, String jdbc, String dbuser, String dbpass) {
+		BonoReservaDTO bono = bonoActivo(email, prop, jdbc, dbuser, dbpass);
+		if(bono == null) {
+			return false;
+		}
+		BonoDAO dao = new BonoDAO(prop, jdbc, dbuser, dbpass);
+		if(bono.getIdReserva1() == null) {
+			bono.setIdReserva1(res.getIdReserva());
+			bono.setFecha((res.getFecha()).plusYears(1));
+			dao.editar(bono);
+			return true;
+		}
+		else if(bono.getIdReserva2() == null) {
+			bono.setIdReserva2(res.getIdReserva());
+			dao.editar(bono);
+			return true;
+		}
+		else if(bono.getIdReserva3() == null) {
+			bono.setIdReserva3(res.getIdReserva());
+			dao.editar(bono);
+			return true;
+		}
+		else if(bono.getIdReserva4() == null) {
+			bono.setIdReserva4(res.getIdReserva());
+			dao.editar(bono);
+			return true;
+		}
+		else if(bono.getIdReserva5() == null) {
+			bono.setIdReserva5(res.getIdReserva());
+			dao.editar(bono);
+			return true;
+		}
+		return false;
+	}
+	
+	/**
 	 * Metodo que genera un id unico para cada reserva
 	 * @return Id
 	 */

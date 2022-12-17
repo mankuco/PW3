@@ -56,7 +56,7 @@ public class BonoReservaDTO {
 	public String getIdReserva3() {
 		return idReserva3;
 	}
-	public void setIdReserva31(String idReserva) {
+	public void setIdReserva3(String idReserva) {
 		this.idReserva3 = idReserva;
 	}
 	
