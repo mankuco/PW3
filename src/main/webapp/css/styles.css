@@ -7,6 +7,19 @@ body{
     font-family: 'Open Sans';
 }
 
+.filtrolabel{
+	    margin: 1px -100px 1px 10px;
+	
+}
+.filtro{
+	
+	margin-top: 60px;
+    margin-bottom: -90px;
+    margin-left: 20px;
+    margin-right: -20px;
+    display: inline-flex;
+}
+
 .page-title{
     text-align: center;
 }

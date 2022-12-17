@@ -84,7 +84,7 @@ public class ReservaDAO extends DAO {
 	 * @Return ArrayList de reservas
 	 */
 	
-	public ArrayList<Reserva> verReservas() {
+	public ArrayList<Reserva> verReservas(LocalDate fechaInicio,LocalDate fechaFin) {
 		
 		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 		ReservaFamiliarDTO rf= null;
@@ -93,9 +93,22 @@ public class ReservaDAO extends DAO {
 		
 		try {
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement(prop.getProperty("ver-reservas"), PreparedStatement.RETURN_GENERATED_KEYS);
-			ResultSet rs = ps.executeQuery();
 			
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("ver-reservas"), PreparedStatement.RETURN_GENERATED_KEYS);
+			
+			
+			
+			if (fechaInicio != null && fechaFin != null) {
+				String sql = " WHERE fecha BETWEEN ? AND ?";
+				 ps = con.prepareStatement(prop.getProperty("ver-reservas")+sql, PreparedStatement.RETURN_GENERATED_KEYS);
+				  PreparedStatement ps1 = con.prepareStatement(prop.getProperty("ver-reservas")+sql, PreparedStatement.RETURN_GENERATED_KEYS);
+				  ps1.setDate(1, Date.valueOf(fechaInicio));
+				  ps1.setDate(2, Date.valueOf(fechaFin));
+				}
+			
+			ResultSet rs = ps.executeQuery();
+
+				
 			while(rs.next()) {
 				String idReserva = rs.getString(1);
 				String idUsuario = rs.getString(2);
@@ -199,7 +212,11 @@ public class ReservaDAO extends DAO {
 		try {
 			Connection con = getConnection();
 			PreparedStatement ps = con.prepareStatement(prop.getProperty("ver-reservas-usuario"), PreparedStatement.RETURN_GENERATED_KEYS);
+			
+			
 			ps.setString(1,IdUsuario);
+			
+			
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -288,6 +305,58 @@ public class ReservaDAO extends DAO {
 		return reservas;
 		
 	}
+	
+public ArrayList<Reserva> verReservasFiltradas(LocalDate Fecha1,LocalDate Fecha2) {
+		
+		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+		ReservaFamiliarDTO rf= null;
+		ReservaAdultosDTO ra= null;
+		ReservaInfantilDTO ri= null;
+		
+		try {
+			Connection con = getConnection();
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("ver-reservas-filtradas"), PreparedStatement.RETURN_GENERATED_KEYS);
+			ps.setString(1,Fecha1.toString());
+			ps.setString(2,Fecha2.toString());
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				String idReserva = rs.getString(1);
+				String idUsuario = rs.getString(2);
+				LocalDate fecha = rs.getDate(8).toLocalDate();
+				LocalTime hora = rs.getTime(11).toLocalTime();
+				int minutosReserva = rs.getInt(3);
+				String idPista = rs.getString(5);
+				float precioPista = rs.getFloat(4);	
+				int numeroNinos = rs.getInt(6);
+				int numeroAdultos = rs.getInt(7);
+				TipoReserva tipoReserva = TipoReserva.valueOf(rs.getString(9));
+				String modalidad = rs.getString(12);	
+				 
+				if(tipoReserva == TipoReserva.FAMILIAR) {
+					 rf = new ReservaFamiliarDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipoReserva, modalidad , fecha, hora, 0, numeroAdultos, numeroNinos);
+					 reservas.add(rf);	 
+				}
+				if(tipoReserva == TipoReserva.INFANTIL) {
+					 ri = new  ReservaInfantilDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipoReserva, modalidad , fecha, hora, 0, numeroNinos);
+						reservas.add(ri);	 
+				}	
+				if(tipoReserva == TipoReserva.ADULTOS) {
+					 ra = new  ReservaAdultosDTO(idReserva, idUsuario, minutosReserva, idPista, precioPista, tipoReserva, modalidad , fecha, hora, 0, numeroAdultos);
+					 reservas.add(ra);	 
+				}
+			}
+		
+		}
+		catch (SQLException e) {
+			close();
+			System.out.println(e);
+		}
+		close();
+		return reservas;
+		
+	}
+
 	
 }
 	
