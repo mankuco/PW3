@@ -203,7 +203,11 @@ public class GestorReservas {
 				}
 			}
 		}
-		BonoReservaDTO bono = new BonoReservaDTO(generarIdUnico(),r1,r2,r3,r4,r5,tipo,fecha,email);
+		String id = generarIdUnico();
+		while (buscaBono(id,prop,jdbc,dbuser,dbpass) != null) {
+			id = generarIdUnico();
+		}
+		BonoReservaDTO bono = new BonoReservaDTO(id,r1,r2,r3,r4,r5,tipo,fecha,email);
 		dao.insertar(bono);
 		return true;
 	}
@@ -247,7 +251,7 @@ public class GestorReservas {
 	/**
 	 * @Resumen Devuelve un bono si existe
 	 */
-	public BonoReservaDTO buscabono(String id, Properties prop, String jdbc, String dbuser, String dbpass) {
+	public BonoReservaDTO buscaBono(String id, Properties prop, String jdbc, String dbuser, String dbpass) {
 		BonoDAO dao = new BonoDAO(prop, jdbc, dbuser, dbpass);
 		BonoReservaDTO bono = dao.existeBono(id);
 		return bono;
@@ -305,7 +309,7 @@ public class GestorReservas {
 	 * @return Id
 	 */
 	public String generarIdUnico(){
-	    double id = Math.random()*99999+1;
+	    int id = (int) (Math.random()*99999+1);
 	    return String.valueOf(id);
 	}
 }

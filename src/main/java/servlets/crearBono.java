@@ -44,7 +44,7 @@ public class crearBono extends HttpServlet {
 		if (userBean != null)
 			if(userBean.getEmail() != null) {
 				GestorReservas gestor = new GestorReservas();
-				String dificultad = request.getParameter("Tipo");
+				String dificultad = request.getParameter("bonoType");
 				TipoReserva tipo = TipoReserva.ADULTOS;
 				if(dificultad.equals("INFANTIL")) {
 					tipo = TipoReserva.INFANTIL;

@@ -25,11 +25,11 @@
             <form action="<%= request.getContextPath() %>/crearBono" method="POST">
                 <br/>
                 
-                <label for="Tipo">Tipo</label>
-                <select id="Tipo" class="select-type" name="Tipo">
-                    <option value="">INFANTIL</option>
-                    <option value="">FAMILIAR</option>
-                    <option value="">ADULTOS</option>
+                <label for="bonoType">Tipo</label>
+                <select id="bonoType" class="select-type" name="bonoType">
+                    <option value="INFANTIL">Infantil</option>
+                    <option value="FAMILIAR">Familiar</option>
+                    <option value="ADULTOS">Adultos</option>
                 </select>
                 
                 <br/><br/>

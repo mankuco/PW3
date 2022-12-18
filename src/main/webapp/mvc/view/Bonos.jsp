@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="stylesheet" href="<%=request.getContextPath()%>/css/styles.css">
-    <title>MIS KARTS</title>
+    <title>MIS BONOS</title>
 </head>
 <body >
 	<%if (userBean.getRol() == true){ %>
@@ -20,9 +20,17 @@
 		
 	<div>		
 	<%if(userBean.getRol() == true){ %>
-					<button class="buttonAdd" onclick="window.location.href='<%= request.getContextPath() %>/mvc/view/addBono.jsp'"> + Crear Bono</button>
-				<%} %>
-			</div>
+		<button class="buttonAdd" onclick="window.location.href='<%= request.getContextPath() %>/mvc/view/addBono.jsp'"> + Crear Bono</button>
+	<%} %>
+	</div>
+
+	<% String msg = (String)request.getAttribute("msg"); %>
+   	<% if (msg != null) { 
+   			if (msg.equals("Ya tiene un bono activo en este momento")){%>
+   				<p style="background-color: #ff9999; text-align: center;"><%= msg %></p>
+   			<%} else { %>
+   				<p style="background-color: #abedb2; text-align: center;"><%= msg %></p>
+   	<% } } %>
 	<%  ArrayList<BonoReservaDTO> bonos = null;
 		bonos = (ArrayList<BonoReservaDTO>)request.getAttribute("verBonos");		
 	   	if (bonos == null || bonos.size() == 0) { %>
