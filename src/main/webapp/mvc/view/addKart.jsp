@@ -39,7 +39,7 @@
                     <option value="true">Adulto</option>
                 </select>
                 <select id="pistaName" class="select-type" name="pistaName">
-                    <option value="null">Sin asociar</option>
+                    <option value="NoAsociado">Sin asociar</option>
                     <%for (PistaDTO a : pistas) { %>
                     <option value="<%= a.getNombrePista()%>"><%= a.getNombrePista()%></option>
                     <%}%>

@@ -49,15 +49,14 @@ public class nuevoKartServlet extends HttpServlet {
 				String estado = request.getParameter("kartEstado");
 				String tipo = request.getParameter("kartType");
 				String pistaName = request.getParameter("pistaName");
-				if (pistaName == "null") {
-					pistaName = null;
-				}
 				Estados estados = Estados.valueOf(estado);
 				GestorPistas karts = new GestorPistas();
-				PistaDTO pista = karts.existePista(pistaName,userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
 				int idKart = karts.crearKart(Boolean.parseBoolean(tipo), estados, userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
 				KartDTO kart = karts.existeKart(idKart, userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
-				karts.asociarKartPista(kart, pista, userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
+				if (!(pistaName.equals("NoAsociado"))) {
+					PistaDTO pista = karts.existePista(pistaName,userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
+					karts.asociarKartPista(kart, pista, userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
+				};
 				String msg = "Kart guardado correctamente";
 				request.setAttribute("msg", msg);
 				RequestDispatcher rd = request.getRequestDispatcher("/misKartsServlet");
