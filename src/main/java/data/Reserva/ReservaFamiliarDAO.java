@@ -28,13 +28,14 @@ public class ReservaFamiliarDAO extends ReservaDAO {
 		try{
 			Connection con = getConnection();
 			PreparedStatement ps = con.prepareStatement(prop.getProperty("inserta-reserva"), PreparedStatement.RETURN_GENERATED_KEYS);
+			ps.setString(1, r.getIdReserva());
 			ps.setString(2,r.getIdUsuario());
 			ps.setInt(3,r.getMinutosReserva());
 			ps.setFloat(4, r.getPrecioPista());
 			ps.setString(5, r.getModalidad());
 			ps.setString(6, r.getIdPista());
-			ps.setNull(7, r.getNumeroNinos());
-			ps.setNull(8, r.getNumeroAdultos() );
+			ps.setInt(7, r.getNumeroNinos());
+			ps.setInt(8, r.getNumeroAdultos() );
 			ps.setDate(9, Date.valueOf(r.getFecha()));
 			ps.setTime(10, Time.valueOf(r.getHora()));
 			ps.setString(11, r.getTipo().toString());

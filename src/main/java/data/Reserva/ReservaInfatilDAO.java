@@ -30,8 +30,8 @@ public class ReservaInfatilDAO extends ReservaDAO {
 			ps.setFloat(4, r.getPrecioPista());
 			ps.setString(5, r.getModalidad());
 			ps.setString(6, r.getIdPista());
-			ps.setNull(7, r.getNumeroNinos());
-			ps.setNull(8, 0 );
+			ps.setInt(7, r.getNumeroNinos());
+			ps.setInt(8, 0 );
 			ps.setDate(9, Date.valueOf(r.getFecha()));
 			ps.setTime(10, Time.valueOf(r.getHora()));
 			ps.setString(11, r.getTipo().toString());

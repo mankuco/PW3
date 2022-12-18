@@ -35,6 +35,7 @@
                     <option value="FAMILIAR">Familiar</option>
                     <option value="ADULTOS">Adultos</option>
                 </select>
+                <br/><br/>
                 <label for="numeroNinos">Numero niños</label>
                 <input type="number" class="input-form" name="numeroNinos">
                 <br/><br/>

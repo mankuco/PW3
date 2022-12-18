@@ -35,8 +35,8 @@ public class ReservaAdultosDAO extends ReservaDAO {
 			ps.setFloat(4, r.getPrecioPista());
 			ps.setString(5, r.getModalidad());
 			ps.setString(6, r.getIdPista());
-			ps.setNull(7, 0);
-			ps.setNull(8, r.getNumeroAdultos() );
+			ps.setInt(7, 0);
+			ps.setInt(8, r.getNumeroAdultos() );
 			ps.setDate(9, Date.valueOf(r.getFecha()));
 			ps.setTime(10, Time.valueOf(r.getHora()));
 			ps.setString(11, r.getTipo().toString());
