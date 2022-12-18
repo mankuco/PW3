@@ -23,7 +23,7 @@
 		<button class="buttonAdd" onclick="window.location.href='<%= request.getContextPath() %>/mvc/view/addBono.jsp'"> + Crear Bono</button>
 	<%} %>
 	</div>
-
+	<br/>
 	<% String msg = (String)request.getAttribute("msg"); %>
    	<% if (msg != null) { 
    			if (msg.equals("Ya tiene un bono activo en este momento")){%>
@@ -32,7 +32,7 @@
    				<p style="background-color: #abedb2; text-align: center;"><%= msg %></p>
    	<% } } %>
 	<%  ArrayList<BonoReservaDTO> bonos = null;
-		bonos = (ArrayList<BonoReservaDTO>)request.getAttribute("verBonos");		
+		bonos = (ArrayList<BonoReservaDTO>)request.getAttribute("verBonos");
 	   	if (bonos == null || bonos.size() == 0) { %>
 			<h3 style=text-align:center; >No hay Bonos que mostrar.</h3>
 	 	<% } else {

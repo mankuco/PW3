@@ -36,9 +36,11 @@ public class GestorPistas {
 	 * @param Entran como parametros todos los datos necesarios para crear una pista
 	 */
 	public void crearPista(String nombre, boolean tipoEstado, Dificultades dificultad, int maxKarts, Properties prop, String jdbc, String dbuser, String dbpass) {
-		PistaDTO pista = new PistaDTO(nombre, tipoEstado, dificultad, maxKarts);
-		PistaDAO crear = new PistaDAO(prop, jdbc, dbuser, dbpass);
-		crear.guardarPista(pista);
+		if(existePista(nombre,prop,jdbc,dbuser,dbpass) == null) {
+			PistaDTO pista = new PistaDTO(nombre, tipoEstado, dificultad, maxKarts);
+			PistaDAO crear = new PistaDAO(prop, jdbc, dbuser, dbpass);
+			crear.guardarPista(pista);
+		}
 	}
 	/* 
 	 * @Resumen Llama a la funcion void guardarKart(Kart kart)
@@ -46,6 +48,9 @@ public class GestorPistas {
 	 */
 	public int crearKart(boolean tipoKart, Estados estado, Properties prop, String jdbc, String dbuser, String dbpass) {
 		int idKart = numerorandom();
+		while(existeKart(idKart,prop,jdbc,dbuser,dbpass) != null) {
+			idKart = numerorandom();
+		}
 		KartDTO kart = new KartDTO(idKart,tipoKart, estado);
 		KartDAO crear = new KartDAO(prop, jdbc, dbuser, dbpass);
 		crear.guardarKart(kart);
@@ -89,12 +94,17 @@ public class GestorPistas {
 	 * @param pista = Pista 
 	 */
 	public void asociarKartPista(KartDTO kart, PistaDTO pista, Properties prop, String jdbc, String dbuser, String dbpass) {
-		kart.setnombrePista(pista.getNombrePista());
-		KartDAO modificar = new KartDAO(prop, jdbc, dbuser, dbpass);
-		modificar.cambiarnombrePista(kart,pista);
-		pista.setnkartsasociados(pista.getnkartsasociados() + 1);
-		PistaDAO cambiar = new PistaDAO(prop, jdbc, dbuser, dbpass);
-		cambiar.cambiarnkartsasociados(pista);
+		if(pista.getMaxKarts() != pista.getnkartsasociados()) {
+			if(kart.getEstado() != Estados.RESERVADO){
+				kart.setnombrePista(pista.getNombrePista());
+				kart.setEstado(Estados.RESERVADO);
+				KartDAO modificar = new KartDAO(prop, jdbc, dbuser, dbpass);
+				modificar.cambiarnombrePista(kart,pista);
+				pista.setnkartsasociados(pista.getnkartsasociados() + 1);
+				PistaDAO cambiar = new PistaDAO(prop, jdbc, dbuser, dbpass);
+				cambiar.cambiarnkartsasociados(pista);
+			}
+		}
 	}
 	
 	/*
@@ -115,39 +125,5 @@ public class GestorPistas {
 	public int numerorandom() {
 		return (int)(Math.random()*99999+1);
 	}
-	
-	/* 
-	 * @Resumen Devuelve una cadena con la informacion del kart
-	 * @return string
-	 
-	public String toStringKart(KartDTO kart) {
-		return "El identificador del kart es " + kart.getIdKart() + ", el tipo es " + kart.getTipoKart() + " y su estado es " + kart.getEstado() + ".";
-	}
-	/* 
-	 * @Resumen Devuelve una cadena con la informacion del pista
-	 * @return string
-	 
-	public String toStringPista(PistaDTO pista) {
-		return "El nombre de la pista es " + pista.getNombrePista() + ", el estado de la pista es " + pista.getTipoEstado() + ", la dificultad es " + pista.getDificultad()
-				+ ", el numero maximo de karts que puede tener asociados es " + pista.getMaxKarts() + " y el numero de karts asociados es " + pista.getnkartsasociados() + ".";
-
-	}*/
-	/* 
-	 * @Resumen Devuelve un vector con todas las pistas disponibles
-	 * @return listaKartsDisponibles = ArrayList<Kart> 
-	
-	public ArrayList<KartDTO> consultarKartsDisponibles() {
-		
-		ArrayList<KartDTO> listaKartsDisponibles = new ArrayList<KartDTO>();
-		ArrayList<KartDTO> listaAUX = getListaKarts();
-		
-		for(int i=0; i < listaAUX.size(); i++ ) {
-		   if(listaAUX.get(i).getEstado() == Estados.DISPONIBLE) {
-			   listaKartsDisponibles.add(listaAUX.get(i));
-		   }
-		}
-		
-		return listaKartsDisponibles;
-	} */
 }
 	
