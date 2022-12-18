@@ -25,20 +25,16 @@
         	<%PistaDAO dao = new PistaDAO(userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass()); %>
         	<%ArrayList<PistaDTO> pistas = dao.verPistas(); %>
             <h1>Modificar Kart</h1>
-            <form action="<%= request.getContextPath() %>/editarKart" method="POST">
+            <form action="<%= request.getContextPath() %>/editarKartServlet" method="POST">
                 <br/>
-                <h3 for="kartEstado">KART Nº <%=id%> </h3>
-                <label for="kartEstado">Estado</label>
+                <h3 >KART Nº <%=id%></h3>
+               <input type="text" class="input-form" name="idk" readonly value=<%=id%>>
+                <label class="kartEstado">Estado</label>
                 <select id="kartEstado" class="select-type" name="kartEstado">
                     <option value="DISPONIBLE">Disponible</option>
                     <option value="MANTENIMIENTO">Mantenimiento</option>
                 </select>
-                <br/>                
-                <br/><br/>
-                <label for="kartType">Tipo</label>
-                <select id="kartType" class="select-type" name="kartType">
-                    <option value="false">Infantil</option>
-                    <option value="true">Adulto</option>
+            
                 </select>
                 <select id="pistaName" class="select-type" name="pistaName">
                     <option value="NoAsociado">Sin asociar</option>

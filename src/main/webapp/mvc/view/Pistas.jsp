@@ -12,7 +12,9 @@
     <title>MIS PISTAS</title>
 </head>
 <body >
+<%if(userBean.getRol()== false){ %>
 <%@ include file="../../include/headerAdministrador.jsp" %>
+<%}else{%><%@ include file="../../include/headerCliente.jsp" %> <%} %>
 <div >
 		
 			<%if(userBean.getRol() == false){ %>
@@ -25,7 +27,7 @@
 			<button class="buttonFilt"  style="background-color: #4b4745" onclick="location.reload();">Quitar Filtro</button>
 		</div>
 <%  ArrayList<PistaDTO> pistas = null;
-if(userBean.getRol()== false){ pistas = (ArrayList<PistaDTO>)request.getAttribute("verPistas"); }			
+ pistas = (ArrayList<PistaDTO>)request.getAttribute("verPistas"); 		
    if (pistas == null || pistas.size() == 0) { %> 
  <h3 style=text-align:center; >No hay pistas que mostrar.</h3>
  <% } else {
@@ -69,7 +71,7 @@ if(userBean.getRol()== false){ pistas = (ArrayList<PistaDTO>)request.getAttribut
 	               
 	          
 	             
-	
+	<% if(userBean.getRol()== false){ %>
 	                <div class="fila">
 						
 	                      <button onclick="eliminar(this)" >ELIMINAR PISTA</button>
@@ -78,6 +80,7 @@ if(userBean.getRol()== false){ pistas = (ArrayList<PistaDTO>)request.getAttribut
 	                 	   <button class="buttonMod"   onclick="editar(this)" type="submit">MODIFICAR PISTA</button>
 	                 	
                 	</div>
+                	<% } %>
             </div>
         </div>
 
