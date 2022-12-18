@@ -51,6 +51,19 @@ function eliminar(item) {
  
 }
 
+function editar(item) {
+ const rid =document.getElementById("reservaid1").innerHTML; 
+	  if (confirm("¿Estas seguro de que quieres editar esta reserva?")) {
+ 
+    		 window.location.replace(`/PW3/mvc/view/editarReserva.jsp?id=${rid}`);
+   		 } else {
+    		  // Mostrar un mensaje de error
+    		  console.error("Ha ocurrido un error al procesar la solicitud");
+  		  }
+ 
+}
+
+
 
 function cerrar(){
     mostrador.style.width = "100%";

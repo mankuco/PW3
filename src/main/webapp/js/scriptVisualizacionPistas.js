@@ -59,8 +59,16 @@ function editar(item) {
 	  if (confirm("¿Estas seguro de que quieres editar esta pista?")) {
 	
   		 fetch(`editarPistaServlet?id=${nP}`, { method: 'GET' })
-   		 .then(response =>{ response.json() 
-   	 })
+   		 .then(response => {
+    			// Verificar que la solicitud se haya realizado correctamente
+   			 if (response.ok) {
+    		  // Redirigir al usuario a la página JSP
+    		 window.location.replace(`/PW3/mvc/view/editarPista.jsp?id=${nP}`);
+   		 } else {
+    		  // Mostrar un mensaje de error
+    		  console.error("Ha ocurrido un error al procesar la solicitud");
+  		  }
+ 		 })
   		/* .then(data => {
      		 window.location.replace("/PW3/mvc/view/editarPista.jsp");
    		 })*/

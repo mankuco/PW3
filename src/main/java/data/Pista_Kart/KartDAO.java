@@ -115,7 +115,7 @@ public class KartDAO extends DAO {
 				}
 				String est = rs.getString("estado");
 				Estados estado = Estados.RESERVADO;
-				if(est.equals("ADULTOS")) {
+				if(est.equals("MANTENIMIENTO")) {
 					estado = Estados.MANTENIMIENTO;
 				}
 				if(est.equals("DISPONIBLE")) {

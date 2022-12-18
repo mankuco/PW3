@@ -207,7 +207,7 @@ public class PistaDAO extends DAO {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				String nombrePista = rs.getString("nombrePista");
-				boolean tipoEstado = false;
+				boolean tipoEstado = rs.getBoolean("tipoEstado");
 				String dif = rs.getString("dificultad");
 				Dificultades dificultad = Dificultades.FAMILIAR;
 				if(dif.equals("ADULTOS")) {
@@ -243,6 +243,27 @@ public class PistaDAO extends DAO {
 			Connection connection =getConnection();
 			PreparedStatement ps=connection.prepareStatement("DELETE FROM Pista WHERE nombrePista=?");
 			ps.setString(1,nombrePista);
+			ps.executeUpdate();
+			close();
+		}
+		catch (Exception e) {
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	
+	/* 
+	 * @Resumen Cambia el valor de la variable nombrePista en el kart
+	 * @param kart = Kart, el kart que se quiere asociaciar
+	 * @param pista = Pista, la pista a la que se le quiere asociar un kart
+	 */
+	public void cambiaEstado(String nombrePista,String estado) {
+		try {
+		
+			Connection connection =getConnection();
+			PreparedStatement ps=connection.prepareStatement(prop.getProperty("estado-pista"));
+			ps.setBoolean(1,Boolean.parseBoolean(estado));
+			ps.setString(2,nombrePista);
 			ps.executeUpdate();
 			close();
 		}

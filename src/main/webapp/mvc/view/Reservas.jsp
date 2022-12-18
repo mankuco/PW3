@@ -109,7 +109,7 @@ if(userBean.getRol()== false){
 	                
 						 <button onclick="eliminar(this)" >CANCELAR RESERVA</button>
 
-		                 		<button class="buttonMod"   type="submit">MODIFICAR RESERVA</button>
+		                 		<button class="buttonMod" onclick="editar(this)" type="submit">MODIFICAR RESERVA</button>
 	                 	
                 	</div>
             </div>

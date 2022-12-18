@@ -63,14 +63,12 @@ public class editarPistaServlet extends HttpServlet {
 		if (userBean != null) {
 				if (userBean.getEmail() != null) {
 			String nombrePista = request.getParameter("pistaName");
-			String dificultad = request.getParameter("pistaType");
 			String estado = request.getParameter("pistaEstado");
-			String maxkarts = request.getParameter("maxKarts");
-			Dificultades dificultades = Dificultades.valueOf(dificultad);
-			GestorPistas pistas = new GestorPistas();
-			pistas.crearPista(nombrePista, Boolean.parseBoolean(estado), dificultades, Integer.parseInt(maxkarts), userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
+			Boolean.parseBoolean(estado);
+			PistaDAO pistas = new PistaDAO(userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
+			pistas.cambiaEstado(nombrePista,estado);
 			
-			String msg = "Pista guardada correctamente";
+			String msg = "Pista editada correctamente";
 			request.setAttribute("msg", msg);
 			RequestDispatcher rd = request.getRequestDispatcher("/misPistasServlet");
 			rd.forward(request, response);

@@ -55,6 +55,18 @@ function eliminar(item) {
  
 }
 
+function editar(item) {
+ const kartID =document.getElementById("reserva").innerHTML; 
+	  if (confirm("¿Estas seguro de que quieres editar este kart?")) {
+ 
+    		 window.location.replace(`/PW3/mvc/view/editarKart.jsp?id=${kartID}`);
+   		 } else {
+    		  // Mostrar un mensaje de error
+    		  console.error("Ha ocurrido un error al procesar la solicitud");
+  		  }
+ 
+}
+
 
 function cerrar(){
     mostrador.style.width = "100%";

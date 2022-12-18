@@ -10,7 +10,8 @@
 		response.sendRedirect(request.getContextPath() + "/usuarioServlet");
 	}
 	else {
-		String id = request.getParameter("nPista");
+		String id = request.getParameter("id");
+		
 %>
     <!DOCTYPE html>
     <html lang="en">
@@ -26,20 +27,7 @@
             <form action="<%= request.getContextPath() %>/editarPistaServlet" method="POST">
                 <br/>
                 <label for="pistaName">Nombre</label>
-                <input type="text" class="input-form" name="pistaName" value=<%=id%>>
-                
-                <br/>
-                
-                <label for="maxKarts">Numero de karts maximo</label>
-                <input type="number" class="input-form" name="maxKarts">
-                
-                <br/><br/>
-                <label for="pistaType">Tipo</label>
-                <select id="pistaType" class="select-type" name="pistaType">
-                    <option value="INFANTIL">Infantil</option>
-                    <option value="FAMILIAR">Familiar</option>
-                    <option value="ADULTOS">Adultos</option>
-                </select>
+                <input type="text" class="input-form" name="pistaName" readonly value=<%=id%>>
                 <select id="pistaEstado" class="select-type" name="pistaEstado">
                     <option value="true">Disponible</option>
                     <option value="false">Mantenimiento</option>

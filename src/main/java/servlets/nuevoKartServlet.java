@@ -59,7 +59,7 @@ public class nuevoKartServlet extends HttpServlet {
 				};
 				String msg = "Kart guardado correctamente";
 				request.setAttribute("msg", msg);
-				RequestDispatcher rd = request.getRequestDispatcher("/misKartsServlet");
+				RequestDispatcher rd = request.getRequestDispatcher("/usuarioServlet");
 				rd.forward(request, response);
 			}
 		}

@@ -67,8 +67,8 @@ if(userBean.getRol()== false){ karts = (ArrayList<KartDTO>)request.getAttribute(
 						 
 	                      <button onclick="eliminar(this)" >ELIMINAR KART</button>
 	               	 
-	                	 <form action="modificarReservaServlet" method="POST">
-	                 	   <button class="buttonMod"  type="submit">MODIFICAR KART</button>
+	                	 
+	                 	   <button class="buttonMod"  onclick="editar(this)" type="submit">MODIFICAR KART</button>
 	                 	</form>
                 	</div>
             </div>
