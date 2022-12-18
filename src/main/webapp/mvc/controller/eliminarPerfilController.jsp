@@ -12,7 +12,7 @@
 		<%}
 		else {
 			ReservaDAO r = new ReservaDAO(userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
-			ArrayList<Reserva> reservas = r.verReservasUsuario(userBean.getEmail());
+			ArrayList<Reserva> reservas = r.verReservasUsuario(userBean.getEmail(),null,null);
 			if((reservas != null) && (reservas.size() != 0)) {
 				for(Reserva a : reservas){
 					r.borraReserva(a.getIdReserva());

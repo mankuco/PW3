@@ -64,3 +64,26 @@ function quitarBordes(){
         items[i].style.border = "none";
     }
 }
+
+document.querySelector('.botonform').addEventListener('click', function(event) {
+  event.preventDefault(); // Evita el envío del formulario
+
+  // Obtener las fechas introducidas
+  var fechaInicio = document.querySelector('#fecha-inicio').value;
+  var fechaFin = document.querySelector('#fecha-fin').value;
+
+  // Comprobar que ambas fechas han sido introducidas
+  if (!fechaInicio || !fechaFin) {
+    alert('Debes introducir ambas fechas');
+    return; // Termina la función
+  }
+
+  // Comprobar que la fecha de inicio es anterior a la fecha de fin
+  if (fechaInicio > fechaFin) {
+    alert('La fecha de inicio debe ser anterior a la fecha de fin');
+    return; // Termina la función
+  }
+
+  // Si se han cumplido ambas condiciones, envía el formulario
+  document.querySelector('form').submit();
+});

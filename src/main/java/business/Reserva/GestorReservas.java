@@ -125,7 +125,7 @@ public class GestorReservas {
 		LocalTime ahora = LocalTime.now();
 		
 		ReservaDAO r = new ReservaDAO(prop, jdbc, dbuser, dbpass);
-		ArrayList<Reserva> reservas = r.verReservasUsuario(email);
+		ArrayList<Reserva> reservas = r.verReservasUsuario(email,null,null);
 		ArrayList<Reserva> validas = new ArrayList<Reserva>();
 		int comparador;
 		for (Reserva a : reservas) {
@@ -171,7 +171,7 @@ public class GestorReservas {
 		LocalTime ahora = LocalTime.now();
 		
 		ReservaDAO r = new ReservaDAO(prop, jdbc, dbuser, dbpass);
-		ArrayList<Reserva> reservas = r.verReservasUsuario(email);
+		ArrayList<Reserva> reservas = r.verReservasUsuario(email,null,null);
 		int comparador;
 		for (Reserva a : reservas) {
 			comparador = hoy.compareTo(a.getFecha());

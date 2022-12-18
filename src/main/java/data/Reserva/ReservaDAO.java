@@ -202,7 +202,7 @@ public class ReservaDAO extends DAO {
 
 
 
-	public ArrayList<Reserva> verReservasUsuario(String IdUsuario) {
+	public ArrayList<Reserva> verReservasUsuario(String IdUsuario,LocalDate fechaInicio,LocalDate fechaFin) {
 	
 		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 		ReservaFamiliarDTO rf= null;
@@ -211,7 +211,16 @@ public class ReservaDAO extends DAO {
 		
 		try {
 			Connection con = getConnection();
+			
 			PreparedStatement ps = con.prepareStatement(prop.getProperty("ver-reservas-usuario"), PreparedStatement.RETURN_GENERATED_KEYS);
+			
+			if (fechaInicio != null && fechaFin != null) {
+				String sql = " AND fecha BETWEEN ? AND ?";
+				
+				 ps = con.prepareStatement(prop.getProperty("ver-reservas-usuario")+sql, PreparedStatement.RETURN_GENERATED_KEYS);
+				 ps.setDate(2, Date.valueOf(fechaInicio));
+				 ps.setDate(3, Date.valueOf(fechaFin));
+				}
 			
 			
 			ps.setString(1,IdUsuario);

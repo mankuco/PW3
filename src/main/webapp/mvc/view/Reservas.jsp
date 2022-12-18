@@ -18,13 +18,17 @@ if(userBean.getRol()== false){
 	
 	if(request.getAttribute("verReservasFiltradas") != null) {
 	  reservas = (ArrayList<Reserva>)request.getAttribute("verReservasFiltradas");
-	} else {
-	  reservas = (ArrayList<Reserva>)request.getAttribute("verReservasADM");
-	}
+	} else {  reservas = (ArrayList<Reserva>)request.getAttribute("verReservasADM");}
+		
+	
+	
 //	reservas= (ArrayList<Reserva>)request.getAttribute("verReservasADM");
-	%><%@ include file="../../include/headerAdministrador.jsp" %><% }
-else{
-	reservas = (ArrayList<Reserva>)request.getAttribute("verReservasUsuario"); 
+	%><%@ include file="../../include/headerAdministrador.jsp" %><% 
+	}else{
+	 if(request.getAttribute("verReservasFiltradasUsuario") != null){ reservas = (ArrayList<Reserva>)request.getAttribute("verReservasFiltradasUsuario");}
+	 else{	reservas = (ArrayList<Reserva>)request.getAttribute("verReservasUsuario"); }
+	 
+
 %><%@ include file="../../include/headerCliente.jsp" %> 
 
 
@@ -40,12 +44,12 @@ else{
 <form class=filtro action="<%=request.getContextPath()%>/misReservasServlet" method="Post">
 
 <label class=filtrolabel for="fecha-inicio">Inicio:</label>
-	<input type="date" name="fecha-inicio" id="fecha-inicio">
+	<input type="date" name="fecha-inicio" id="fecha-inicio"  >
 	  <br>
 <label class=filtrolabel for="fecha-fin">Fin:</label>
-	  <input type="date" name="fecha-fin" id="fecha-fin">
+	  <input type="date" name="fecha-fin" id="fecha-fin" >
 	  <br>
-	  <input class="boton" type="submit" value="Filtrar">
+	  <input class="botonform" type="submit" value="Filtrar">
 </form>
 
 		

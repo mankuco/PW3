@@ -45,14 +45,14 @@ public class misReservasServlet extends HttpServlet {
 				UsuarioDAO usuario = new UsuarioDAO(userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
 				UsuarioDTO user = usuario.buscarUsuario(userBean.getEmail());
 				
-				LocalDate fechaInicio = null;
-				LocalDate fechaFin = null;
+				
 				
 				ReservaDAO ReservaDAO = new ReservaDAO(userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
-				ArrayList<Reserva> reservasADM =  ReservaDAO.verReservas(fechaInicio,fechaFin);
-
+				ArrayList<Reserva> reservasADM =  ReservaDAO.verReservas(null,null);
+				ArrayList<Reserva> reservasUsuario= ReservaDAO.verReservasUsuario(userBean.getEmail(),null,null);
+				
 				request.setAttribute("verReservasADM", reservasADM);
-			//	request.setAttribute("verReservasUsuario", reservasUsuario);
+				request.setAttribute("verReservasUsuario", reservasUsuario);
 				RequestDispatcher rd = request.getRequestDispatcher("./mvc/view/Reservas.jsp");
 				rd.forward(request, response);
 				
@@ -82,15 +82,18 @@ public class misReservasServlet extends HttpServlet {
 
 				if (fechaInicioStr != null && !fechaInicioStr.isEmpty()) {
 				  fechaInicio = LocalDate.parse(fechaInicioStr, DateTimeFormatter.ISO_DATE);
-				}
+				}else { fechaInicio=null;}
 
 				if (fechaFinStr != null && !fechaFinStr.isEmpty()) {
 				  fechaFin = LocalDate.parse(fechaFinStr, DateTimeFormatter.ISO_DATE);
-				}
+				}else{ fechaFin=null;}
 				
 				ReservaDAO ReservaDAO = new ReservaDAO(userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
 				ArrayList<Reserva> reservasADMFilt =  ReservaDAO.verReservasFiltradas(fechaInicio,fechaFin);
+				ArrayList<Reserva> reservasUsuarioFilt= ReservaDAO.verReservasUsuario(userBean.getEmail(),fechaInicio,fechaFin);
+				
 				request.setAttribute("verReservasFiltradas", reservasADMFilt);
+				request.setAttribute("verReservasFiltradasUsuario", reservasUsuarioFilt);
 				RequestDispatcher rd = request.getRequestDispatcher("./mvc/view/Reservas.jsp");
 				rd.forward(request, response);
 				
