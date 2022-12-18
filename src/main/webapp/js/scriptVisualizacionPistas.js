@@ -53,6 +53,26 @@ function eliminar(item) {
  
 }
 
+
+function editar(item) {
+ const nP =document.getElementById("reserva").innerHTML;
+	  if (confirm("¿Estas seguro de que quieres editar esta pista?")) {
+	
+  		 fetch(`editarPistaServlet?id=${nP}`, { method: 'GET' })
+   		 .then(response =>{ response.json() 
+   	 })
+  		/* .then(data => {
+     		 window.location.replace("/PW3/mvc/view/editarPista.jsp");
+   		 })*/
+    	.catch(error => {
+      console.error(error);
+    });
+  
+  }
+ 
+}
+
+
 function ocultarPistasNoDisponibles() {
   // Obtén todos los elementos div que representan a las pistas
   var pistas = document.querySelectorAll('.item');

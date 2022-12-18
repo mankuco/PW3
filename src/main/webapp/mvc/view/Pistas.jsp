@@ -75,7 +75,7 @@ if(userBean.getRol()== false){ pistas = (ArrayList<PistaDTO>)request.getAttribut
 	                      <button onclick="eliminar(this)" >ELIMINAR PISTA</button>
 	               	 
 	                	
-	                 	   <button class="buttonMod"  type="submit">MODIFICAR PISTA</button>
+	                 	   <button class="buttonMod"   onclick="editar(this)" type="submit">MODIFICAR PISTA</button>
 	                 	
                 	</div>
             </div>

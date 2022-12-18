@@ -67,7 +67,7 @@ public class misPistasServlet extends HttpServlet {
 		CustomerBean userBean = (CustomerBean) request.getSession().getAttribute("userBean");
 		if (userBean != null) {
 			if (userBean.getEmail() != null) {
-	    String pistaID = request.getParameter("id");
+	    String pistaID = request.getParameter("nPista2");
 	
 	     PistaDAO pistaDAO= new PistaDAO(userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
 	     pistaDAO.borraPista(pistaID);

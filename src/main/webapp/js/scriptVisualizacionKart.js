@@ -35,11 +35,6 @@ function cargar(item){
      
 }
 
-/* 
-function eliminar(item){
-	document.getElementById('idK').innerHTML = kartID.innerHTML;
- 	
-}*/
 
 function eliminar(item) {
 	
