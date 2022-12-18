@@ -52,18 +52,18 @@ public class crearBono extends HttpServlet {
 				else if(dificultad.equals("FAMILIAR")) {
 					tipo = TipoReserva.FAMILIAR;
 				}
+				RequestDispatcher rd;
 				if(gestor.crearBono(null, null, null, null, null, tipo, null, userBean.getEmail(), userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass()) == true) {
 					String msg = "Bono creado correctamente";
 					request.setAttribute("msg", msg);
-					RequestDispatcher rd = request.getRequestDispatcher(request.getContextPath() + "/misBonosServlet");
-					rd.forward(request, response);
+					rd = request.getRequestDispatcher("/misBonosServlet");
 				}
 				else {
 					String msg = "Ya tiene un bono activo en este momento";
 					request.setAttribute("msg", msg);
-					RequestDispatcher rd = request.getRequestDispatcher(request.getContextPath() + "/misBonosServlet");
-					rd.forward(request, response);
+					rd = request.getRequestDispatcher("/misBonosServlet");
 				}
+				rd.forward(request, response);
 			}
 			else {
 				response.sendRedirect(request.getContextPath());

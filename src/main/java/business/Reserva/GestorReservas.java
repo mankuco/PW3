@@ -198,7 +198,7 @@ public class GestorReservas {
 		ArrayList<BonoReservaDTO> lista = dao.listarBonosUsuario(email);
 		if(lista != null) {
 			for(BonoReservaDTO a : lista) {
-				if(a.getIdReserva5() != null) {
+				if(a.getIdReserva5() == null) {
 					return false;
 				}
 			}
