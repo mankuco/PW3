@@ -47,13 +47,16 @@ public class nuevaReservaServlet extends HttpServlet {
 		if (userBean != null) {
 				if (userBean.getEmail() != null) {
 			String nombrePista = request.getParameter("pistaName");
-			int minutosReserva = Integer.parseInt(request.getParameter("pistaType"));
+			int minutosReserva = Integer.parseInt(request.getParameter("numeroNinos"));
+			int numeroNinos = Integer.parseInt(request.getParameter("numeroAdultos"));
+			int numeroAdultos = Integer.parseInt(request.getParameter("minutosReserva"));
 			TipoReserva tipos = TipoReserva.valueOf(request.getParameter("reservaType"));
 			boolean bono = Boolean.parseBoolean(request.getParameter("reservaBono"));
 			LocalTime hora = LocalTime.parse(request.getParameter("horaReserva"));
 			LocalDate fecha = LocalDate.parse(request.getParameter("fechaReserva"));
+			String email = userBean.getEmail();
 			GestorReservas reserva = new GestorReservas();
-			reserva.crearReserva(nombrePista, minutosReserva, nombrePista, tipos, nombrePista, fecha, hora, minutosReserva, minutosReserva, userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
+			reserva.crearReserva(email, minutosReserva, nombrePista, tipos, nombrePista, fecha, hora, numeroNinos, numeroAdultos, userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
 			String msg = "Reserva guardada correctamente";
 			request.setAttribute("msg", msg);
 			RequestDispatcher rd = request.getRequestDispatcher("/misPistasServlet");
