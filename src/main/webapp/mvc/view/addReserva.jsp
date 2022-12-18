@@ -54,11 +54,6 @@
                     <%}%>
                 </select>
                 <br/><br/>
-                <label for="reservaBono">Incluir en bono:</label>
-                <select id="reservaBono" class="select-type" name="reservaBono">
-                    <option value="SI">Sí</option>
-                    <option value="NO">No</option>
-                </select>
                 <input type="submit" class="small-button" value="Crear" style="border: solid 2px #cf74f2;">
              </form>
 		</body>
