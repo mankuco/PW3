@@ -18,6 +18,11 @@
 			<%if(userBean.getRol() == false){ %>
 				<button class="buttonAdd" onclick="window.location.href='<%= request.getContextPath() %>/mvc/view/addPista.jsp'"> + A&ntilde;adir Pista</button>
 			<%} %>
+			<button class="buttonFilt" style="background-color: #008040" onclick="ocultarPistasNoDisponibles()">Disponibles</button>
+			<button class="buttonFilt"  onclick="mostrarFamiliares()">Familiares</button>
+			<button class="buttonFilt"  onclick="mostrarAdultos()">Adultos</button>
+			<button class="buttonFilt"  onclick="mostrarInfantiles()">Infantiles</button>
+			<button class="buttonFilt"  style="background-color: #4b4745" onclick="location.reload();">Quitar Filtro</button>
 		</div>
 <%  ArrayList<PistaDTO> pistas = null;
 if(userBean.getRol()== false){ pistas = (ArrayList<PistaDTO>)request.getAttribute("verPistas"); }			
@@ -34,7 +39,7 @@ if(userBean.getRol()== false){ pistas = (ArrayList<PistaDTO>)request.getAttribut
                     <img src="https://www.diariodeleon.es/media/diariodeleon/images/2021/07/21/2021072109360110806.jpg" alt="">        
                     </div>
                     <p class="descripcion"><%=p.getNombrePista()%></p>
-                     <p id="nombre">  <%= p.getDificultad() %></p>
+                     <p class="nombre" id="nombre"><%=p.getDificultad()%></p>
                        <p id="nombrepista"  style=display:none; >  <%= p.getnkartsasociados() %></p>
                        <p id="precioPista"  style=display:none; >  <%= p.getMaxKarts() %> </p>
                         <p id="nPista" style=display:none;><%=p.getNombrePista()%></p>

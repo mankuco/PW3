@@ -53,6 +53,86 @@ function eliminar(item) {
  
 }
 
+function ocultarPistasNoDisponibles() {
+  // Obtén todos los elementos div que representan a las pistas
+  var pistas = document.querySelectorAll('.item');
+  
+    pistas.forEach(pista => {
+  pista.style.display = "";
+  });
+  
+  // Itera sobre cada uno de los elementos
+  pistas.forEach(pista => {
+    // Obtén el elemento span que contiene el estado de la pista
+    var estado = pista.querySelector('.fecha');
+    // Si el estado es "mantenimiento", oculta el elemento div de la pista
+    if (!estado || estado.innerHTML === "MANTENIMIENTO" ) {
+      pista.style.display = "none";
+    }
+  });
+}
+
+function mostrarFamiliares() {
+  // Obtén todos los elementos div que representan a las pistas
+  var pistas = document.querySelectorAll('.item');
+  
+    pistas.forEach(pista => {
+  pista.style.display = "";
+  });
+  
+  // Itera sobre cada uno de los elementos
+  pistas.forEach(pista => {
+    // Obtén el elemento span que contiene el estado de la pista
+    var fam = pista.querySelector('.nombre');
+    // Si el estado es "mantenimiento", oculta el elemento div de la pista
+    if ( !(fam.innerHTML === "FAMILIAR") ) {
+      pista.style.display = "none";
+    }
+  });
+}
+
+function mostrarAdultos() {
+  // Obtén todos los elementos div que representan a las pistas
+  var pistas = document.querySelectorAll('.item');
+  
+    pistas.forEach(pista => {
+  pista.style.display = "";
+  });
+  
+  // Itera sobre cada uno de los elementos
+  pistas.forEach(pista => {
+    // Obtén el elemento span que contiene el estado de la pista
+    var fam = pista.querySelector('.nombre');
+    // Si el estado es "mantenimiento", oculta el elemento div de la pista
+    if ( !(fam.innerHTML === "ADULTOS") ) {
+      pista.style.display = "none";
+    }
+  });
+}
+
+function mostrarInfantiles() {
+  // Obtén todos los elementos div que representan a las pistas
+  var pistas = document.querySelectorAll('.item');
+  
+  pistas.forEach(pista => {
+  pista.style.display = "";
+  });
+  
+  // Itera sobre cada uno de los elementos
+  pistas.forEach(pista => {
+    // Obtén el elemento span que contiene el estado de la pista
+    var fam = pista.querySelector('.nombre');
+    // Si el estado es "mantenimiento", oculta el elemento div de la pista
+    if ( !(fam.innerHTML === "INFANTIL") ) {
+      pista.style.display = "none";
+    }
+  });
+}
+
+
+
+
+
 function cerrar(){
     mostrador.style.width = "100%";
     seleccion.style.width = "0%";

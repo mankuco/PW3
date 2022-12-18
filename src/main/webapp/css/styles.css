@@ -448,3 +448,19 @@ body{
 	width: 200px;
 	transition:1000ms;
 }
+
+.buttonFilt{
+    height: 40px;
+    border: none;
+    padding: 0 10px;
+    color: #fff;
+    background-color: #0080ff;
+    border-radius: 5px;
+    cursor:pointer;
+    box-shadow: 2px 5px 5px #8080ff;
+    margin:0px 5px;
+}
+
+.buttonFilt:hover{
+	 box-shadow: 2px 5px 5px #808080;
+}
