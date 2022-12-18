@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -43,12 +45,14 @@ public class misReservasServlet extends HttpServlet {
 				UsuarioDAO usuario = new UsuarioDAO(userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
 				UsuarioDTO user = usuario.buscarUsuario(userBean.getEmail());
 				
-				ReservaDAO ReservaDAO = new ReservaDAO(userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
-				ArrayList<Reserva> reservasADM =  ReservaDAO.verReservas();
-				ArrayList<Reserva> reservasUsuario =  ReservaDAO.verReservasUsuario(user.getEmail());
+				LocalDate fechaInicio = null;
+				LocalDate fechaFin = null;
 				
+				ReservaDAO ReservaDAO = new ReservaDAO(userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
+				ArrayList<Reserva> reservasADM =  ReservaDAO.verReservas(fechaInicio,fechaFin);
+
 				request.setAttribute("verReservasADM", reservasADM);
-				request.setAttribute("verReservasUsuario", reservasUsuario);
+			//	request.setAttribute("verReservasUsuario", reservasUsuario);
 				RequestDispatcher rd = request.getRequestDispatcher("./mvc/view/Reservas.jsp");
 				rd.forward(request, response);
 				
@@ -66,7 +70,42 @@ public class misReservasServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+			CustomerBean userBean = (CustomerBean) request.getSession().getAttribute("userBean");
+		if (userBean != null) {
+			if (userBean.getEmail() != null) {
+				
+				String fechaInicioStr = request.getParameter("fecha-inicio");
+				String fechaFinStr = request.getParameter("fecha-fin");
+
+				LocalDate fechaInicio = null;
+				LocalDate fechaFin = null;
+
+				if (fechaInicioStr != null && !fechaInicioStr.isEmpty()) {
+				  fechaInicio = LocalDate.parse(fechaInicioStr, DateTimeFormatter.ISO_DATE);
+				}
+
+				if (fechaFinStr != null && !fechaFinStr.isEmpty()) {
+				  fechaFin = LocalDate.parse(fechaFinStr, DateTimeFormatter.ISO_DATE);
+				}
+				
+				ReservaDAO ReservaDAO = new ReservaDAO(userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
+				ArrayList<Reserva> reservasADMFilt =  ReservaDAO.verReservasFiltradas(fechaInicio,fechaFin);
+				request.setAttribute("verReservasFiltradas", reservasADMFilt);
+				RequestDispatcher rd = request.getRequestDispatcher("./mvc/view/Reservas.jsp");
+				rd.forward(request, response);
+				
+				
+				
+				
+			}
+			else {
+				response.sendRedirect(request.getContextPath());
+			}
+		}
+		else {
+			response.sendRedirect(request.getContextPath());
+		}
+		
 	}
 	
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
