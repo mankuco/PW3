@@ -25,25 +25,15 @@
         	<%ArrayList<PistaDTO> pistas = dao.verPistas(); %>
             <h1>Crear reserva</h1>
             <form action="<%= request.getContextPath() %>/nuevaReserva" method="POST">
-                <br/>
-                <label for="pistaName">Nombre</label>
-                <input type="text" class="input-form" name="pistaName">
-                
-                <br/>
-                
                 <label for="minutosReserva">Minutos reserva</label>
                 <input type="number" class="input-form" name="minutosReserva">
                 
                 <br/><br/>
-                <label for="pistaType">Tipo</label>
-                <select id="pistaType" class="select-type" name="reservaType">
+                <label for="reservaType">Tipo</label>
+                <select id="reservaType" class="select-type" name="reservaType">
                     <option value="INFANTIL">Infantil</option>
                     <option value="FAMILIAR">Familiar</option>
                     <option value="ADULTOS">Adultos</option>
-                </select>
-                <select id="" class="select-type" name="pistaEstado">
-                    <option value="true">Disponible</option>
-                    <option value="false">Mantenimiento</option>
                 </select>
                 <label for="numeroNinos">Numero niños</label>
                 <input type="number" class="input-form" name="numeroNinos">
@@ -63,6 +53,11 @@
                     <%}%>
                 </select>
                 <br/><br/>
+                <label for="reservaBono">Incluir en bono:</label>
+                <select id="reservaBono" class="select-type" name="reservaBono">
+                    <option value="SI">Sí</option>
+                    <option value="NO">No</option>
+                </select>
                 <input type="submit" class="small-button" value="Crear" style="border: solid 2px #cf74f2;">
              </form>
 		</body>
