@@ -100,7 +100,10 @@ public class BonoDAO extends DAO {
 				else if(rs.getString(8) == "FAMILIAR") {
 					tipo = TipoReserva.FAMILIAR;
 				}
-				LocalDate date = rs.getDate(7).toLocalDate();
+				LocalDate date = null;
+				if (rs.getDate(7) != null) {
+					date = rs.getDate(7).toLocalDate();
+				}
 				BonoReservaDTO bono = new BonoReservaDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),tipo,date,rs.getString(9));
 				reservas.add(bono);
 			}
@@ -205,7 +208,11 @@ public class BonoDAO extends DAO {
 				else if(rs.getString(8) == "FAMILIAR") {
 					tipo = TipoReserva.FAMILIAR;
 				}
-				bono = new BonoReservaDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),tipo,rs.getDate(7).toLocalDate(),rs.getString(9));
+				LocalDate date = null;
+				if (rs.getDate(7) != null) {
+					date = rs.getDate(7).toLocalDate();
+				}
+				bono = new BonoReservaDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),tipo,date,rs.getString(9));
 			}
 			if (ps != null){ 
 				ps.close(); 
@@ -234,7 +241,11 @@ public class BonoDAO extends DAO {
 				else if(rs.getString(8) == "FAMILIAR") {
 					tipo = TipoReserva.FAMILIAR;
 				}
-				BonoReservaDTO bono = new BonoReservaDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),tipo,rs.getDate(7).toLocalDate(),rs.getString(9));
+				LocalDate date = null;
+				if (rs.getDate(7) != null) {
+					date = rs.getDate(7).toLocalDate();
+				}
+				BonoReservaDTO bono = new BonoReservaDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),tipo,date,rs.getString(9));
 				bonos.add(bono);
 			}
 			if (ps != null){ 
