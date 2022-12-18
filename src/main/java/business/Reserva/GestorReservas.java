@@ -236,6 +236,15 @@ public class GestorReservas {
 	}
 	
 	/**
+	 * @Resumen Devuelve una lista con todos los bonos de un usuario
+	 */
+	public ArrayList<BonoReservaDTO> listarBonos(Properties prop, String jdbc, String dbuser, String dbpass) {
+		BonoDAO dao = new BonoDAO(prop, jdbc, dbuser, dbpass);
+		ArrayList<BonoReservaDTO> lista = dao.listarBonos();
+		return lista;
+	}
+	
+	/**
 	 * @Resumen Devuelve un bono si existe
 	 */
 	public BonoReservaDTO buscabono(String id, Properties prop, String jdbc, String dbuser, String dbpass) {

@@ -12,6 +12,9 @@
 		<li class="navbar-item"> 
 			<a href="<%=request.getContextPath()%>/misReservasServlet">Reservas</a>
 		</li>
+		<li class="navbar-item"> 
+			<a href="<%=request.getContextPath()%>/misBonosServlet">Bonos</a>
+		</li>
 	</ul>
 	
 	<ul class="navbar-right">

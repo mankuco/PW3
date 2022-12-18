@@ -23,19 +23,6 @@ public class BonoDAO extends DAO {
 			Connection connection = getConnection();
 			PreparedStatement ps=connection.prepareStatement(prop.getProperty("inserta-bono"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(1,bono.getIdBono());
-			ps.setString(2,bono.getIdReserva1());
-			if(bono.getIdReserva2() != null) {
-				ps.setString(3,bono.getIdReserva2());
-				if(bono.getIdReserva3() != null) {
-					ps.setString(4,bono.getIdReserva3());
-					if(bono.getIdReserva4() != null) {
-						ps.setString(5,bono.getIdReserva4());
-						if(bono.getIdReserva5() != null) {
-							ps.setString(6,bono.getIdReserva5());
-						}
-					}
-				}
-			}
 			String tipo = "INFANTIL";
 			if(bono.getTipo() == TipoReserva.ADULTOS) {
 				tipo = "ADULTOS";
@@ -43,9 +30,8 @@ public class BonoDAO extends DAO {
 			if(bono.getTipo() == TipoReserva.FAMILIAR) {
 				tipo = "FAMILIAR";
 			}
-			ps.setString(7,tipo);
-			ps.setDate(8, Date.valueOf(bono.getFecha()));
-			ps.setString(9, bono.getEmail());
+			ps.setString(2,tipo);
+			ps.setString(3, bono.getEmail());
 			ps.executeUpdate();
 			close();
 		}
@@ -60,7 +46,12 @@ public class BonoDAO extends DAO {
 			Connection connection = getConnection();
 			PreparedStatement ps=connection.prepareStatement(prop.getProperty("edita-bono"), PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(7,bono.getIdBono());
-			ps.setString(1,bono.getIdReserva1());
+			if(bono.getIdReserva1() != null) {
+				ps.setString(1,bono.getIdReserva1());
+			}
+			else{
+				ps.setString(1,null);
+			}
 			if(bono.getIdReserva2() != null) {
 				ps.setString(2,bono.getIdReserva2());
 				if(bono.getIdReserva3() != null) {
@@ -70,8 +61,20 @@ public class BonoDAO extends DAO {
 						if(bono.getIdReserva5() != null) {
 							ps.setString(5,bono.getIdReserva5());
 						}
+						else {
+							ps.setString(5,null);
+						}
+					}
+					else {
+						ps.setString(4,null);
 					}
 				}
+				else {
+					ps.setString(3,null);
+				}
+			}
+			else {
+				ps.setString(2,null);
 			}
 			ps.setDate(6, Date.valueOf(bono.getFecha()));
 			ps.executeUpdate();
