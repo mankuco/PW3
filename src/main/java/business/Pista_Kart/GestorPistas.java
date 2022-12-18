@@ -44,11 +44,12 @@ public class GestorPistas {
 	 * @Resumen Llama a la funcion void guardarKart(Kart kart)
 	 * @param Entran como parametros todos los datos necesarios para crear un kart
 	 */
-	public void crearKart(boolean tipoKart, Estados estado, Properties prop, String jdbc, String dbuser, String dbpass) {
+	public int crearKart(boolean tipoKart, Estados estado, Properties prop, String jdbc, String dbuser, String dbpass) {
 		int idKart = numerorandom();
 		KartDTO kart = new KartDTO(idKart,tipoKart, estado);
 		KartDAO crear = new KartDAO(prop, jdbc, dbuser, dbpass);
 		crear.guardarKart(kart);
+		return idKart;
 	}
 
 	/* 

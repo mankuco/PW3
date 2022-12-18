@@ -10,12 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import business.Pista_Kart.PistaDTO;
-import data.Pista_Kart.PistaDAO;
+import business.Pista_Kart.*;
 import display.CustomerBean;
 import business.Pista_Kart.Dificultades;
-
-import java.time.*;
 
 /**
  * Servlet implementation class nuevaPista
@@ -37,7 +34,7 @@ public class nuevaPistaServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.sendRedirect(request.getContextPath() + "index.jsp");
+		response.sendRedirect(request.getContextPath() + "/index.jsp");
 	}
 
 	/**
@@ -45,26 +42,22 @@ public class nuevaPistaServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		CustomerBean userBean = (CustomerBean) request.getSession().getAttribute("userBean");
-		if (userBean != null || userBean.getEmail() != null) {
-			String nombrePista = request.getParameter("nombrePista");
+		CustomerBean userBean = (CustomerBean) request.getSession().getAttribute("userBean");		
+		if (userBean != null) {
+				if (userBean.getEmail() != null) {
+			String nombrePista = request.getParameter("pistaName");
 			String dificultad = request.getParameter("pistaType");
+			String estado = request.getParameter("pistaEstado");
 			String maxkarts = request.getParameter("maxKarts");
 			Dificultades dificultades = Dificultades.valueOf(dificultad);
-			
-
-			PistaDAO pistaDAO = new PistaDAO(userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
-			PistaDTO pista = new PistaDTO();
-			
-			pista.setNombrePista(nombrePista);
-			pista.setDificultad(dificultades);
-			pista.setMaxKarts(Integer.parseInt(maxkarts));
-			pistaDAO.guardarPista(pista);
+			GestorPistas pistas = new GestorPistas();
+			pistas.crearPista(nombrePista, Boolean.parseBoolean(estado), dificultades, Integer.parseInt(maxkarts), userBean.getprop(), userBean.getjdbc(), userBean.getdbuser(), userBean.getdbpass());
 			
 			String msg = "Pista guardada correctamente";
 			request.setAttribute("msg", msg);
-			RequestDispatcher rd = request.getRequestDispatcher("/mvc/view/nuevaPista.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/misPistasServlet");
 			rd.forward(request, response);
+		}
 		}
 		else {
 			response.sendRedirect(request.getContextPath());

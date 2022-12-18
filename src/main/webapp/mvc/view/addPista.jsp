@@ -35,9 +35,13 @@
                 <br/><br/>
                 <label for="pistaType">Tipo</label>
                 <select id="pistaType" class="select-type" name="pistaType">
-                    <option value="">INFANTIL</option>
-                    <option value="">FAMILIAR</option>
-                    <option value="">ADULTOS</option>
+                    <option value="INFANTIL">Infantil</option>
+                    <option value="FAMILIAR">Familiar</option>
+                    <option value="ADULTOS">Adultos</option>
+                </select>
+                <select id="pistaType" class="select-type" name="pistaEstado">
+                    <option value="true">Disponible</option>
+                    <option value="false">Mantenimiento</option>
                 </select>
                 
                 <br/><br/>
