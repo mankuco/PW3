@@ -57,6 +57,7 @@ public class nuevaPistaServlet extends HttpServlet {
 			request.setAttribute("msg", msg);
 			RequestDispatcher rd = request.getRequestDispatcher("/misPistasServlet");
 			rd.forward(request, response);
+			response.sendRedirect("/misPistasServlet");
 		}
 		}
 		else {

@@ -21,6 +21,13 @@
 	</head>
 	<body>
 		<%@ include file="../../include/headerCliente.jsp" %>
+		<% String msg = (String)request.getParameter("msg"); %>
+    	<% if (msg != null) { 
+    			if (msg.equals("Campos incompletos")){%>
+    				<p style="background-color: #ff9999; text-align: center;"><%= msg %></p>
+    			<%} else { %>
+    				<p style="background-color: #abedb2; text-align: center;"><%= msg %></p>
+    	<% } } %>
 		<h1 style="text-align:center">Bienvenido/a</h1>
 		<% ServletContext context = getServletContext(); %>
 		<p style="margin-left:20px; font-size: 16px;">Nombre y Apellidos: <%= userBean.getNombre() + " " + userBean.getApellidos() %></p>

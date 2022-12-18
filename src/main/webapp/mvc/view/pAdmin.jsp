@@ -20,6 +20,13 @@
 	</head>
 	<body>
 		<%@ include file="../../include/headerAdministrador.jsp" %>
+		<% String msg = (String)request.getParameter("msg"); %>
+    	<% if (msg != null) { 
+    			if (msg.equals("Campos incompletos")){%>
+    				<p style="background-color: #ff9999; text-align: center;"><%= msg %></p>
+    			<%} else { %>
+    				<p style="background-color: #abedb2; text-align: center;"><%= msg %></p>
+    	<% } } %>
 		<% ArrayList<UsuarioDTO> usuarios = (ArrayList<UsuarioDTO>) request.getAttribute("listaUsuarios"); %>
 		<% GestorUsuario gestorU = new GestorUsuario(); %>
 		<% GestorReservas gestorR = new GestorReservas(); %>
