@@ -41,24 +41,24 @@
 	       	<div class="mostrador" id="mostrador">
 		    	<div class="fila">
 		            <% for (BonoReservaDTO k : bonos){ %> 
-		                <div class="item" onclick="cargar(this)">
+		                <div class="item" >
 	                    <p class="descripcion">Bono <%= k.getIdBono() %></p>
-	                    <p id="usuario">Usuario  <%= k.getEmail() %></p>
+	                    <h5 id="usuario"><%= k.getEmail() %></h5>
 	                    <%if (k.getIdReserva1() != null){ %>
-	                    	<p id="reserva1"  style=display:none; >  <%= k.getIdReserva1() %></p>
+	                    	<p id="reserva1"  >  <%= k.getIdReserva1() %></p>
 	                    	<%if (k.getIdReserva2() != null){ %>
-	                    		<p id="reserva2"  style=display:none; >  <%= k.getIdReserva2() %></p>
+	                    		<p id="reserva2" >  <%= k.getIdReserva2() %></p>
 	                    		<%if (k.getIdReserva3() != null){ %>
-	                    			<p id="reserva3"  style=display:none; >  <%= k.getIdReserva3() %></p>
+	                    			<p id="reserva3"   >  <%= k.getIdReserva3() %></p>
 	                    			<%if (k.getIdReserva4() != null){ %>
-	                    				<p id="reserva4"  style=display:none; >  <%= k.getIdReserva4() %></p>
+	                    				<p id="reserva4"  >  <%= k.getIdReserva4() %></p>
 	                    				<%if (k.getIdReserva5() != null){ %>
-	                    					<p id="reserva5"  style=display:none; >  <%= k.getIdReserva5() %></p>
+	                    					<p id="reserva5"  >  <%= k.getIdReserva5() %></p>
 	                    <%}}}} %>
 	                    <span class="fechaVencida"> <%= k.getFecha() %></span>
-	                <%}} %>
+	                <%} %>
 	         	</div>
-                <% count++; if (count % 3 == 0) {%>  </div>  <div class="fila"> <%}} %>
+                <% count++; if (count % 3 == 0) {%>  </div>  <div class="fila"> <%}}} %>
 	            </div>
 		  
 		        </div>
